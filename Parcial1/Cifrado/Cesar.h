@@ -28,8 +28,11 @@ int Cesar::decrypt(string encryptWord)
           return offset;
         }
       }
-      dictionary.close();
+      offset++;
+      dictionary.clear();
+      dictionary.seekg(0, ios::beg);
     }
+    dictionary.close();
   }
   else
   {
