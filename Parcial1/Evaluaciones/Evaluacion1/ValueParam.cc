@@ -8,15 +8,17 @@ class FixValParam : public testing::TestWithParam<int*>
 protected:
   Base* instance2Test;
 public:
-  void SetUp()
+  FixValParam()
   {
     instance2Test = GetParam();
   }
-  void TearDown()
+  ~FixValParam()
   {
     delete instance2Test;
     instance2Test = NULL;
   }
+  void SetUp(){};
+  void TearDown(){};
 };
 
 TEST_P(FixValParam, sortSmallBig)
@@ -29,5 +31,5 @@ TEST_P(FixValParam, sortSmallBig)
   }
 }
 
-int array[] = {1,2,3,4,5};
-INSTANTIATE_TEST_CASE_P(UsingValuesIn, FixValParam, testing::ValuesIn(array));
+int a1[] = {5,3,2,1,4};
+INSTANTIATE_TEST_CASE_P(UsingValuesIn, FixValParam, testing::Values(a1));
