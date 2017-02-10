@@ -1,0 +1,4 @@
+covmerge.exe *.covexp > merged.db
+gen_html merged.db
+
+example -> coverage

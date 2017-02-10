@@ -1,0 +1,164 @@
+Testwell Oy                             CTC++ System Version 7.2
+Verifysoft Technology GmbH
+12 March 2014
+
+
+Instrumenting without C/C++ Preprocessing
+=========================================
+
+Remark when CTC++ v7.2 and its ctcxmlmerge tool came available:
+
+One, biggest?, reason for using this arrangement has been that your
+code contained conditional compilations or it contained code fragments
+like 'if (variable == MACROVALUE)'. When the code was first C-preprocessed,
+and if you needed to compile the code on different configurations, where
+the conditional compilations and macros resolved differently, ctc
+considered the code being changed. Corollary it was not possible to get
+one combined coverage report of the tests over all configuration.
+
+See the CTC++ User's Guide (ctcug.pdf) how you can handle the situation
+with ctcxmlmerge tool, and not using this arrangement, which is not
+guaranteed to work generally.
+
+Anyway, here is the description of the old arrangement:
+
+------------------------------------------------------------------------
+The normal way of CTC++ instrumenting a source file is the following:
+
+Phase 1: CTC++ uses C/C++ Preprocessor for the source file. In this phase
+         the #includes, #defines and conditional compilation are resolved.
+         The result is taken to a temporary file (temp1).
+
+Phase 2: Then CTC++ reads the temp1 file, parses it and inserts its
+         probes to it. The result comes to another temporary file (temp2).
+
+Phase 3: Finally CTC++ invokes the C/C++ compiler for compiling the
+         instrumented file temp2 resulting in an instrumented object file.
+
+This document describes a technique, a trick, how you can do CTC++
+instrumentation without the C/C++ Preprocessing phase (phase 1 above).
+
+You may wish to try this trick, if you have in your source code macros
+expanding to code, which CTC++ would instrument in phase 2 above, and you
+do not want that.
+
+When the macro body code is not opened and CTC++ does see it, in a profile
+listing the internal code (algorithm), to which the macro expands, does not
+show. The possible instrumentation of the macro body code does not affect
+the TER calculations. The macro call is like any statement.
+
+Some people might consider it wrong that the macro body code, which after
+all is part of the program code, is not measured for code coverage. Some
+other people might consider this to be acceptable in the sense that the
+macro is just a "black box" in the code where it is used and the internal
+behavior of the "black box" is not of interest in the problem domain what
+the code using the macro represents.
+
+If you share the latter opinion, and wish to not to instrument, i.e.
+measure for code coverage, the macro body code, you may try the
+"instrumenting without C-preprocessing" arrangement described below.
+
+BUT IF YOU DECIDE TO USE THIS TRICK, IT IS NOTED THAT THIS IS A TOTALLY
+UNWARRANTED TECHNIQUE TO USE BY CTC++. THIS MAY SUCCEED IN SOME SITUATIONS,
+BUT THIS MAY ALSO FAIL, EITHER
+- IN INSTRUMENTING THE SOURCE FILE
+- OR IN COMPILING THE INSTRUMENTED CODE
+- OR IN LINKING THE INSTRMENTED OBJECTS
+- OR IN RUNNING THE INSTRUMENTED CODE
+- OR CTC++ REPORTS GIVE YOU FALSE INFORMATION
+- OR POTENTIALLY THE ERRONEOUS BEHAVIOR GOES UNNOTICED
+YOU ARE USING THIS TRICK AT YOUR OWN RISK.
+
+The trick is to advise the CTC++ Preprocessor to use a copy command in
+phase 1 instead of the compiler preprocessing. Then in phase 2 the
+CTC++ Preprocessor reads effectively the original source file and does
+not resolve, and thus does not instrument, the macros. Also some other
+ctc.ini file configuration settings need to be done so that the
+compilation context and the used compilation options are properly
+taken into notice. The arrangement can be set up as follows (example on
+Windows with Visual C++ compiler):
+
+To begin with, let's assume we have a C file (myfile.c), which we wish
+to instrument and use this technique. We have one (default) configuration
+file in %ctchome%\ctc.ini, which is read first.
+
+We need to override certain settings in ctc.ini file. There are a couple
+of ways doing it, for example the following:
+
+We edit a file %ctchome%\nocppctc.ini with the following contents:
+
+<<
+[Microsoft Visual C++]
+   # Not "cl /E ...", just copy
+   PREPROC_C   = copy %FILE% %RESULT% > nul
+   PREPROC_CXX = copy %FILE% %RESULT% > nul
+
+   # The OPT_NO_COMPILE setting must be stripped off any C-preprocessor
+   # options like /D and /FI. Especially the /D option _must_ be kept
+   # in the compilation command of the instrumented code.
+   OPT_NO_COMPILE = /WX,/link,/Fp,/Yc,/Yu,/YX
+
+   # Now that C-preprocessing has not been done, something that would have
+   # been done at C-preprocessing time, needs to be done at compile time
+   OPT_ADD_COMPILE = /I$(CTCHOME),/nologo,/DCTC_CLIKE_MCOND,/D__CTC__
+
+   # In this alternate way the instrumented temp file (some CTC.987.2.cpp)
+   # must be arranged to current working directory, and not to %temp%
+   # directory. In this way the #include "somefile.h" type of includes
+   # get properly resolved if the included file is in "."
+   TMP_DIRECTORY = .
+>>
+
+Then we do the instrumentation as follows:
+
+   ctc -c %ctchome%\nocppctc.ini cl -c myfile.c
+
+If the myfile.c is reasonably "sane", the instrumentation and compilation
+succeed resulting in myfile.obj. It is linked to the instrumented
+executable in a normal manner along with the CTC++ run-time library.
+
+
+Some notes about the nocppctc.ini file and other issues:
+
+Although this is an unwarranted feature, surprisingly, in many cases the
+source files are sane enough so that this succeeds. If you use this, you
+may experience the following:
+
+- Code nesting level may not be correct in ctcpost listings, if
+  conditional compilation is used with flow-control statements (if,
+  while, for, ...)
+
+- CTC++ Preprocessing (phase 2) may fail, if macros or conditional
+  compilation is used in such a way that the non-preprocessed source
+  code is not legal C/C++.
+
+- The instrumented code may be erroneous and its compilation (phase 3) may
+  fail, if use of macros mislead CTC++ to make invalid instrumentation.
+  This could also show as unresolved symbols at link-time.
+
+
+Remark: when CTC++ v6.5 enters the picture:
+
+In CTC++ v6.5, there is some new functionality. One such new thing is that
+at instrumentation time ctc collects information about where the functions
+have been defined (normally in a .c or .cpp file) and about where they have
+been declared (normally in a .h file). This new information can then be
+seen in the new XML reports.
+
+This new feature in CTC++ v6.5 is one more reason, why this "instrument
+without C/C++ preprosessing" style should not be used. Well, it can still
+be used, but CTC++ v6.5 (and beyond) cannot derive the information where
+the functions have been declared. Each function definition is considered
+to serve as a declaration, too (unless there is a separate declaration and
+definition in the same .c or .cpp file).
+
+Recent CTC++ versions have also been "forced" to collect more and more
+information from the header files, (for example, information whether a
+class is a class template or not). Certain parsing and instrumentation
+decisions are based on that information in special cases.
+
+If ctc does not see the header files, there is a risk that in these
+special cases the parsing and instrumentation of the code does not go
+right.
+
+--- end of no_cpp.txt ---

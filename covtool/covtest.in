@@ -1,0 +1,432 @@
+int x=903;
+
+enum hank
+{
+    fred = 99, bill = 37,
+    hank,
+    john
+};
+
+class Fred
+{
+    int fred;
+    enum {
+	   stuff };
+    void bill();
+    struct iterator
+    {
+	int hank;
+    };
+};
+
+template<class T, class v>
+  bool fred();
+
+template<class T>
+struct SomeBag
+{
+};
+
+typedef CovStream::iterator iterator;
+
+namespace std
+{
+
+ class C
+ {
+   struct iterator
+   {
+       iterator() {  };
+   };
+   void bill() { int x = 9/10; return 32; }
+   void sue() { int x = 9/10; return 32; }
+ };
+
+};
+# 214 "else"
+
+# 300 "something"
+int should_be_line_300;
+# 329 "crap"
+
+template<class T, class U>
+int function(T *parm1,
+	     U const &parm2,
+	    )
+{
+  if(parm1 == parm2)
+    if(parm1 == 0)
+    {
+      parm2 == 0;
+    }
+    else
+      return sizeof(T) / sizeof(U);
+  else
+  {
+   return 99;
+  }
+};
+
+int function()
+{
+    while(tom) 9 = 10;
+
+    while( 1 == 2 )
+    {
+       printf("stuff");
+    }
+
+    do
+      fred=99;
+    while(crap == junk);
+
+    do
+    {
+	{
+	   9 = 10;
+	}
+    }
+    while(1==3);
+
+}
+extern int bill();
+extern "C" void f();
+
+extern "C"
+{
+    int x;
+    struct crap
+    {
+      float junk;
+
+      crap()
+      {
+      }
+      ~crap()
+      {
+      }
+    }
+};
+
+
+bool operator== (iterator const &r) const
+{
+  return ptr_ == r.ptr_;
+}
+
+
+  struct iterator
+  {
+
+    bool operator!= (iterator const &r) const { return ptr_ != r.ptr_; }
+
+    char * ptr_;
+    char * end_; // a copy of chunk_->end_ to speed up comparisons
+
+    chunk* chunk_;
+
+    char operator*() const { return *ptr_; }
+
+    iterator& operator++()
+    {
+      if(ptr_ == end_)
+      {
+	if(chunk_->next_)
+	{
+	  chunk_ = chunk_->next_;
+	  ptr_   = &chunk_->data_[0];
+	  end_   = chunk_->end_;
+	}
+	else
+	{
+	  ptr_ = 0;
+	  end_ = 0;
+	}
+
+      }
+      else
+      {
+	++ptr_;
+	
+	if(ptr_ == end_ )
+	{
+
+	  if(chunk_->next_)
+	  {
+	    chunk_ = chunk_->next_;
+	    ptr_   = &chunk_->data_[0];
+	    end_   = chunk_->end_;
+	  }
+	  else
+	  {
+	    ptr_ = 0;
+	    end_ = 0;
+	  }
+	}
+	
+      }
+
+      return *this;
+    }
+
+    iterator operator++(int)
+    {
+      iterator old = *this;
+
+      if(ptr_ == end_)
+      {
+	if(chunk_->next_)
+	{
+	  chunk_ = chunk_->next_;
+	  ptr_   = &chunk_->data_[0];
+	  end_   = chunk_->end_;
+	}
+	else
+	{
+	  ptr_ = 0;
+	  end_ = 0;
+	}
+
+      }
+      else
+      {
+	++ptr_;
+	
+	if(ptr_ == end_ )
+	{
+
+	  if(chunk_->next_)
+	  {
+	    chunk_ = chunk_->next_;
+	    ptr_   = &chunk_->data_[0];
+	    end_   = chunk_->end_;
+	  }
+	  else
+	  {
+	    ptr_ = 0;
+	    end_ = 0;
+	  }
+	}
+	
+      }
+
+      return old;
+    }
+
+};
+
+template<class F, class S>
+class Pair
+{
+public:
+    typedef Pair<F,S> self;
+
+    Pair( self const &);
+    ~Pair();
+};
+
+template<class T, class K>
+class Map
+{
+public:
+    typedef pair<T,K> value_type;
+private:
+
+    struct node
+    {
+	node *next_;
+
+	value_type data_;
+	
+	node(value_type const &v, node* next)
+	: data_(v),
+	  next_(next)
+	{
+	}
+
+    };
+
+    node* data_;
+
+public:
+
+    Map()
+    : data_(0)
+    {
+    }
+
+    ~Map()
+    {
+	while(data_)
+	{
+	    node *next = data_->next_;
+	    delete data_;
+	    data_ = next;
+	}
+    }
+
+    struct iterator
+    {
+	node * thisn_;
+	
+	iterator(node* n): thisn_(n) {}
+	
+	~iterator()
+	{
+	}
+	
+	iterator &operator++()
+	{
+	    thisn_ = thisn_->next_;
+	    return *this;
+	}
+	
+	value_type &operator*()
+	{
+	    return thisn_->data_;
+	}
+	
+	
+    };
+
+    iterator begin() { return data_; }
+    iterator end()   { return 0; }
+
+    iterator insert( value_type const &v)
+    {
+	data_ = new node(v, data_);
+    }
+
+};
+
+extern void bob(Map<float,int>*);
+
+Map<float,int> const & function(
+				 void (*funcparm) (Map<float,int>*p) = bob,
+				 int bill = 99
+				)
+{
+  return bill + bob;
+}
+
+template<> int x;
+
+template<class T>
+void f() try
+{
+    int member;
+    return 99;
+}
+catch(CLASS)
+{
+    int x;
+}
+
+int x;
+
+
+struct S
+{
+private:
+    int x_;
+    int y_;
+
+    S(int x, int y)
+    const try
+    : x_(x),
+      y_(y)
+    {
+    }
+    catch(carap)
+    {
+      printf("boooo hoooo\n");
+    }
+
+    ~S()
+    {
+    }
+
+    void member() const
+    try
+    {
+      printf("yeah!\n");
+    }
+    catch(ola)
+    {
+      printf("boooo hoooo\n");
+    }
+
+};
+
+#1 "t.in"
+
+struct S
+{
+private:
+    void other_member()
+    {
+      a = b; return 99;
+      otehr();
+    }
+public:
+    int x_;
+    int y_;
+
+#37 "crapola"
+
+    S(int x, int y)
+    const try
+    : x_(x),
+      y_(y)
+    {
+      x = y_;
+    }
+    catch(carap)
+    {
+      printf("boooo hoooo\n");
+    }
+#19 "t.in"
+
+    ~S()
+    {
+      x_ = y_;
+    }
+
+    void member() const
+    try
+    {
+      printf("yeah!\n");
+    }
+    catch(ola)
+    {
+      printf("boooo hoooo\n");
+    }
+
+};
+
+#1 "t.in"
+
+namespace hank = bill;
+
+int f()
+{
+    namespace bob = tom;
+    using bob;
+
+    if(1)
+    switch(4)
+    {
+	case 9:
+	  break;
+
+	case class::member::value:
+	    break;
+	
+	default:
+	    break;
+    }
+
+}
+
+
+

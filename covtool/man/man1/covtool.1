@@ -1,0 +1,45 @@
+
+NAME
+
+    covtool -- tools for analyzing test coverage
+
+SYNOPSIS
+
+    cov++
+    covmerge.exe
+    gen_html
+    covannotate.exe
+    covtool.exe
+
+DESCRIPTION
+
+    The suite of covtool programs lets you dynamically
+    instrument C++ programs as you compile them.  When
+    instrumented programs run, they automatically generate
+    test coverage information.  This coverage information
+    can then be used to help you improve the quality of
+    your code by adding new tests that verify every line
+    of your program's behavior.
+
+    The other executables and scripts, described above have
+    their own man pages.  The covtool.exe program is
+    described here.
+
+    The program, covtool.exe, instruments your C++ code by
+    recognizing the major program components:
+
+      statements
+      functions
+      classes
+      class members
+      typedef, union, enum, etc
+      namespaces
+
+    It then injects function calls into your program which
+    log the fact that lines within files have been executed.
+    As your program runs, a database of this information is
+    kept.  At program termination, this database is printed
+    to a log file.  These log files are then merged together
+    and converted into annotated source (ascii or html
+    format).
+

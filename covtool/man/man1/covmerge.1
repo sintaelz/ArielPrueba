@@ -1,0 +1,29 @@
+
+NAME
+
+  covmerge.exe -- merged coverage info from multiple test runs
+
+SYNOPSIS
+
+  covmerge.exe *.covexp >merged.db
+
+
+DESCRIPTION
+
+  This script merges test coverage information produced by
+  instrumented executables into a single database file.  You
+  typically run many instrumented programs many times each
+  to get the collection of .covexp files.  You then merge
+  these many files into a single merged.db file for later
+  processing.
+
+  The merging process includes the creation of new
+  information.  The instrumented programs do not aggregate
+  the information on a directory basis.  covmerge.exe does
+  this for you.
+
+  You can examine the merged.db file yourself, but the
+  easies way is to use the gen_html script to have it
+  create web pages which you can then just peruse.
+
+

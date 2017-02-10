@@ -1,0 +1,9 @@
+file: simple.c 3 2 66
+el:  8 9
+il:  7 8 9
+totals: 3 2 66
+
+file: /test1/file.c 10 10 100
+el: 1 2 3 4 5 6 7 8 9 10
+il: 1 2 3 4 5 6 7 8 9 10
+

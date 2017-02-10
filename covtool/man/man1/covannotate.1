@@ -1,0 +1,25 @@
+
+NAME
+
+    covannotate.exe -- annotate c++ source given coverage info
+
+SYNOPSIS
+
+    covannotate.exe source_file merged.db
+
+DESCRIPTION
+
+  This program reads the coverage information, either in
+  merged or .covexp format, and uses it to annotate C++
+  source files to show which lines were executed and
+  which weren't.  Here is an example of its output:
+
+    #include <stdio.h>
+    int main()
+   +{
+   +  printf("hello world");
+   +  exit(0);
+     }
+
+  In general, you should use gen_html to automate the process
+  of annotating all your files for you.

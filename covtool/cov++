@@ -1,0 +1,234 @@
+#!/bin/sh
+#
+#  Execute g++ in such a way as to create an instrumented executable.
+#  This script takes the normal g++ options and passes them on to
+#  g++ but also adds the following:
+#
+#    -DCOVTOOL_INST
+#
+#    If you are linking, it adds covtoolhelper.o after the last library.
+#
+#    If compiling but not linking, it instruments the generate object.
+#
+#  Only 1 .c file per invocation is allowed, C++ sources named *.c++ are
+#  not supported as a temporary file is used by that name.  The -E option
+#  is not supported.  Use g++ raw to do that.
+#
+#  See the help() below for options interpreted by this script.
+#
+#set -x
+
+TOOLDIR=`dirname $0`
+
+#
+# The command invocations for your compiler and linker can be
+# specified in environment variables: COVTOOL_CC, COVTOOL_LN.
+# These are not limited to just the name of the program, you
+# can supply options as well.  For example, COVTOOL_CC="xlC -+".
+# See the -CMD option below.
+#
+#
+# The file name extensions for c++ sources and the c++ intermediate
+# file used by this script can be specified in these variables:
+# COVTOOL_EXT, COVTOOL_TMP.  The defaults are .c and .c++.  See
+# the -EXT option below
+#
+
+#
+# if all 4 symbols are defined, use the ones in the environment,
+# else, read the config file and get default answers.
+#
+
+if [    "$COVTOOL_CC"  = "" \
+     -o "$COVTOOL_LN"  = "" \
+     -o "$COVTOOL_EXT" = "" \
+     -o "$COVTOOL_TMP" = "" \
+   ]
+then
+  . $TOOLDIR/cov++.cfg
+fi
+
+mode=""  # compile or link.  Either -c or not -c
+gpp_options=""
+skips=""
+preprocessor_options="-DCOVTOOL_INST '-D__extension__='"
+cfiles=""
+
+help()
+{
+  . $TOOLDIR/covtool_version
+
+  echo ""
+  echo "$covtool_version"
+  echo ""
+  echo ""
+  echo "cov++: Invokes $COVTOOL_CC and creates an instrumented object or executable"
+  echo "usage:"
+  echo "    cov++ [g++ options, -CBG, -VER, -KEEP, -EXT, -CMP, or -skip options] ..."
+  echo "  Only 1 .c file can be specified.  Use .c extension, not .c++"
+  echo "  -skip options let you skip some instrumentations."
+  echo "    see $TOOLDIR/README"
+  echo "  example usage:"
+  echo "    cov++ -o progname -Da=b -I. -I.. -O2 file.c"
+  echo "  Note:  instrumentation data collection is turned off by default."
+  echo "  To turn it on, have your main() call CvT_StartRecording____();"
+  echo "  The -v option turns on verbosity during execution"
+  echo "  The -KEEP option lets you save the intermediate .c++ file after the run"
+  echo "  The -EXT .A .B option uses .A as the file name extension for C++ sources"
+  echo "    and .B as the file name extension for C++ temp files"
+  echo "  The -CMD A B option uses A as the compiler, and B as the linker"
+  echo "    (A and B should be surrounded by quotes if they have options in them)"
+  echo "  The -CBG option selects a debuggable version of the runtime data collector"
+  echo "  The -DIAG option is helpful in debugging covtool.exe -- it suppresses line info"
+  echo ""
+  echo ""
+  echo ""
+  exit 0
+}
+
+if [ $# = 0 ]
+then
+  help
+fi
+
+keep_intermediate_file=""
+helper="$TOOLDIR/covtoolhelper.o"
+diag=""
+
+while [ $# != 0 ]
+do
+  option="$1"
+  shift
+  case "$option" in
+
+    "-DIAG")
+	    diag="-diagnostic" # set diagnostic mode
+	    keep_intermediate_file="yes"
+	    ;;
+
+    "-EXT")
+	    COVTOOL_EXT=$1
+	    shift
+	    COVTOOL_TMP=$1
+	    shift
+	    ;;
+	
+    "-CMP")
+	    COVTOOL_CC=$1
+	    shift
+	    COVTOOL_LN=$1
+	    shift
+	    ;;
+
+    "-KEEP")
+	     keep_intermediate_file="yes"
+	     ;;
+
+    "-VER")
+	     set -x
+	     ;;
+
+    "-h")
+	     help
+	     ;;
+
+    "-help")
+	     help
+	     ;;
+
+    "-skip")
+	     skips="$skips -skip '$1'"
+	     shift
+	     ;;
+	
+    "-c") mode="$option"
+	  ;;
+	
+    "-CBG") helper="$TOOLDIR/covtoolhelper_debug.o"
+	    ;;
+
+
+    "-D"*) preprocessor_options="$preprocessor_options '$option'"
+	   ;;
+
+    "-I"*) 
+	   if [ "$option" = "-I" ]
+	   then
+	     shift
+	     option="-I$1"
+	     preprocessor_options="$preprocessor_options '$option'"
+	   else
+             preprocessor_options="$preprocessor_options '$option'"
+	   fi
+	   ;;
+
+
+
+    *"$COVTOOL_TMP")
+	    echo "error:  '$option' is a $COVTOOL_TMP file.  This isn't supported"
+	    exit 1
+	    ;;
+	
+    *"$COVTOOL_EXT")
+	  if [ "$cfiles" != "" ]
+	  then
+	    echo "error:  more than one $COVTOOL_EXT file specified.  This isn't supported"
+	    exit 1
+	  fi
+	  cfiles="$option"
+	  ;;
+
+    *)
+	gpp_options="$gpp_options '$option'"
+	;;
+  esac
+done
+
+#echo "mode                ='$mode'"
+#echo "skips               = '$skips'"
+#echo "preprocessor_options= '$preprocessor_options'"
+#echo "gpp_options         = '$gpp_options'"
+#echo "cfiles              = '$cfiles'"
+
+if [ "$mode" = "-c" ]
+then
+
+    case "$cfiles" in
+	*$COVTOOL_EXT)
+	    ;;
+	*)
+	  echo "cov++ error:  input file name has the wrong extension"
+	  echo "                    file name:  $cfiles"
+	  echo "                     expected:  *$COVTOOL_EXT"
+	  exit 1
+	  ;;
+    esac
+
+    base=`basename $cfiles $COVTOOL_EXT`
+
+    tmpfile="$base$COVTOOL_TMP"
+
+    if [ "$diag" != "" ]
+    then
+      diag="$diag $tmpfile"
+    fi
+
+    eval "$COVTOOL_CC -E $preprocessor_options $cfiles | $TOOLDIR/covtool.exe -instrument $diag $skips >$tmpfile"
+    eval "$COVTOOL_CC $mode $gpp_options -fpermissive $tmpfile"
+    errorlevel=$?
+    if [ "$keep_intermediate_file" = "" ] ; then rm $tmpfile ; fi
+    exit $errorlevel
+else
+    if [ "$cfiles" != "" ]
+    then
+	echo "error:  cov++ can only perform a compile step or a link step"
+	echo "        instead of doing this:  cov++ file$COVTOOL_EXT"
+	echo "        do this:"
+	echo "          cov++ -c file$COVTOOL_EXT"
+	echo "          cov++    file.o"
+	echo "        Sorry for the inconvenience"
+	exit 1
+    fi
+    eval "$COVTOOL_LN $preprocessor_options $gpp_options $cfiles $helper"
+fi
+

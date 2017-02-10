@@ -1,0 +1,9 @@
+file: /home/seung/ArielPruebas/covtool/example/program.c 7 5 71
+il:  4 5 7 10 12 15 17 
+el:  4 5 7 10 15 
+totals: 7 5 71
+dir: /home 7 5 71
+dir: /home/seung 7 5 71
+dir: /home/seung/ArielPruebas 7 5 71
+dir: /home/seung/ArielPruebas/covtool 7 5 71
+dir: /home/seung/ArielPruebas/covtool/example 7 5 71

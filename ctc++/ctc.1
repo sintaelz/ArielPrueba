@@ -1,0 +1,735 @@
+.\"--------------------------------------------------------
+.\" MODULE      : $RCSfile: ctc.1 $
+.\" PART OF     : CTC++
+.\" VERSION     : $Revision: 1.34 $, $Date: 2016/12/23 09:20:15 $
+.\" AUTHOR      : $Author: olavi $
+.\" DESCRIPTION : CTC++ manual page
+.\"
+.\"             Copyright (c) 2012-2013 Testwell Oy
+.\"             Copyright (c) 2013-2016 Verifysoft Technology GmbH
+.\"
+.\" LAST EDITED : 23.12.2016
+.\"--------------------------------------------------------
+.TH CTC++ 1 "23 December 2016"
+.SH NAME
+ctc - CTC++, Test Coverage Analyzer for C/C++ (v8.1)
+
+.SH SYNOPSIS
+.ad l
+.BR ctc " [ctc-opts] comp/link-cmd comp/link-opts file..."
+.br
+
+[ctc-opts]:
+.br
+.RS 4
+.RB [ -i " {f|d|m|te|ti}]"
+.br
+.RB [ -n " symbolfile]"
+.br
+.RB [ -v ]
+.RB [ -V ]
+.RB [ -k ]
+.RB [ -h ]
+.br
+.RB [ @ "optionsfile]..."
+.br
+.RB [ -c " conf-file[;conf-file]...]..."
+.br
+.RB [ -C " conf-param{=value|+value|-value}]..."
+.br
+.RB [ -2comp ]
+.br
+.RB [ -no-comp ]
+.br
+.RB [ -no-templates ]
+.br
+.RB [ -no-warnings ]
+.RE
+.ad n
+
+.SH DESCRIPTION
+.B CTC++
+is a powerful and easy-to-use tool system for measuring test coverage of
+C and C++ programs. It can also be used for spotting execution bottlenecks.
+
+The whole
+.B CTC++ System
+consists of the following major parts:
+
+.PD 0
+.IP 1)
+.B CTC++ Preprocessor
+program
+.RB ( ctc ).
+It is used to instrument the user-selected C/C++ source files with
+measurement probes for collecting information of the program code
+execution. The instrumentation is integrated to the compilation
+command in the sense that when ctc instruments the source file it
+also invokes compiler to compile the instrumented version of the
+source file resulting in an instrumented object file.
+
+.IP 2)
+.B CTC++ run-time library
+.RB ( "libctc.a" / ".so"
+or
+.BR libctc64.a ).
+It is added into linkage when the instrumented program containing one
+or more instrumented objects is linked. The CTC++ run-time library
+provides the necessary run-time services to the CTC++ probes.
+This layer also takes care of the storing/adding of the execution
+coverage data from main memory to a binary datafile.
+
+.IP 3)
+.B CTC++ Postprocessor
+program
+.RB ( ctcpost ).
+It is used after some test runs with the instrumented program have
+been carried out. With
+.B ctcpost
+you get various human-readable and XML reports of the executed test
+runs with the instrumented program. One of the report variants is
+Execution Profile Listing in a text file. See
+.BR ctcpost (1)
+for more information.
+
+.IP 4)
+.B CTC2html
+utility
+.RB ( ctc2html ).
+It is used to convert the Execution Profile Listing to hierarchical
+HTML-browsable format. See
+.BR ctc2html (1)
+for more information.
+
+.IP 5)
+Still, you may have acquired a separate	component to CTC++ called
+.B CTC++/Host-Target
+add-on. It facilitates running the tests on an embedded target
+machine, capturing the test results (the execution counters collected
+by the inserted probes) to the host, and then producing the
+human-readable results with
+.B ctcpost
+and
+.B ctc2html
+on the host.
+.PD
+.PP
+This manual page discusses mostly the
+.B ctc
+program
+.RB ( "CTC++ Preprocessor" ),
+how the source files are instrumented, compiled and linked. Also, the
+instrumented program behavior (what comes to its CTC++ specific actions)
+is covered in this man page.
+
+.SH HOW TO GET STARTED WITH CTC++
+Next it is shortly explained a use scenario how CTC++ could be used
+in a simple case. Assume we have three source files making up an
+executable program and we give commands:
+
+.RS 4
+.B gcc -c file2.cc
+.br
+.B ctc -i m gcc -o myprog file1.cc file3.cc file2.o
+.RE
+
+The first line compiles file2.cc into file2.o. In that compilation
+there is no CTC++ involved at all. File file2.cc is not instrumented by
+.BR ctc .
+
+The second line invokes
+.BR ctc .
+It notices the compilation command (gcc) and files to be compiled
+(file1.cc and file3.cc). First
+.B ctc
+instruments these two source files to temporary files and then
+compiles them using the gcc command resulting the same objects as
+the original gcc command would have produced. Now the file1.o and
+file3.o are instrumented object files of file1.cc and file3.cc.
+The original .cc files remain intact.
+
+Moreover, on the second line,
+.B ctc
+notices that the 'gcc' command also links, because there was no such
+option (like -c) that would have prevented it.
+.B ctc
+invokes the linkage command (here gcc command) with appropriate object
+files and adds to the command line the
+.BR "CTC++ run-time library" .
+Of the objects file2.o is non-instrumented and file1.o and file3.o
+are instrumented.
+
+.B ctc
+also created (or updated, if it already  existed) the
+.I MON.sym
+file, where CTC++ maintains information of the instrumented source files.
+
+Next some test runs are done with the instrumented program 'myprog'.
+Functionally, it behaves like the original non-instrumented program
+would behave. But when the program executes the code in file1 and file3,
+the inserted probes collect execution counter data in main  memory.
+When the program execution ends	(or at some other user-selected points)
+the counters are written to a datafile,
+.I MON.dat
+on disk. Multiple program executions accumulate the counter values
+in the datafile.
+
+With the command:
+
+.RS 4
+.B ctcpost MON.sym MON.dat -p profile.txt
+.RE
+
+we get the execution profile listing, written to the file
+.IR profile.txt .
+It shows in detail how the instrumented program executions exercised
+the code in file1.cc and file3.cc. No information of file2.cc is
+present as that file was not instrumented.
+
+A hierarchical HTML-browsable representation of the execution profile
+listing is obtained as follows:
+
+.RS 4
+.B  ctc2html -i profile.txt
+.RE
+
+This command creates a subdirectory
+.I CTCHTML
+and a couple of .html files. The browsing is started from the file
+.IR ./CTCHTML/index.html .
+
+The above is just a simple example of the basic use of CTC++.
+There are many options on how you can fine-tune the CTC++ usage
+for special needs.
+
+Next, assume you have a makefile for compiling/linking your program
+(or whatever the build target is). If you wish to build an
+instrumented version of your target, you can use your makefile
+along with ctc. You just activate the makefile so that it launches
+ctc-prefixed comp/link commands instead of the original ones, for
+example as follows:
+
+.RS 4
+.B make \(lqCOMP=ctc -i m gcc\(rq \(lqLINK=ctc ld\(rq
+.RE
+
+(assuming that in the makefile COMP was initially defined
+to mean gcc and LINK to mean ld).
+
+As of CTC++ v6.3, it is	possible to do makefile based builds
+with
+.B ctcwrap
+command, as follows:
+
+.RS 4
+.B ctcwrap -i m -v make
+.RE
+
+Whenever the make command emits the command "gcc ..." or "ld ...",
+.B ctcwrap
+changes them to the commands "ctc -i m -v gcc ..." and
+"ctc -i m -v ld ...", respectively.
+
+.SH OPTIONS
+.TP
+.BR -i " {f|d|m|{te|ti}}..."
+Specifies the instrumentation mode to be used:
+
+.B f
+function coverage
+.br
+.B d
+decision coverage (implies
+.BR f )
+.br
+.B m
+multicondition coverage (implies
+.BR fd )
+.br
+.B te
+timing exclusive (implies
+.BR f )
+.br
+.B ti
+timing inclusive (implies
+.BR f )
+
+If nothing is specified the default instrumentation mode is
+decision coverage
+.RB ( "-i d" ).
+
+There can be many -i options, latest overrides. In one -i option
+there can be many coverage instrumentation arguments f, d, m,
+strongest prevails.
+
+There can be max one timing instrumentation argument te, ti.
+
+When coverage instrumentation is at least d, at ctcpost
+time 'statement coverage' reporting is obtained.
+
+When coverage instrumentation is m, at ctcpost
+time 'condition coverage' and 'MC/DC coverage' reporting can
+be obtained.
+.TP
+.BI -n " symbolfile"
+Specifies the name of the symbolfile and the diretory in which
+the symbolfile is saved. Default is
+.I MON.sym
+in the current directory. File extension ".sym" is enforced,
+if not given explicitly. The symbolfile contains the descriptions
+of the instrumented files.
+.PP
+.B -v
+.RS
+Displays C/C++ preprocessing commands, instrumentation information,
+compilation and linking commands.
+.RE
+.PP
+.B -V
+.RS
+Displays a copyright notice including version information, and also
+what configuration files were used.
+.RE
+.PP
+.B -k
+.RS
+Keep (do not delete) the instrumented temporary source  files.
+(To see the names of the temporary files, use also the
+.B -v
+option.) The location of the temporary files is defined by the
+configuration parameter
+.B TMP_DIRECTORY
+(see the
+.I CTC++ User's Guide
+or
+.I ctc.ini
+for more information).
+.RE
+.PP
+.B -h
+.RS
+Displays a short command-line help.
+.RE
+.PP
+.BI @ optionsfile
+.RS
+Specifies a file which contains additions to the command line of
+.BR ctc .
+Wildcard expansion (or any other command-line expansion) is not done.
+Newlines in the file are taken as spaces. Double quotes can be used
+to preserve spaces within an option defined in the options file.
+.RE
+.PP
+.B -c
+.IR conf-file [; conf-file ]...
+.RS
+Specifies additional configuration file(s), which are searched
+after all other places for configuration files have been looked through.
+The configuration files are searched from the following places in order:
+
+.PD 0
+.IP 1. 3
+file
+.I /usr/local/lib/ctc/ctc.ini
+.IP 2. 3
+file
+.I $HOME/lib/ctc/ctc.ini
+.IP 3. 3
+file
+.I $CTCHOME/ctc.ini
+.IP 4. 3
+file
+.I $HOME/.ctc.ini
+.IP 5. 3
+file(s) specified by the environment variable
+.B CTCINIT
+(multiple files separated by a semicolon)
+.IP 6. 3
+file
+.I ./.ctc.ini
+.IP 7. 3
+file(s) specified by this option
+.PD
+.PP
+Parameters in a later file may override parameters in an
+earlier file (however, still subject if '=', '+' or '-' was used...).
+.RE
+.PP
+.B -C
+.IR conf-param {=value|+value|-value}
+.RS
+Overrides (=) the value of a configuration  parameter or adds
+(+) or removes (-) a string to the value. If the parameter is a list of
+values, an implicit list separator (,) is inserted before the added value.
+In case of '=', parameter values specified in the command  line
+override values specified in configuration files. Moreover,
+in case of  '=', parameter values specified later in the command
+line override the ones specified earlier.
+.RE
+.TP
+.B -2comp
+.RS
+"Double compilation", before the instrumentation phase, compile
+the original source file using the original compiler options.
+Sometimes needed to correctly create files dependent on the
+original source files.
+.RE
+.TP
+.B -no-comp
+"No compilation", do not compile the instrumented source file
+after the instrumentation phase. Needed in rare usage scenarios
+to obtain the instrumented source file without compiling it
+(see the
+.I CTC++ User's Guide
+for more information).
+.TP
+.B -no-templates
+Specifies that all templates are left uninstrumented as if
+they were enclosed between the pragmas
+.B CTC SKIP
+and
+.B CTC ENDSKIP
+.TP
+.B -no-warnings
+Specifies that all CTC++ warning messages are suppressed.
+.PP
+Compiler command and its interpretation is defined in the
+configuration file (see
+.I CTC++ User's Guide
+or
+.I ctc.ini
+for more information). Different compiler commands can be used
+in the same environment (as defined in the configuration file).
+
+.SH SYMBOLFILE AND DATAFILE
+When a file is instrumented, ctc derives a description of
+the file and adds it into a symbolfile. Also the file's
+instrumentation time is recorded (timestamp).
+
+When a source file is re-instrumented using a symbolfile, which
+already has a description of the file, the old timestamp will
+be used, if the instrumentation mode is the same and if the
+file's description would become the same. I.e. there are same
+number of probes, on same source lines, and on those lines the
+source code is the same (as ctc could see it from C-preprocessed
+form of the source file).
+
+Default name on symbolfile is
+.I MON.sym
+in current directory. Symbolfile path and name can be determined
+explicitly with
+.B -n
+option. The instrumented object files remember the (absolute path)
+and name of the symbolfile that was used at the instrumentation
+time and the instrumentation timestamp.
+
+At some point of the instrumented program execution
+(normally at program end), the ctc run-time library writes
+the collected execution data of the instrumented files to a
+datafile. The datafile path and name will be inherited from
+the used symbolfile when ".sym" extension is changed to ".dat".
+
+If the datafile contains already execution data of a source
+file, the data will be summed up, if the timestamps are same.
+If the timestamps differ, the execution data of the file,
+which was in execution, overwrites the file's data in the datafile.
+This means that the instrumented program can be run multiple
+times and the coverage data in the datafile gets cumulated.
+But when a file is changed, reinstrumented, and re-run,
+its coverage data in the datafile is restarted from the changed level.
+
+The datafile is created to the same directory and name as the
+symbolfile was when the file was instrumented, only the file
+extension ".sym" is changed to ".dat".
+
+If at test time you do not have similar directory context as you
+had at instrumentation time, read from the
+.I CTC++ User's Guide
+how you can define environment variable
+.B CTC_DATA_PATH
+to specify the directory where the datafile will be written
+at the test time.
+
+The ctcpost tool then reads the symbolfile and datafile and can
+produce various reports.
+
+.SH SELECTING THE FILES TO BE INSTRUMENTED
+.B ctc
+can leave the code coming from some specified source files
+un-instrumented. ctc sees source files in two ways. Firstly,
+they can appear on the compilation command line, for example
+
+.RS 4
+.B ctc -i m gcc -c file1.c file2.c
+.RE
+
+Secondly, a source file can be #included to another source file,
+which is instrumented.
+
+Whether the source files given on command line or #included to
+another file are instrumented or not, is controlled by
+configuration parameters
+.B EXCLUDE
+and
+.BR NO_EXCLUDE .
+Their default settings are (in ctc.ini file)
+
+.RS 4
+.B EXCLUDE
+=
+.RI % INCLUDES %
+.RE
+.RS 4
+.B NO_EXCLUDE
+=
+.RE
+
+which means that all files that are seen on command line are instrumented,
+but code that comes from an #included file is not instrumented.
+
+.B EXCLUDE/NO_EXCLUDE
+can be fine-tuned. For example the following instrumentation command
+
+.RS 4
+.B ctc -i m -C \(lqEXCLUDE+*/Dir2/*\(rq -C NO_EXCLUDE+*/hdr5.h gcc ...
+.RE
+
+woud not instrument any #included files and any file residing in
+directory Dir2. However code coming from header hdr5.h would be
+instrumented. Read from the
+.I CTC++ User's Guide
+more of
+.BR EXCLUDE/NO_EXCLUDE .
+Also understand the difference between '=' (to override) and '+' (to append)
+and '-' (to remove) in configuration parameter list settings.
+
+.SH EXAMPLES
+.TP 3
+.B 1.
+Three source files (file1.c, file2.c and file3.c), resulting in an
+executable named "testexe". The instrumented object files are named
+file1.o, file2.o and file3.o.
+
+.RS 5
+.B ctc -i m gcc -o testexe file1.c file2.c file3.c
+.RE
+
+.TP 3
+.B 2.
+Three source files from which only the first two are instrumented.
+The instrumented object files are file1.o and file2.o.
+
+.RS 5
+.B ctc -i m gcc -c file1.c file2.c
+.br
+.B gcc -c file3.c
+.br
+.B ctc -i m gcc -o testexe file1.o file2.o file3.o
+.RE
+
+.RS 3
+alternate way:
+.RE
+
+.RS 5
+.B ctc -i m -C EXCLUDE+file3.c gcc -o testexe file1.c file2.c file3.c
+.RE
+
+.TP 3
+.B 3.
+Makefile having source files which are compiled to produce an
+executable, original objects and executable are replaced by the
+instrumented ones.
+
+.RS 5
+.B make clean
+.br
+.B make \(lqCC=ctc -i m gcc\(rq
+.RE
+
+.RS 3
+alternate way:
+.RE
+
+.RS 5
+.B ctcwrap -i m make
+.RE
+
+.TP 3
+.B 4.
+Same as above, but file1.o should not be instrumented.
+
+.RS 5
+.B make clean
+.br
+.B make file1.o
+.br
+.B make \(lqCC=ctc -i m gcc\(rq
+.RE
+
+.TP 3
+.B 5.
+Same as above, different method.
+
+.RS 5
+.B make clean
+.br
+.B make \(lqCC=ctc -i m -C EXCLUDE+file1.c gcc\(rq
+.RE
+
+.RS 3
+alternate way:
+.RE
+
+.RS 5
+.B ctcwrap -i m -C EXCLUDE+file1.c make
+.RE
+
+.SH FILES
+.PD 0
+.TP 20
+.I /usr/local/bin/ctc
+CTC++ preprocessor
+.TP
+.I /usr/local/lib/libctc.a
+CTC++ run-time library (depending on the delivery there can also be
+.IR libctc.so )
+.TP
+.I /usr/local/lib/libctc64.a
+CTC++ 64-bit run-time library
+.TP
+.I /usr/local/lib/ctc/ctc.ini
+default configuration file
+.TP
+.I $HOME/lib/ctc/ctc.ini
+default local configuration file
+.TP
+.I $CTCHOME/ctc.ini
+alternate configuration file
+.TP
+.I $HOME/.ctc.ini
+user's local configuration file
+.TP
+.I ./.ctc.ini
+local configuration file
+.TP
+.I /usr/local/include/ctc.h
+header file needed in compiling an instrumented source file
+.PD
+.SS "Files generated by the CTC++ Preprocessor:"
+.LP
+.PD 0
+.TP 20
+.RI < symname > .sym
+descriptions of counters and timers
+.TP
+.RI < symname > .sym.lock
+auxiliary file, which is automatically created and deleted, and which
+is used to serialize the possible parallel updates of the symbolfile.
+
+.SS Files generated by CTC++ instrumented executables:
+.LP
+.PD 0
+.TP 20
+.RI < symname > .dat
+execution data produced by the instrumented program during a test
+session
+.TP
+.RI < symname > .dat.lock
+auxiliary file, which is automatically created and deleted, and which
+is used to serialize the possible parallel updates of the datafile.
+.PD
+
+.SS "Files generated by the CTC++ Postprocessor:"
+.LP
+Execution profile listing, untested listing, timing listing,
+contents of symfiles/datafiles listing. See
+.BR ctcpost (1).
+.SS "Files generated by the CTC2HTML utility:"
+.LP
+.TP 20
+.I ./CTCHTML/*
+This subdirectory is created in the working directory
+(unless with -o option another directory is specified) and
+the output HTML files are written there. The browsing is started
+from file index.html. See
+.BR ctc2html (1).
+
+.SH DIAGNOSTICS
+Error messages are intended to be self-explanatory.
+
+Preprocessor exit values:
+
+.RS 2
+.PD 0
+.IP "0 -" 4
+preprocessing was successful
+.IP "1 -" 4
+there was an error which terminated preprocessing
+.PD
+.RE
+.PP
+Possible compiler warnings about "statement not reachable"
+or "function should return a value" should be ignored, assuming the
+original source compiled without these warnings.
+
+Instrumented program exit values:
+
+.RS 3
+.PD 0
+.IP "1 -" 4
+error occurred while initializing the instrumented program
+.IP "2 -" 4
+error occurred while executing a #pragma CTC - command
+.PD
+.RE
+.PP
+On normal program termination, the instrumented program returns the
+same exit status as the original program on same conditions. Errors
+encountered while appending the default datafile are reported to the
+stderr and the exit value of the program is not changed.
+
+.SH ENVIRONMENT
+.PD 0
+.TP 20
+.B CTCHOME
+path for the CTC++ home directory; the configuration file
+.I ctc.ini
+is searched in this directory
+.TP
+.B CTCINIT
+path(s) for optional/additional configuration file(s)
+.TP
+.B CTC_DATA_PATH
+directory to which instrumented program writes its datafile
+.TP
+.B CTC_LOCK_MAX_WAIT
+if defined, advises CTC++ how many seconds to wait for the lock
+before giving up in symbolfile and datafile updates; a value
+of 0 means "do not use locking"; see the
+.I CTC++ User's Guide
+.PD
+
+.SH VENDOR
+.nf
+Verifysoft Technology GmbH
+In der Spoeck 10, 77656 Offenburg, Germany
+URL: http://www.verifysoft.com
+.fi
+
+.SH SEE ALSO
+.BR ctcpost (1),
+.BR ctcwrap (1),
+.BR ctc2dat (1),
+.BR ctc2html (1),
+.BR ctc2excel (1),
+.BR ctcxmlmerge (1),
+.br
+.I CTC++ User's Guide
+(ctcug.pdf)
+
+.SH NOTES
+In some	unix environments the C++ compiler's implementation of
+templates is problematic with CTC++'s current instrumentation
+method.	The problem shows so that the instrumented program does not
+collect coverage information about the template class methods.

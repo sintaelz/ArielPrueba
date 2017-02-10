@@ -1,0 +1,78 @@
+#!/usr/bin/perl
+##########################################################################
+#  RCSfile     : $RCSfile: ctcagent.pl $
+#  Version     : $Revision: 1.5 $, $Date: 2010/12/08 09:15:16 $
+#  Last Edited : 8.12.2010
+#  Author      : $Author: jorma $
+#
+#                   Copyright (C) 2007-2010 Testwell Oy
+##########################################################################
+
+# Auxiliary script in CTC++ ctcwrap utility. Wrapping the compile/link
+# command with "ctc ". The ctc-options are assumed to be passed via
+# environment variable CTCOPTS!
+
+sub basename;
+
+# Sanity check
+if (!defined $ENV{'CTCWRAPDIR'}) {
+    die "$0 error: Usage problem. Should be invoked via ctcwrap callchain!";
+}
+
+@CMDARGS = ();
+
+# Strip off PATH from the "wrap-directory" that was added there
+# earlier for certain technical reasons...
+@PATH = ();
+foreach $i (split (':', $ENV{'PATH'})) {
+    next if $i eq $ENV{'CTCWRAPDIR'};
+    push (@PATH, $i);
+}
+$ENV{'PATH'} = join(':', @PATH);
+
+$COMMAND = basename($0);
+
+foreach $tmp (@ARGV) {
+    $tmp =~ s/([^\\])\$/$1\\\$/g;
+    push(@CMDARGS, $tmp);   # Sorry, we store this here twice for now
+}
+
+# In case someone has used like...: 'ctcwrap make "CC=ctc -i f gcc"'
+if ($COMMAND eq "ctc") {
+    unshift (@CMDARGS, "ctc");
+    exec (@CMDARGS) or die "$0 error: Couldn't exec $!";
+}
+
+# Prepend compilername here
+unshift (@CMDARGS, $COMMAND);  
+
+# Do the command (gcc, g++, ld, ...) under ctc...
+unshift (@CMDARGS, "ctc");
+
+exec (@CMDARGS) or die "$0 error: Couldn't exec $!";
+
+1;
+
+##########################################################################
+# SUBROUTINE: basename
+# PURPOSE   : Strip possible directory part from a filename, return basename
+##########################################################################
+sub basename 
+{
+    my ($filename) = @_;
+    my $base = $filename;
+    my $end;
+
+    $end = rindex $filename, '\\';
+    if ((rindex $filename, '/') > $end) {
+        $end = rindex $filename, '/';
+    }
+
+    if ($end >= 0) {
+        $base = substr $filename, $end + 1;
+    }
+
+    return $base;
+}
+
+#EOF $RCSfile: ctcagent.pl $

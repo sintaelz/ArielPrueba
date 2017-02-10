@@ -1,0 +1,192 @@
+
+NAME
+
+  cov++  A g++ test coverage analysis tool
+
+SYNOPSIS
+
+  cov++ [cov++ options] [g++ options]
+
+
+DESCRIPTION
+
+  "cov++" is a thin wrapper around covtool.exe whose purpose is
+  to help you instrument your C++ code with a minimum of intrusion
+  into your compilation process.
+
+  Basically, you can replace the name 'g++' with 'cov++' in most
+  makefiles and recompile your code to get an instrumented
+  executable.  The ease with which you can use g++ depends on a
+  variety of factors.
+
+  This script is not meant to handle the variety of uses of g++.
+  For example, it will not accept a command of the following
+  form:
+
+    cov++ file.c other_file.o
+
+  cov++ will perform only the compilation of a single file:
+
+    cov++ -c file.c
+
+  Or the linkage of many files:
+
+    cov++ -o file1.o file2.o ... lib1.a lib2.a lib3.so ...
+
+  You cannot both compile and link in the same command.
+
+  Nor can use use cov++ to generate preprocessed c++ files.
+  That is, the following command will not work:
+
+    cov++ -E file.c
+
+
+OPTIONS
+
+  In addition to the g++ options, cov++ accepts the following
+  options specific to itself:
+
+    -KEEP
+		
+    -VER
+		
+    -EXT .a .b
+
+    -h
+
+    -skip dir_prefix
+
+    -CMD c1 c2
+
+  These options have the following meanings:
+
+    "-KEEP" means to keep the intermediate files (.b) after the
+    run.
+
+    "-VER" means to turn on logging of actives. When used, it
+    should be first.
+
+    "-EXT .a .b" means to use .a as the file name extension of
+    C++ source code.  The extension, .b, is the name of the
+    generated intermediate files actually fed to g++.  The
+    extension, .b, must be accepted by g++ as a valid c++
+    source extension.  Allowed values for .a and .b are
+
+      .c
+      .C
+      .c++
+      .cpp
+      .cxx
+
+    The two values supplied as parameters to the -EXT option
+    must be different members of the above list.
+
+    "-CMD c1 c2" means to use c1 as the compiler and c2 as the
+    linker.  The defaults are:
+
+      -CMD g++ g++
+
+    "-skip /usr" means to ignore files beginning with /usr when
+    instrumenting.  This greatly speeds up your runs by allowing
+    you to ignore system headers.  Also, it helps you get better
+    coverage numbers.  It is unlikely that your program will
+    fully exercise the system functionality.  Multiple -skip
+    options can be supplied.
+
+
+ENVIRONMENT VARIABLES AND FILES
+
+  The file, cov++.cfg defines the default values for various
+  options.  This file will befound in the same directory that
+  cov++ is found.  By default, cov++ is installed in
+
+    /usr/local/covtool/cov++
+
+  But if you copy it to another location, it will read its
+  configuration files from that directory.  It will also expect
+  to find the covtool.exe program in that directory as well.
+
+  Each option is associated with an environment variable.  If
+  you set these options in the environment before  running the
+  program, they will override the defaults -- but not the command
+  line options.  The variables are:
+
+     Name            Default
+     ========================
+     COVTOOL_CC      g++
+     COVTOOL_LN      g++
+     COVTOOL_EXT     .c
+     COVTOOL_TMP     .c++
+
+  Note:  for these variables to superseed the cov++.cfg file,
+  they must ALL FOUR BE SET.
+
+  You might feel the need to set these variables to slightly
+  speed up the processing of your makefile -- but is by no
+  means needed.
+
+
+WARNING
+
+  While it is possible to change the name of the compiler from
+  g++ to something else, the 'something else' must obey the g++
+  command line syntax with respect to -g, -c, -o, *.o, *.a, *.so,
+  etc.
+
+
+USE IN MAKEFILES
+
+  To use cov++ in makefiles, most people will only need to
+  replace g++ with cov++.  You will also have to modify the main
+  programs of your tests to turn on logging.  These should be the
+  only modifications to your build process needed.  Here is an
+  example makefile entry:
+
+    CC=cov++ -skip /usr
+
+ANALYZING THE COVERAGE DATA
+
+  Once you have built your instrumented executable and run all
+  of your tests, you should see a variety of files named
+  *.covexp distributed throughout your test directories.
+
+  Use covmerge.exe to merge them into a single merged.db file.
+  Use gen_html to created web pages that contain your execution
+  statistics and annotated source code.  For example do the
+  following:
+
+    edit your makefile and replace g++ with cov++
+
+    do a clean build
+
+    run all your tests
+
+    merge your *.covexp files:
+	
+
+      covmerge.exe `find * -name '*.covexp' -print` \\
+       >merged.db
+
+
+    gen_html merged.db
+	
+    point your browser at coverage_html/index.html
+
+    examine the coverge tabs and annotated sources
+
+  An annotated source file is a copy of your .c file but each
+  line begins with either ' ', '-', or '+'.  A line beginning
+  with a blank means that there is not instrumentation on that
+  line.  A line with a '+' means that the line was instrumented
+  and that you executed during at least 1 test.  The lines
+  beginning with -' means that the line was instrumented but
+  never executed.  Consider:
+
+    #include <stdio.h>
+    int main()
+   +{
+   +  printf("hello world");
+   +  exit(0);
+     }
+
+

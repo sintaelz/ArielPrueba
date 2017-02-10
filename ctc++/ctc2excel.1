@@ -1,0 +1,145 @@
+.\" $RCSfile: ctc2excel.1 $
+.\" $Revision: 1.13 $
+.\" $Author: olavi $
+.\"
+.\" Copyright (c) 2012-2013 Testwell Oy
+.\" Copyright (c) 2013-2016 Verifysoft Technology GmbH
+.\"
+.\" LAST EDITED : 21.06.2016
+.\"
+.\"
+.TH ctc2excel 1 "21 June 2016"
+.SH NAME
+ctc2excel - CTC++, Test Coverage Analyzer for C/C++
+.nf
+          CTC++ to Excel Converter (v3.3)
+
+.SH SYNOPSIS
+.ad l
+.B ctc2excel -h
+.br
+.B ctc2excel
+.RB [ -i
+.IR inputfile ]
+.RB [ -o
+.IR outputfile ]
+.br
+.RB [ -u ]
+.br
+.RB [ -efs " 'c'" ]
+.br
+.RB [ -full ]
+.RB [ -nopath ]
+.ad n
+
+.SH DESCRIPTION
+.B ctc2excel 
+generates Excel representation from the input CTC++ 
+Execution Profile Listing. The output file contains coverage
+and execution hit information of the functions, one line per
+each function. The output file can then be opened in Excel
+or other spreadsheet program.
+
+.SH OPTIONS
+.TP
+.B -h
+.RS
+Displays a brief help and the command-line options.
+.RE
+.TP
+.BI -i " inputfile"
+Specify the input CTC++ Execution Profile Listing.
+By default input is read from STDIN.
+.TP
+.BI -o " outputfile"
+Specify the output Excel TSV file.
+By default output is written to STDOUT.
+.TP
+.B -u
+.RS
+(untested) Only functions, which are not fully tested are reported.
+.RE
+.TP
+.B -efs 'c'
+.RS
+(excel field separator) The fields in the excel file are separated by
+character c. Default is tab character.
+.RE
+.TP
+.B -full
+.RS
+Copy all lines of information from the input Execution Profile
+Listing File to the output Excel TSV file. Different line types are
+tagged with '1', '2', etc. By default only one line (with tag '2') of each
+function is copied to the output file. The default usage represents
+rather closely the function coverage view to the Execution Profile Listing,
+but in Excel processable form.
+.RE
+.TP
+.B -nopath
+Show no file path in the source file name.
+By default file path is shown in the way as it was in the input
+Execution Profile Listing.
+
+.SH EXAMPLE
+ctcpost -p profile.txt
+
+and assume the profile.txt has the following text fragments:
+
+MONITORED SOURCE FILE : ../dir2/sample.c
+.br
+INSTRUMENTATION MODE  : decision
+
+ HITS/TRUE      FALSE    LINE DESCRIPTION
+.br
+=========================================
+
+         1                  2 FUNCTION main()
+         1          0 -     5   ternary-?: j == 6 && k == 7
+         0          1 -     6   if (j == 10)
+         1                  9   return 1
+                           10 }
+
+***TER  67 % (  4/  6) of FUNCTION main()
+        80 % (  4/  5) statement
+.br
+-----------------------------------------
+
+
+ctc2excel -i profile.txt -o excel.csv -efs ';'
+
+then the output file contains one line of the above kind of functions:
+
+2;../dir2/sample.c;decision;1;2;main();67;4;6;80;4;5
+
+If -full option had been selected, the output file would have contained
+also line types:
+.br
+- "1;...": Information lines (symbolfile names etc.) below the header
+.br
+- "3;...": FILE summary line
+.br
+- "4;...": Bottom line SUMMARY lines
+
+If -nopath option had been used, "sample.c" would have been displayed
+and not "../dir2/sample.c".
+
+.SH VENDOR
+Verifysoft Technology GmbH
+.br
+In der Spoeck 10, 77656 Offenburg, Germany
+.br
+URL: http://www.verifysoft.com
+
+.SH SEE ALSO
+.BR ctc (1),
+.BR ctcpost (1),
+.BR ctcwrap (1),
+.BR ctcxmlmerge (1),
+.BR ctc2dat (1),
+.BR ctc2html (1),
+.br
+.I CTC++ User's Guide
+(ctcug.pdf)
+
+.\" EOF $RCSfile: ctc2excel.1 $

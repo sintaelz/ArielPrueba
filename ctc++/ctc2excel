@@ -1,0 +1,518 @@
+#!/usr/bin/perl
+##########################################################################
+# 
+#                   CTC++ System, ctc2excel (v3.1)
+#                   CTC++ to Excel TSV converter
+#
+#  RCSfile     : $RCSfile: ctc2excel.pl $
+#  Version     : $Revision: 1.11 $, $Date: 2016/06/09 13:38:26 $
+#  Last Edited : 09.06.2016/op
+#  Author      : $Author: olavi $
+#
+# 
+#                Copyright (C) 2005-2013 Testwell Oy
+#                Copyright (C) 2013-2016 Verifysoft Technology GmbH
+##########################################################################
+# Additional notice to users:
+# You may use this Perl script as part of your authorized use of the
+# CTC++ System. You/your organization is supposed to acquire the actual
+# Perl system independently (start for example from http://www.perl.org).
+#
+# Testwell provides support for this ctc2excel component of the CTC++ System
+# in the same way as Testwell provides support for the other components of
+# the CTC++ System. Because this component is provided in a source file
+# form, you are able to modify this file. However, if you do any such
+# modifications, other than those explicitly marked below, Testwell may
+# not be capable of providing you support, and Testwell reserves the right
+# not to support you with this component, if you have done your own other
+# modifications to this file.
+#
+# Testwell would however be pleased to receive your bug corrections/reports
+# and enhancement suggestions and will consider them in future versions of
+# this tool.
+#
+##########################################################################
+
+##########################################################################
+# subroutines
+##########################################################################
+sub parse_cmdline;
+sub display_or_not;
+
+##########################################################################
+# global "constants"
+##########################################################################
+$version = "ctc2excel v3.3";
+
+$usage =
+  "Usage:\n" .  
+  "  ctc2excel [-i infile] [-o outfile] [-u] [-efs 'c'] [-full] [-nopath]\n" .
+  "  ctc2excel -h \n";
+
+$help = <<END; 
+$version
+
+$usage
+Command-line options:
+  -i infile  Input Execution Profile Listing file . Default 'stdin'.
+  -o outfile Output Excel TSV file. Contains coverage data of the functions,
+             one line of each. Default 'stdout'.
+  -u         Only untested (under 100% TER) functions are reported in outfile.
+  -efs 'c'   Use c as Excel field separator. Default tab. Example -efs ';'.
+  -full      Write to outfile also the header information and the summary
+             information of the instrumented files and of overall.
+  -nopath    Of the reported instrumented files drop off the path portion.
+  -h         Displays this help text.
+
+END
+
+
+##########################################################################
+# global variables
+##########################################################################
+
+*INPUT = *STDIN;
+# name of the input execution profile listing file
+$infile = "";
+# name of the output Excel TSV file
+$outfile = "";
+# generate only function specific linetype 2
+$full = 0;
+# show file path
+$path = 1;
+$monitored_source_file = "";
+$monitored_function = "";
+$coverage_view = "";
+$instrumentation_mode = "";
+$reduced_mode = "";
+$ter_function = "";
+$ter_of_function = 0;
+$ter_source = "";
+$ter_of_source = 0;
+$ter_summary = "";
+$efs = "\t";        # excel field separator, default tab, -efs 'c' may override
+$u_opt = 0;         # flag, if -u (untested) option present (1) or not (0)
+
+##########################################################################
+# execution starts here !
+##########################################################################
+
+# parse the command line
+parse_cmdline();
+
+# open file for input (given with -i option) 
+# or read from *STDIN
+if ($infile) {  
+  open(INPUT,"<$infile") 
+     or die "ctc2excel: Can not open file $infile for reading: $! \n";
+} elsif (! -t STDIN) {  
+     # If STDIN is not connected to a terminal, so following cases, e.g.
+     # Piped to:                ctcpost -p - | ctc2excel 
+     # Redirected from file:    ctc2excel < profile.txt 
+     print STDERR "ctc2excel: Reading input profile listing from stdin\n";
+  } else {
+     # This is only the simplest, no redirect/pipe
+     print $help;
+     exit(0);
+  }
+  
+# create output Excel TSV file
+# or write to STDOUT
+if ($outfile) { 
+   open(OUTPUT, ">$outfile") 
+      or die "ctc2excel: Can not open file $outfile for writing: $! \n";
+   select(OUTPUT);
+} 
+
+# loop the input execution profile listing file through
+# generate output Excel TSV
+while (<INPUT>) {
+    s/\015?\012$//;
+
+    if (/^\*.+EXECUTION TIME LISTING.+/) {
+       die "ctc2excel: Wrong input file listing\n";
+    }
+
+    elsif (/^\*.+UNTESTED CODE LISTING.+/) {
+       die "ctc2excel: Wrong input file listing\n";
+    }
+
+    elsif (/^(Symbol file\(s\) used)\s+: (.+)/) {
+       if ($full) {
+          print "1$efs$1$efs$2\n";
+       }
+    } 
+
+    elsif (/^(Data file\(s\) used)\s+: (.+)/) {
+       if ($full) {
+          print "1$efs$1$efs$2\n";
+       }
+    }
+
+    elsif (/^(XML file\(s\) used)\s+: (.+)/) {
+       if ($full) {
+          print "1$efs$1$efs$2\n";
+       }
+    }
+
+    elsif (/^(Chosen file\(s\))\s+: (.+)/) {
+       if ($full) {
+          print "1$efs$1$efs$2\n";
+       }
+    }
+
+    elsif (/^(Unchosen file\(s\))\s+: (.+)/) {
+       if ($full) {
+          print "1$efs$1$efs$2\n";
+       }
+    }
+
+    elsif (/^\s+: (.+)/) { # : mon.SYM (Tue Mar 22 11:30:20 2005)
+       if ($full) {
+          print "1$efs$efs$1\n";
+       }
+    }
+
+    elsif (/^(Listing produced at)\s+: (.+)/) {
+       if ($full) {
+          print "1$efs$1$efs$2\n";
+       }
+    }
+
+    elsif (/^(Coverage view)\s+: (.+)/) {
+       $coverage_view = $2;
+       if ($full) {
+          print "1$efs$1$efs$2\n";
+       }
+    }
+
+    elsif (/^MONITORED (.+) FILE : (.*[\\\/])(.+)/) { #path+file
+       if ($path) {
+          $monitored_source_file = "$efs$2$3";
+       } else {
+          $monitored_source_file = "$efs$3";
+       }
+    }
+
+    elsif (/^MONITORED (.+) FILE : (.+)/) { #only file
+       $monitored_source_file = "$efs$2";
+    }
+
+    elsif (/^INSTRUMENTATION MODE\s+: (.+)/) {
+       $instrumentation_mode = $1;
+       if ($instrumentation_mode =~ /(.+)\+inclusive_timing/ or
+           $instrumentation_mode =~ /(.+)\+exclusive_timing/) {
+          $instrumentation_mode = $1;
+       }
+       # multicondition/condition coverage
+       if ($instrumentation_mode eq "multicondition" &&
+           $coverage_view eq "As instrumented") {
+          $reduced_mode = "multicondition";
+       }
+       elsif ($instrumentation_mode eq "multicondition" &&
+              $coverage_view eq "Reduced to MC/DC coverage") {
+          $reduced_mode = "MC/DC";
+       }
+       elsif ($instrumentation_mode eq "multicondition" &&
+              $coverage_view eq "Reduced to condition coverage") {
+          $reduced_mode = "condition";
+       }
+       elsif ($instrumentation_mode eq "multicondition" &&
+              $coverage_view eq "Reduced to decision coverage") {
+          $reduced_mode = "decision";
+       }
+       elsif ($instrumentation_mode eq "multicondition" &&
+              $coverage_view eq "Reduced to function coverage") {
+          $reduced_mode = "function";
+       }
+       # decision coverage
+       elsif ($instrumentation_mode eq "decision" &&
+           $coverage_view eq "As instrumented") {
+          $reduced_mode = "decision";
+       }
+       elsif ($instrumentation_mode eq "decision" &&
+              $coverage_view eq "Reduced to MC/DC coverage") {
+          $reduced_mode = "decision";
+       }
+       elsif ($instrumentation_mode eq "decision" &&
+              $coverage_view eq "Reduced to condition coverage") {
+          $reduced_mode = "decision";
+       }
+       elsif ($instrumentation_mode eq "decision" &&
+              $coverage_view eq "Reduced to decision coverage") {
+          $reduced_mode = "decision";
+       }
+       elsif ($instrumentation_mode eq "decision" &&
+              $coverage_view eq "Reduced to function coverage") {
+          $reduced_mode = "function";
+       }
+       # function coverage
+       else {
+          $reduced_mode = "function";
+       }
+    }
+
+    elsif (/^#line \d+ "(.*[\\\/])(.+)"/) { # path+file
+       # #line 1 "C:\huuhaa\helloworldbasic.pan"
+       if ($path) {
+          $monitored_source_file = "$efs$1$2";
+       } else {
+          $monitored_source_file = "$efs$2";
+       }
+    }
+
+    elsif (/^#line \d+ "(.+)"/) { # only file
+            # #line 1 "helloworldbasic.pan"
+       $monitored_source_file = "$efs$1";
+    }
+
+    elsif (/^\s*(\d+)\s+-*\s+(\d+)\s*FUNCTION (.+)/) {
+       #  0    -  3 FUNCTION E32Dll()
+       $monitored_function = "$efs$1$efs$2$efs$3";
+       if ($reduced_mode eq "function") {
+          # had only this one "header" line, process here.
+          if ($1 == 0) {
+             $ter_function = "$efs0$efs0$efs1\n";
+          } else {
+             $ter_function = "$efs100$efs1$efs1\n";
+          }
+          if (display_or_not($1 == 0 ? 0 : 100)) {
+             print "2" . $monitored_source_file . $efs . $reduced_mode .
+                $monitored_function . $ter_function;
+          }
+       }
+    }
+
+    elsif (/^\*\*\*TER\s+(\d+) % \(\s*(\d+)\/\s*(\d+)\) of FUNCTION .+/) { 
+       #***TER  50 % (  1/  2) of FUNCTION E32Dll()
+       # function ending TER struct cov line
+       $ter_function = "2" . $monitored_source_file . $efs . $reduced_mode .
+                       $monitored_function . "$efs$1$efs$2$efs$3";
+       # print pending once stm cov line and its TER seen, too...
+       $ter_of_function = display_or_not($1);
+    }
+
+    elsif (/^\*\*\*TER\s+(\d+) % \(\s*(\d+)\/\s*(\d+)\) of FILE .+/) {#only file/path+file
+       # ***TER  57 % (  8/ 14) of FILE HELLOWORLDBASICAPPUI.cpp
+       $ter_source = "3" . $monitored_source_file . $efs . $reduced_mode . 
+                     "$efs$efs$efs" . "FILE" . "$efs$1$efs$2$efs$3";
+       # print pending once stm cov line and its TER seen, too...
+       $ter_of_source = display_or_not($1);
+    }
+
+    elsif (/^\s+(\d+) % \(\s*(\d+)\/\s*(\d+)\) statement/) {
+       # 56 % ( 14/ 25) statement
+       if ($ter_of_function == 1) {
+          print $ter_function . "$efs$1$efs$2$efs$3\n";
+          $ter_of_function = 0;
+       } else {
+          if ($ter_of_source == 1) {
+             if ($full) {
+                print $ter_source . "$efs$1$efs$2$efs$3\n";
+             }
+             $ter_of_source = 0;
+          }
+       }
+    }
+
+    elsif (/^\s+N\.A\. statement/) {
+       if ($ter_of_function == 1) {
+          print $ter_function . "\n";
+          $ter_of_function = 0;
+       } else {
+          if ($ter_of_source == 1) {
+             if ($full) {
+                print $ter_source . "\n";
+             }
+             $ter_of_source = 0;
+          }
+       }
+    }
+
+    elsif (/^-{77}/) { # the ------.... line
+       if ($ter_of_source == 1) {
+          if ($full) {
+             print $ter_source . "\n";
+          }
+          $ter_of_source = 0;
+       }
+    }
+
+    # SUMMARY lines:
+    # =============
+    elsif (/^(Source files)\s+: (.+)/) {
+       if ($full) {
+          print "4$efs$1$efs$2$efs$efs$efs"."SUMMARY\n";
+       }
+    }
+
+    elsif (/^(Headers extracted)\s+: (.+)/) {
+       if ($full) {
+          print "4$efs$1$efs$2$efs$efs$efs"."SUMMARY\n";
+       }
+    }
+
+    elsif (/^(Source lines)\s+: (.+)/) {
+       if ($full) {
+          print "4$efs$1$efs$2$efs$efs$efs"."SUMMARY\n";
+       }
+    }
+
+    elsif (/^(Functions)\s+: (.+)/) {
+       if ($full) {
+          print "4$efs$1$efs$2$efs$efs$efs"."SUMMARY\n";
+       }
+    }
+
+    elsif (/^(Measurement points)\s+: (.+)/) {
+       if ($full) {
+          print "4$efs$1$efs$2$efs$efs$efs"."SUMMARY\n";
+       }
+    }
+
+    elsif (/^TER\s+: (\d+) % \((\d+)\/(\d+)\) statement/ ||
+           /^TER\s+: (\d+) % \((\d+)\/(\d+)\) statement(.*)/) {
+       # can be at function, file and overall levels... provokes writeout
+       # summary "TER : 75 % (6/8) statement[ (N.A. for n functions)]"
+       if ($full) {
+          print $ter_summary . "$efs$1$efs$2$efs$3\n";
+       }
+    }
+
+    elsif (/^TER\s+: N\.A\. statement/) {
+       # can be at function level only, provokes writeout
+       if ($full) {
+          print $ter_summary . "\n";
+       }
+    }
+
+    elsif (/^TER\s+: (\d+) % \((\d+)\/(\d+)\) (.+)/ ||
+           /^TER\s+: (\d+) % \((\d+)\/(\d+)\)/)    {
+       # struct summary "TER  : 5 % (5/100) imode" or "TER  ; 100 % (0/0)"
+       $ter_summary = "4$efs"."TER"."$efs$4$efs$efs$efs" .
+                      "SUMMARY" . "$efs$1$efs$2$efs$3";
+    }
+}
+
+close INPUT;
+close OUTPUT;
+
+1;
+##########################################################################
+# execution ends here !
+##########################################################################
+
+
+##########################################################################
+# SUBROUTINE: parse_cmdline
+# PURPOSE   : This subroutine parses the command line
+#             The command line switches are:
+#
+#             -h            display a brief help on usage
+#             -i inputfile  input file name
+#             -o outputfile output file name
+#             -full         all linetypes generated
+#             -nopath       show no file path
+#
+# ARGUMENTS : -
+# RETURNS   : -
+##########################################################################
+sub parse_cmdline
+{
+
+   if (@ARGV == 1 and $ARGV[0] eq "-h") {
+      print $help;
+      exit(0);
+   }
+ 
+   for ($i = 0; $i <= $#ARGV; ++$i) {
+
+      if ($ARGV[$i] eq "-i") {
+         if ($i < $#ARGV) {
+            $infile = $ARGV[$i + 1];
+            ++$i;
+         } else {
+            die "ctc2excel: Error commandline option: $ARGV[$i]\n" .
+                "$usage";
+         }
+
+      } elsif ($ARGV[$i] eq "-o") {
+         if ($i < $#ARGV) {
+            $outfile = $ARGV[$i + 1];
+            ++$i;
+         } else {
+            die "ctc2excel: Error commandline option: $ARGV[$i]\n" .
+                "$usage";
+         }
+
+      } elsif ($ARGV[$i] eq "-u") {
+         $u_opt = 1;
+
+      } elsif ($ARGV[$i] eq "-efs") {
+         if ($i < $#ARGV) {
+            $efsarg = $ARGV[$i + 1];
+	    if (length($efsarg) == 3) {
+               if (substr($efsarg,0,1) eq substr($efsarg,2,1)) {
+                   # ok, we have "x" or 'x'
+                   $efs = substr($efsarg,1,1);
+                   $i++;
+               } else {
+                   # some AxB...
+                   die "ctc2excel: Error commandline option: $ARGV[$i]\n" .
+                       "$usage";
+               }
+            } elsif (length($efsarg) == 1) {
+               # perhaps "x" (win cmd shell shows x) or 'x' (unix cmd shell x)
+               $efs = $efsarg;
+               $i++;
+            } else  {
+               die "ctc2excel: Error commandline option: $ARGV[$i]\n" .
+                   "$usage";
+            }
+         } else {
+            die "ctc2excel: Error commandline option: $ARGV[$i]\n" .
+                "$usage";
+         }
+
+      } elsif ($ARGV[$i] eq "-full") {
+         $full = 1;
+
+      } elsif ($ARGV[$i] eq "-nopath") {
+         $path = 0;
+
+      } else {
+         die "ctc2excel: Error commandline option: $ARGV[$i]\n" .
+             "$usage";
+      }
+   }
+}
+
+
+##########################################################################
+# SUBROUTINE: display_or_not
+# PURPOSE   : Looks if -u (display only untested) option has been given.
+#             From argement gets TER%. Concludes if something should
+#             be displayed of not.
+# ARGUMENTS : - ter TER%
+#             - $u_opt (global variable)
+# RETURNS   : - 0 (=false/=should not be displayed/=int value 0), or
+#               1 (=true/=should be displayed/=int value 1)
+##########################################################################
+sub display_or_not
+{
+   my ($ter) = @_;
+
+   if ($u_opt == 1) {
+      # only when -u we may restrict displaying...
+      if ($ter < 100) {
+         return 1;
+      } else {
+         return 0;
+      }
+   } else {
+      return 1; # no -u option, also the fully tested displayed
+   }
+}
+
+
+# EOF $RCSfile: ctc2excel.pl $

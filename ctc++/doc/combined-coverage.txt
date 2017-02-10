@@ -1,0 +1,580 @@
+Testwell Oy                             CTC++ System Version 7.2
+Verifysoft Technology GmbH
+12 March 2014
+
+How to get combined coverage in CTC++
+=====================================
+
+This matter has come to new consideration along with CTC++ v7.2.
+Notably by its ctcxmlmerge tool which was added to CTC++. It gives
+another, or better, way to handle this need. See the CTC++ v7.2
+User's Guide (ctcug.pdf) for the details.
+
+Here, below, however there is still the pre-CTC++ v7.2 level description
+of the issue and how it could be handled without ctcxmlmerge tool.
+
+
+------------------------------------------------------------------------
+Testwell Oy                            CTC++ System Version 7.0
+18 August 2011
+
+
+How to get combined coverage in CTC++
+=====================================
+
+In this document we discuss of advanced CTC++ use where we instrument
+and link same code files to different programs, e.g. into a program with
+which we run unit tests and into a program with which we run system tests.
+We want to get CTC++ coverage report, which contains execution hits on the
+common files of both test runs.
+
+We do not discuss of the basic/simple/for_what_CTC++_was_initially_
+designed_for usage style in a single program case, which is:
+- some set of code files are instrumented and linked to one program
+- first tests are run and first coverage report is obtained
+- possible some code files are modified and the whole program is
+  re-instrumented (both the changed and unchanged files)
+- more tests are run with the program (which possibly has been re-built)
+- coverage report is obtained, where the execution data of the unchanged
+  files have been summed-up to the previous data, but on the changed
+  files the execution data starts from zero.
+
+The CTC++ architecture sets certain initial requirements so that coverage
+hits combining obtained from different program executions (which programs
+have partially same files) would be possible at all, such as:
+- the file must be known to CTC++ with same name (including possible
+  directory path)
+- the file contents after C-preprocessing must be the same from those
+  parts that CTC++ is interested of
+
+The second requirement may be difficult. Consider that in some code file
+there is macro definitions and conditional compilation, which affect to
+the appearance of the code how CTC++ sees it. For example
+
+   ....
+   #ifdef FLAG
+      ....the code in some way
+   #else
+      ....the code in some other way
+   #endif
+   ....
+
+If FLAG is defined when compiling the file to A-program but not defined
+when compiling the code to B-program, by normal CTC++ means the coverage
+results for the file obtained from A-program run and B-program run can
+not be combined.
+
+There is certain idea how to handle this combined coverage need, which
+goes over current CTC++'s capabilities. Read more at the end of this
+document.
+
+In this document we concentrate on a use case, where the CTC++
+preconditions to obtain a combined coverage from multiple program
+executions are met in the first place, and describe one use scenario,
+which should work. But even in that use scenario, we can do it wrong,
+and do not get a CTC++ report having the combined coverage. We list
+various traps, where we can fall, and explain them in rather detailed
+way.
+
+
+1. To begin with we assume a situation:
+---------------------------------------
+
+- we have some code files file1.cpp, file2.cpp, file3.cpp, etc.
+- they are instrumented, compiled and linked to some number of
+  executables, Aexe, Bexe, Cexe,...
+- perhaps they are unit test executable, module test executable,
+  system test executable, etc.
+- some of the code files are same in all executables, but some are
+  unique per each executable
+
+When we have run tests with Aexe, Bexe, Cexe,... we want to get combined
+coverage report, where from the same files' part the coverage hits are
+summed-up from various execution contexts.
+
+
+2. We do as follows:
+--------------------
+
+2.1.
+----
+We do the game on Aexe: Instrument the code (get MONA.sym), run the
+tests (get MONA.dat).
+
+2.2.
+----
+We do the game on Bexe: Start from scratch. Arrange the build context
+so that the source files are in the same directories as they were when
+the files were instrumented for Aexe.
+
+(Or, perhaps unrealistic: we do not instrument the .cpp files again,
+but use the instrumented .obj files from the Aexe build. But we may not
+have copies of those instrumented .obj files any more, and it may be
+difficult to get our build toolchain to start from them. It always
+wants to start from the .cpp files and so we have to re-instrument the
+files).
+
+When we instrument the code for Bexe, we do NOT have the MON.sym file
+(that from the Aexe building, i.e MONA.sym) in our build context.
+Means that new MONB.sym gets born.
+
+We run test on Bexe. We get MONB.dat.
+
+2.3.
+----
+On Cexe we do the same thing as for Bexe. We get MONC.sym and MONC.dat.
+
+2.4.
+----
+Now we generate the report as follows
+
+   ctcpost -p combined_coverage.txt \
+           MONA.sym MONB.sym MONC.sym \
+           MONA.dat MONB.dat MONC.dat
+
+and we remember to check what CTCPost notices ctcpost possibly wrote to
+stderr.
+
+The CTCPost notices reveal if something did not go as we hoped. For
+example, CTC++ may have concluded that some code file, which has same
+name does not represent same level in Aexe, Bexe, Cexe, and thus CTC++
+refuses to sum up the coverage hits. But these CTCPost notices do not
+reveal all the traps that we may have fallen into.
+
+But if everything went fine, the combined_coverage.txt file is what
+we wanted. We can convert it to HTML form by ctc2html tool.
+
+But things do not always succeed. Next we discuss what can go wrong.
+
+
+3. Issue of file name:
+----------------------
+
+When CTC++ instruments a source code file, it records its description
+into symbolfile (default MON.sym). The file name is recorded (by default,
+see * remark below) in the way it shows on compilation command line.
+For example it could be X:\some\dir\file5.cpp.
+
+CTC++ uses this file name in its whole toolchain: in symbolfile, in
+instrumented program, in datafile, and in profile listing.
+
+Thus, so that CTC++ in general could produce a combined coverage of some
+code file, it needs to be known in pertinent symbolfiles (MONA.sym,
+MONB.sym, MONC.sym) in the same way. This means that when building the
+instrumented Aexe, Bexe and Cexe programs the files must be referred
+in the same way on the compilation command.
+
+(*) CTC++ has configuration parameter SOURCE_IDENTIFICATION, by which
+we can fine-tune how the source file name is recorded in symbolfile and
+thereby used in the whole CTC++ toolchain. Possible values are:
+
+as_given       The file name is recorded as it is given on compilation
+               command line
+               - this is the default that perhaps everybody uses now. 
+
+basename       E.g. of X:\some\dir2\file5.cpp only file5.cpp is
+               recorded in the symbolfile. This facilitates
+               - regardless from what directory the file is compiled,
+                 it is always known to CTC++ by its plain basename
+               - can produce conflicts if different folders have
+                 different files with same name
+               - in Profile Listing lacks the directory information
+               - in generating HTML report the source code finding must
+                 be advised with -s options to ctc2html tool, which is
+                 elaborate (+ conflicting file name problem)
+               - in the HTML report there is an additional nuisance that
+                 at summary levels grouping of the files to directories
+                 is not done; as if all files were in "." folder
+
+absolute       E.g. of ..\dir2\file5.cpp it could become
+               X:\some\dir2\file5.cpp
+               - this makes the reports explicit
+               - the HTML report works also smoothly (sources get found)
+
+absolute_without_drive
+
+               E.g. of ..\dir2\file5.cpp it could become
+               \some\dir2\file5.cpp
+               - this makes the reports explicit
+               - if the builds are done in different subst'ed
+                 root directories X:, Y:, Z:, in CTC++'s toolchain
+                 the code file can still be considered the same
+               - the HTML report works smoothly (sources get found)
+                 provided that current drive is the same as build time
+
+
+4. What is timestamp in CTC++ toolchain:
+----------------------------------------
+
+Timestamp, or instrumentation timestamp, is the build machine's clock
+time when the code file has been instrumented. Its precision in one
+second (seconds since 1.1.1970). Timestamp follows the instrumented file
+throughout the CTC++ toolchain (in symbolfile, in instrumented executable,
+in datafile, in some ctcpost output reports).
+
+CTC++ uses the timestamp e.g. for controlling if coverage data coming
+from a datafile represents that level of the source code file, which
+CTC++ knows based on symbolfile.
+
+
+5. How timestamp behaves when source code file is re-instrumented:
+------------------------------------------------------------------
+
+Assume we have instrumented the whole program from scratch and obtained
+symbolfile MON.sym. Then for some reason we clean the project, but not
+delete the symbolfile, and rebuild the whole program. I.e. we recompile
+all files and also re-instrument them.
+
+In this situation, per each source file, CTC++ checks if in the symbolfile
+there already is a description of the file. If there is, CTC++ further
+checks, if the file's description would become the same as it already is
+in the symbolfile. If this is the case, to the instrumented code CTC++
+inherits the timestamp from the previous instrumentation. This has the
+benefit that the previously instrumented executable and the new
+instrumented executable produce coverage data, which CTC++ accepts the
+sum up in its toolchain (at instrumented program execution time and/or
+when in ctcpost time many datafiles are given).
+
+But if in re-instrumentation the CTC++ considers the file to have changed,
+the old description in the symbolfile is overwritten with new description
+and it will also get new timestamp. This means that there no more is
+possibility to get coverage report on the file of such test run, which was
+done with previous instrumentation executable.
+
+Here is one trap where the user may fall:
+
+If the build toolchain compiles a source file two times, e.g. debug
+and release versions of it. These compilations often contains #defines
+and conditional compilation, and due to them CTC++ sees the source as
+being different (CTC++ instruments the code from its C-preprocessed
+form).
+
+We have to avoid instrumenting same file to same symbolfile under
+different compilation flags. Or if we absolutely want to, we have to
+use handle_symdat.bat type of arrangement, where the symbolfiles (their
+names) are generated per each object file etc.
+
+
+6. Issue if first instrumenting too many source files into a symbolfile:
+------------------------------------------------------------------------
+
+Assume that in the beginning we do not quite know how we should
+instrument the program. Perhaps we end up to "instrument it all".
+Assume the "all" is 100 source files. And we get symbolfile MON.sym,
+which has descriptions of them.
+
+Later we come to our senses and realize that we do not want coverage
+data of all files. Perhaps there is some test driver and stub code,
+which are not the actual "code under test". Assume 60 files remains. So we
+re-instrument the program and use appropriate -C EXCLUDE+.... definition
+to leave some files out of instrumentation. But we still use the so far
+obtained symbolfile MON.sym.
+
+Fine, we run some test and get datafile MON.dat. Then we take the
+coverage report
+
+   ctcpost -p profile.txt MON.sym MON.dat
+
+But we are not happy. The TER% is miserably low. Also the excluded 40
+code files show in the report. And as they were not executed, they make
+the overall TER% low.
+
+If in ctcpost report run there is a description on a file in symbolfiles,
+but no coverage data on them from datafiles, ctcpost emulates 0% coverage
+on such files.
+
+Ok, in ctcpost there are options -f (files, select these files) and
+-nf (no files, do not select these files), but they may be elaborous
+to use.
+
+In this case, it might have been better to start from scratch in the
+re-instrumentation phase, when the final set of the files of interest
+became known. I.e. delete the "too large" MON.sym before the
+re-instrumentation.
+
+A "too large" MON.sym can be made smaller also for example as follows:
+
+   ctcpost -a TEMP.sym -(n)f (not_)selected_files MON.sym
+   rem check with ctcpost -l ... that TEMP.sym has proper contents
+   move TEMP.sym MON.sym
+
+
+7. Trap in combining symbolfiles by ctcpost -a option:
+------------------------------------------------------
+
+This feature came into CTC++ v6.5.6. It can be used like
+
+   ctcpost -a MON_joint.sym MON1.sym MON2.sym MON3.sym ...
+
+Now if in the input symbolfiles there are same source files, which have
+different timestamps (even if the file descriptions were otherwise same),
+in the joint symbolfile there remains only that description, whose
+timestamp is the youngest. (In one symbolfile there can be only one
+entry per one source file).
+
+This means that using the joint symbolfile there is not possible to
+get coverage report of such program executions, where of the source
+file there has been earlier timestamp level instrumented code.
+
+Unfortunately (as an after thought, this can be considered a flaw in
+the design of this feature), ctcpost does not give any CTCPost notice
+of the incidents, where it detects these kind of collisions and rejects
+the older instrumentation descriptions. For now we just have to be
+aware of this trap and live with it.
+
+In CTC++ v7.0 there came new functionality into "ctcpost -L symbolfile"
+command. It helps in studying these situations. The command now displays
+also how many times the file's description has been overwritten in the
+symbolfile (the "rwr" field). If this value is greater than 0, it is a
+sign that either the file has been re-instrumented so that its
+description is overwritten or in the "ctcpost -a ..." command the
+file's description has been overwritten. 
+
+
+8. Issues related to datafile (MON.dat) writing:
+------------------------------------------------
+
+When a host-based CTC++ is used, the instrumented executable writes
+(and sums up) directly the coverage data into the datafile.
+
+If the tests have been run at the target device, the coverage data is
+brought into the host machine in a text file and the datafile is
+written (and summed up) by ctc2dat utility.
+
+In both cases the behavior is the same in the regard that is discussed
+here below.
+
+Assume we have done one test round, i.e. instrumented the program,
+ran some tests and obtained the datafile. Then we change some source
+files and re-instrument the whole program. In it the changed source
+files get new timestaps. When we now run the tests and when the datafile
+is updated (either by the host-based instrumented exutable directly or by
+ctc2dat utility), it happens that on the changed files the coverage data
+in the datafile the previous execution data is overwritten.
+
+The behavior is this regardless if at the re-instrumentation time it
+was used same or separate symbolfile.
+
+In a datafile there can be only one entry of an instrumented file.
+The instrumented executable (ctc2dat represents it, too) always
+overrules what "timestamp-level" the coverage data is in the datafile
+of each source file.
+
+Here is a little point to understand. Assume that we have done the "error"
+that we have instrumented debug and release level code into the same
+symbolfile. It is an issue of its own. But regardless of it we have
+got debug-level executable and release-level executable. Inside them
+there are different timestamp level versions of the files, which CTC++
+has concluded to be different.
+
+Assume we first run debug-level executable and get datafile MON.dat.
+Then we run release-level executable, and on top of the datafile
+MON.dat. What happens is that now in the datafile the coverage data of
+the changed files contains execution hits only of the second run.
+
+There is one more point to understand here. Consider the usage scenario,
+which we described in the beginning (independent instrumentations of
+Aexe, Bexe and Cexe, and they have some common code files). And further
+assume that we would try to collect the coverage hits of each executables
+into the same MON.dat file. Assume we run first Aexe and get datafile
+MON.dat. Then we run Bexe on top of the datafile MON.dat, and hope that
+on the common files the coverage hits would be summed up.
+
+Sorry, that does not happen! Instead it happens that of the common
+files the coverage hits of Aexe run are overruled by Bexe run--of those
+files that were executed also in Bexe! If we would run Cexe, the
+coverage data of the common files would represent that of the Cexe only.
+
+Why this behavior? CTC++ is designed to behave like this. At run-time
+CTC++ does not consult (does not read or need) the instrumentation
+time symbolfiles, and so it can not decide if coverage data is ok or
+not ok to sum up the previous coverage data in the datafile. The
+timestamp equality is the only check.
+
+In CTC++ v7.0 there came new functionality into "ctcpost -L datafile"
+command. It helps in studying these situations. The command now displays
+also how many times the file's coverage data has been reset in the
+datafile (the "rwr" field). If this value is greater than 0, it is a
+sign that some old coverage data has been overwritten. The -L options
+shows in "upd" field how many times the file's coverage data has been
+accumulated since last reset.
+
+
+9. Trap in target testing when catenating unrelated text form
+(MON.txt or ctcdata.txt) coverage data files
+--------------------------------------------------------------
+
+Here with "target testing" we mean use of CTC++ Host-Target add-on
+(HOTA) or use of CTC++ for Symbian Target Devices add-on (CTC4STD).
+When they are used, they first produce the coverage data into a
+text file. In HOTA use MON.txt is often used as its file name.
+In CTC4STD use the file name convention is ctcdata.txt instead.
+
+Technically CTC++ architecture allows that multiple MONx.txt files
+(perhaps representing different test session results) can be catenated
+into one MON_joint.txt file, or multiple ctcdatax.txt files can be
+catenated into one ctcdata_joint.txt file. Now if into the joint file
+there come many coverage data entries of a same source file, which
+have been instrumented at different times (e.g. coverage hits from
+Aexe run and Bexe run), there happens loss of coverage hits in the
+ctc2dat phase. 
+
+If there are this kind of same files but different instrumentation
+times, only those coverage hits reach the output datafile, which hits
+represent the later instrumentation. For this trap to occur, it is
+further needed that there is one output datafile, where to the two or
+more instrumented files would want to write their coverage hits, e.g.,
+and when typically, explicit -o option is used in ctc2dat utility.
+
+
+10. Trap when in a same test session running two programs having same
+instrumented files, but which are instrumented at different times
+---------------------------------------------------------------------
+
+Running many instrumented programs in a test session is of course
+normal CTC++ use. The trap here is in a situation, where the programs
+contain same instrumented files, which have been instrumented at
+different times.
+
+Here at the risk-zone is especially CTC4STD use. In it the coverage
+hits are first collected to CTC_Chunk. It is a Symbian data structure,
+where CTC4STD run-time maintains coverage hits of all programs (their
+instrumented files) that are run at the device. At the end of the test
+session CTC_Chunk content is written to the ctcdata.txt file. The
+ctcdata.txt file can also be written out many times during the test
+session (later write-outs append the file), e.g. by the periodic write
+out arrangement.
+
+In this regard (many incarnations of the same instrumented file)
+CTC4STD behavior is a bit "black art", and this may change in next
+CTC4STD version. Anyway, what can happen is that into one ctcdata.txt
+file there comes many coverage hit incarnations of a same file. Of
+them only that incarnation survives (after ctc2dat phase to the
+datafile), which has the latest instrumentation timestamp.
+
+
+11. Trap in combining datafiles by ctcpost -a option:
+-----------------------------------------------------
+
+Consider again the usage scenario, which we described in the beginning.
+Assume we do
+
+   ctcpost -a MON_joint.dat MONA.dat MONB.dat MONC.dat
+
+and we would (unfoundedly) hope that we would get in the MON_joint.dat
+the coverage data summed up from the common files' part.
+
+Sorry, that does not happen! This ctcpost operation has no knowledge
+of the symbolfiles and ctcpost does not know if the coverage data of the
+common files represent same levels of the source files. What happens is
+that in the MON_joint.dat there is only one test run, originating from
+one of MONA.dat, MONB.dat or MONC.dat, of the common files. The what
+"wins" is the one who has youngest timestamp per each common file.
+Should there happen incidents where coverage data on some file is
+discarded, there comes CTCPost notice message.
+
+
+12. Summary--Why the proposed usage scenario works, some remarks:
+-----------------------------------------------------------------
+
+Here we refer to the arrangement that was presented in the beginning,
+where Aexe, Bexe and Cexe were instrumented separately, and of each we
+had MONx.sym and MONx.dat.
+
+First "must-rule" is that the common files have to be named in the same
+way in the corresponding MONx.sym symbolfiles.
+
+Now general usage habit may be to have SOURCE_IDENTIFICATION=as_given
+in the CTC++ configuration file. If in instrumenting Aexe some file is
+specified on compilation command line as X:\some\dir\file5.cpp, it
+must be specified exactly (uppercase lowercase and \ / variation still
+allowed) in the same way when the file is compiled to Bexe and Cexe.
+Means also that the directory structure where the source files reside
+has to be the same in each build.
+
+It might be worth considering to have in CTC++ configuration file
+setting SOURCE_IDENTIFICATION=absolute_without_drive.
+
+If this were used, the de-facto directory structure in each build has
+still to be the same, but the following "relaxations" could be enjoyed
+- if the drive letter is some subst'ed root directory, it could sometimes
+  be X:, sometimes Y:, etc. and still CTC++ would consider same file
+- on compilation command line the file name can have been specified in
+  various ways (by basename "file5.cpp" only, by e.g. "..\dir\file5.cpp",
+  etc.) as long as the file's absolute path without drive letter is the
+  same
+- in CTC++ profile reports the file name shows explicitly with its
+  absolute path, although not having drive letter
+- the ctc2html utility can still find the original source file (from
+  current drive), even though it has no drive letter specified. Or,
+  ctc2html can be advised with -s (search) option to search the source
+  files starting from some root folder
+
+
+Second "must-rule" is that the common files really must be the same as
+CTC++ sees them. What is "same" here? Simply, in the files on same lines,
+which are of interest to CTC++, there is same code! And note that CTC++
+sees the C-preprocessed level of the source file, where #defines,
+#includes and conditional compilations are resolved. But on those lines,
+which CTC++ does not record into its symbolfile (the lines that show in
+Execution Profile Listing), there can be differences.
+
+
+The big idea is in ctcpost -p .... command. In it we give all the
+MONx.sym and MONx.dat files as input. ctcpost first reads all the
+MONx.sym files and detects what are the common files, i.e. what have
+similar descriptions even though they might have different timestamps.
+
+Then when ctcpost reads the MONx.dat files, on the common files it
+accepts and sums up coverage data if only the timestamp is one that
+became known when reading the MONx.sym files. If the timestamp of the
+coverage data is unknown, that coverage data is discarded.
+
+
+And along the way we have all the time kept the MONx.sym symbolfiles
+and MONx.dat datafiles strictly separate per each Aexe, Bexe and Cexe.
+If we had started to mix them along the way, we easily might have
+fallen to some of the traps that we've discussed above.
+
+
+13. What about if we have source code files containing #ifdeffing
+-----------------------------------------------------------------
+
+As mentioned in introduction, when some file is compiled to Aexe with
+FLAG defined but when compiled to Bexe with FLAG is not defined, CTC++
+can see the code (after C-preprocessing) as being different. Follows
+that by normal CTC++ means the coverage results of these two program
+executions can not be combined. CTC++ can see the code as different
+e.g. in "if (A == FLAG) {..." where FLAG is command line macro having
+different value in different compilations.
+
+But if the true C/C++ source file is anyway the same in both cases,
+the users (and especially the big bosses) wish to get the combined
+coverage information.
+
+The following could be done:
+- On Aexe, Bexe, Cexe etc. we do the testing separately, and not mix
+  their symbolfiles (MON.sym) and datafiles (MON.dat) in any phase.
+  And we avoid the traps that we discussed earlier.
+- Of each of the programs an XML form coverage report is obtained
+  to a file. Same information is also in text form coverage report,
+  reading the XML form may be easier.
+- The user develops (sorry, for now this is not coming from Testwell)
+  a program, which reads two or more XML-form CTC++ coverage files
+- The purpose of that program is to calculate combined TER percentages:
+  per functions, per files, per overall (these are the ones that the
+  big bosses are interested of...)
+
+From XML form it should be easy to read the coverage data. The utility
+could rely that same files really mean same files, and so it could
+trust on the line number information. This might make it simple to sum
+up execution hits per single function. And then integrate it to file
+level and to system level. The utility has to obey the CTC++ rules how
+TER% is calculated from the probes that signify covered/not coverage
+thing.
+
+Perhaps it is unrealistic, at least at this early phase of this idea,
+to try to get the combined coverage report to textual form and then
+to HTML form. Suffices if we get the TER%s.
+
+---end.

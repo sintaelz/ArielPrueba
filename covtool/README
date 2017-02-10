@@ -1,0 +1,520 @@
+This directory defines the source code and make rules for a C++
+test coverage tool.  This tool is provisionally called "covtool"
+but the name may change.  See the file COPYRIGHT for your rights
+to use this code.
+
+This tool differs from similar tools available on some systems
+(tcov, purecov, or gcov) in that instead of instrumenting the
+object modules, it is the source code that gets instrumented --
+albeit without editing any of the source. More about this later.
+
+A test coverage tool helps you determine whether or not all the
+lines of code in a C++ program have been executed during a
+sequence of tests.  It does not analyze program behavior in any
+other way.  It does not magically tell you what is wrong with
+your program or if your program is in fact working correctly,
+but it does tell you whether or not every executable statement
+in your program has been executed.
+
+It is your reponsibility to ensure that the program's outputs
+are being properly checked for accuracy.  This tool only helps
+make sure that you got all the lines of code executed.  Well,
+not _all_ lines of code:  static initialization and destruction
+are periods of time in which no collection occurs -- so as to
+prevent bugs caused by C++ run time library reentrancy.
+
+Instrumentation doesn't beginning until your program invokes
+"CvT_StartRecording____()".  Normally, the instrumentor
+automatically invokes a call to this function before the first
+line in your "main()" function.  If you choose not to
+instrument your main function for some reason, you'll have to
+call the function yourself.  You'll have to forward declare it
+like this:
+
+  extern void CvT_StartRecording____();
+
+Instrumentation doesn't start until this function returns --
+so lines of source in the module that calls this function won't
+show up as instrumented until the function is called.
+
+An instrumented executables runs very slowly compared to your
+normal executable performance -- so be ware of the additional
+time your tests will take when instrumented.
+
+See the subdirectory, example, for a full scale example of
+instrumenting a program.  See commentary below about cov++
+the compile/instrumentation driver script used in the example.
+
+Here is an overview of running the tool:
+
+  1.  run make in this directory and verify that you have built
+      the following:
+
+	covtool.exe
+	covmerge.exe
+	covannotate.exe
+	covtoolhelper.o
+
+      then, as root, run 'make install'.  You don't actually have
+      to do the make install step.  If you want to use the tools
+      from the directory where you compiled it that is fine.
+
+      If you do run the make install step, you can test your
+      installation using the following steps.  If you don't do the
+      install, then installation test will fail (so don't run it).
+
+      As yourself, then run 'make install_tests'.  You can see an
+      example of an annotated .c file in install_tests/covmerge.ann
+      or read_database.ann in the same directory.   You should also
+      add /usr/local/covtool/man to your MANPATH.  And add
+      /usr/local/covtool to your command search path.
+
+
+  2.  in some C++ program you wish analyze, modify the make
+      rules so that instead of compile your .c files directly
+      into .o files, you do this instead:
+
+	Build instrumented versions of your source files by
+	modifying your make rules to compile your .c files
+	into .o files using the instrumentor.  You should
+	probably be using the cov++ wrapper for the
+	instrumentor.
+	
+	Here is an example of doing that:
+	
+	  .SUFFIXES: .c .o
+	  .c.o:
+		  cov++ -skip /usr/ -Dflags -I. -I.. -c $<
+	
+	  program: program.o
+		  cov++ -o $@ program.o
+	
+	
+	These examples assume that the either /usr/local/covtool
+	or the compilation directory is in your path.
+	
+	Alternately, you could use the low level instrumentor
+	program directly:
+	
+	  .SUFFIXES: .c .o
+	  .c.o:
+		g++ -E -Dflags -I. -I.. $< | \
+		  covtool.exe -instrument >`basename $< .o`.c++
+		g++ -c -O2 `basename $< .o`.c++
+		rm `basename $< .o`.c++
+		
+	   program: program.o
+		g++ -o $@ program.o $COVTOOL_PATH/covtoolhelper.o
+	
+	 If you are not naming your .c sources '*.c', but rather
+	 '*.cxx', or '*.cpp' or something, you will need to tell
+	 cov++ the names of the sources and a different name
+	 excepted by your compiler for C++ code.  See the -EXT
+	 option.  The actual instrumentor doesn't know about file
+	 name extensions.  For example:  "-EXT .cpp .cpp"
+		
+  3.  run all your tests using the now instrumented executable
+	
+  4.  Use the covmerge.exe program to create a merged version
+      of the instrumentation logs created by the runs you have
+      just made:
+	
+	  covmerge.exe *.covexp >merged.db
+	
+      If you are like me, you will have many tests distributed
+      throughout a variety of subdirectories. To collect a merged
+      coverage database, do this:
+
+	 covmerge.exe `find * -name '*.covexp' -print` >merged.db
+	
+  5.  If you want to know the percent coverage totals for
+      complete set of tests, use
+	
+	  grep 'totals:' merged.db
+	
+      You could also examine the individual totals: lines from each
+      of the *.covexp files.
+
+      If you want to know the coverage numbers for a given
+      source file do this:
+
+	  grep 'file:.*YOUR_FILE_NAME' merged.db
+	
+      It will print out records like this:
+
+	  file: /dir/YOUR_FILE_NAME instrumented-lines executed-lines percentage
+	
+      where 'percentage' is the executed-lines as a percentage of
+      instrumented lines.
+	
+  6.  If you would like to see which lines from which files
+      are NOT covered by your tests, use the program,
+      covannotate.exe to annotate your files with coverate
+      information stored in .covexp file or the merged
+      database above.
+
+      Note the script, gen_html, can be used to autmoatically run
+      the annotator for you.  You must merge your .covexp files into
+      a merged database to use gen_html.  You run gen_html like this:
+
+	gen_html merged_database_filename
+	
+      It creates a subdirectory, coverage_html, and creates .html files
+      including annotated versions of your source code (it is likely to
+      be slow on a large project).  See the description for the
+      covannotate in the next paragraphs for an explanation of the
+      annoated source format.
+
+      If you wish to manually run the coverage annotator, you invoke it
+      like this:
+	
+	  covannotate.exe your-c-file-name coverage-database-or-log ...
+	
+	All lines in the annotated output file will begin with either
+	' ', '-', or '+'.  These characters have the following
+	significance:
+	
+	  ' '  -- line was not instrumented
+	  '-'  -- instrumented but not executed
+	  '+'  -- executed
+
+	For example, your annotated source file might look like this:
+	
+	   #include <stdio.h>
+	   int main()
+	  +{
+	  +  printf("hello world\n");
+	  +  exit(0);
+	   }
+
+	Note:  the .covexp files (and the merged version thereof)
+	contain filenames with the full directory part attached.
+	When using covannotate.exe you do not have to specify the
+	full pathname.  That program figures out the pathname for
+	the file you specify and uses that to search the .covexp
+	files.
+	
+  7.  Add additional tests to make sure that all your lines of code
+      get tested.  At least to 85% coverage in the totals: section.
+	
+  8.  To simplify your life, you should probably modify your
+      makefile to allow you to provide a make directive that will
+      let you build everything with coverage or not.  Here's an
+      example:
+
+	INSTRUMENTATION=false
+	
+	ifeq ($(INSTRUMENTATION),true)
+	CC=g++
+	else
+	CC=g++ -EXT .cpp .c++ -skip /usr
+	endif
+	
+      In this example, when you normally run make, you don't get
+      instrumentation.  If you want to turn on instrumentation
+      just do this:
+
+	make clean
+	
+	make INSTRUMENTATION=true
+	
+      You will of course have to have a clean target of your own
+      construction.
+
+WIERDNESSES
+
+  As stated earlier, covtool does not handle instrumentation during
+  static initialization and destruction.  This is is because of
+  ordering issues with the standard library 'standard allocator'.
+  However, I might figure out how to fix this later.
+
+  Also, threads are not supported!  Both the threading and the
+  static initialization issues could be eliminated by having the
+  covtoolhelper.c file implemented to communicate with a separate
+  process which does the collection.  Feel free to do this and
+  send me the source ;->.
+
+REDUCING VOLUME
+
+  The covtool.exe program allows you to reduce the amount of
+  instrumentation injected by specifying directories which
+  should not be instrumented on its command line.  To skip
+  the C and C++ standard headers you would use an invocation
+  like this:
+
+    covtool.exe -instrument -skip /usr/include/ <your_file.i
+
+  Multiple -skip commands can be given, so that you pick and
+  choose the directories to ignore.  Actually, the skip option
+  does not define directories, but rather a prefix.  You could
+  skip all file names beginning with 'h' like this:  "-skip h".
+  I guess, I should make -skip accept filename pattern match
+  rules, but I haven't yet.
+
+  The parameter to the skip function does not have the same
+  characteristics as the text you find in .covexp files,
+  described below.  The -skip directives are in the format
+  defined by the compiler when it #includes files.  If you
+  can't get your skip pattern to work, grep the preprocessed
+  output from the compiler like this:
+
+    grep '^#'
+
+  the file name patterns it presents define the format of
+  the file names to the -skip directive.  So, if you use a
+  -I.. compiler directive, and you want to skip ../somedir
+  then your skip directive should be something like
+
+    -skip ../somedir
+
+  rather than skipping the full pathname of the directory as
+  you would expect from examining the .covexp files.
+
+
+COVEXP/MERGED DATABASE FILE FORMAT
+
+  The runtime data collection routines found in covtoolhelper.c
+  produce data of the following forms:
+
+    file: [filename] [instrumented_lines] [executed_lines]
+
+    el: [number] ...
+
+    il: [number] ...
+
+    totals: [instrumented_lines] [executed_lines] [percent_covered]
+
+  For aesthetic reasons, the data is formatted as attractively as
+  possible, but the official format does not require attractive
+  presentation in the database files.  The data in the files should
+  be considered as a stream having 5 token types -- with blanks and
+  newlines as the separator.  The token types are:
+
+    numbers
+    file:
+    el:
+    il:
+    totals:
+
+  There should only be one 'totals:' line and it should be at the
+  end.  The el: and il: tags may be absent or may be followed by
+  0 or more numbers.
+
+  The filename will contain the full pathname.
+
+
+NAMING .covexp FILES
+
+
+  When running tests with instrumented executables, the .covexp
+  files will normally be named something like this:
+
+    cov-run-3287.covexp
+
+  With each run, you will get a new cov-run file.  The number in
+  the file name is the process id of the running program.  You can
+  specify the file name prefix for the .covexp files by using the
+  environment variable, COVTOOL_PREFIX.  For example:
+
+    export COVTOOL_PREFIX=test1
+    program_that_performs_the_test
+
+  And instead of getting
+
+    cov-run-????.covexp
+
+  You will get
+
+    test1-????.covexp
+
+
+PROGRAM BUGS UNCOVERED BY INSTRUMENTATION
+
+
+While the instrumentor and runtime data collector probably have
+bugs I have not yet caught, the act of instrumentation itself
+sometimes brings to light bugs in your program which have not
+yet given symptoms.
+
+1.  The missing return statement
+
+    I have a program that the instrumentor told me was 85 percent
+    covered -- which is great.  However the instrumented version
+    crashed when I ran one particular test.  After scratching my
+    head and debugging for some time, I discovered that a function
+    had no return statement and it was supposed to return pointer
+    to string.  G++ did not give me any errors, and so my test had
+    been passing only by accident.  Here is what the code looked
+    like:
+
+      string const *function(int parm)
+      {
+	static string rv;
+
+	if(parm != 99)
+	{
+	  rv = "not 99";
+	  return &rv;
+	}
+	else
+	{
+	  rv = "yep, 99";
+	}
+
+      }
+
+    As you can see, if the parm is 99, then there is no return
+    statement for 'function'.  What gets returned? Apparantly,
+    the &rv was getting returned because my test was looking for
+    "yep, 99" and got it.
+
+    Apparantly the act of injecting instrumentation calls, caused
+    the return value not to accidentally be &rv as it was before
+    but some random pointer.
+
+    Putting in a statement of the form 'return &rv' at the end
+    of the function solved the real problem instrumentation had
+    detected.
+
+2.  Using a pointer after it was deleted
+
+    In another program, adding instrumentation caused the program
+    output to change without a crash.  Instead of printing the
+    number 34, it produced 704502365.  A bit of debugging led
+    to the following discovery:  a function was returning a data
+    structure containing a pointer to a deleted object -- but
+    the program was printing a member of that object.  The act
+    of instrumentation did not cause the number to change, but
+    the instrumentation runtime activity was re-using the
+    deleted heap packet.
+
+Thus, if your tests fail after you add instrumentation, do not
+immediately assume that the problem is the result of a bug in
+the instrumentation itself.  On the other hand, if your program
+won't compile after instrumentation, it most certain is a problem
+with covtool.  Please report it as described below.
+
+
+REPORTING PROBLEMS
+
+
+Unfortunately, covtool itself is no more immune to program bugs
+than any other.  Let me apologize in advance for any you
+encounter.
+
+When an problem occurs, please send email to lowell.boggs@attbi.com
+and I will attempt to get back with you within a couple of days.
+Sorry, but I cannot guarantee any specific turn around time.  Also,
+I cannot provide general programming help.  I can only attempt to
+resolve problems with covtool -- and am anxious to do so.  Please
+do as much to debug the problem yourself as you can -- as there is
+only one of me and (hopefully) there will be many of you.
+
+When problem does occur, please provide the information specifically
+requested below and as much detail as possible as to the scenario
+that led to the problem.  Also, please state clearly what you thought
+was supposed to happen and what did happen.  I am not much of a mind
+reader.
+
+There are likely to be the following kinds of problems:
+
+  0.  threads and static initialization and destruction.  covtool
+      does not support threads and it does not support you turning
+      on recording during static initialization or destruction!
+
+  1.  covtool.exe might incorrectly instrument your program.  This
+      is likely to result in a failure of it to compile with
+      instrumentation.  I have compiled all the /usr/include/g++
+      headers and have not had any problems, but you never know.
+      A work around for this might be to use the -skip directives
+      to suppress the instrumentation for the offending file.  On
+      the other hand, it might not fix the problem.  In either
+      event, please do the following to report the problem:
+
+	A.  produce a .i file from your source that won't properly
+	    instrument.
+	
+	B.  email me the compile error you are seeing and the
+	    instrumented file.  See the email address above.
+	
+      If you have an interest in the source code for covtool.exe,
+      you might try diagnosing the problem yourself.  If you run
+      covtool.exe without the -instrument option, it will produce
+      a commentary describing the lines of text, the { brace depth,
+      and the kind of C++ structure it thinks it is processing:
+      enum, class, block, function, etc.  You can sometimes guess
+      what is wrong by looking at the commentary and verifying that
+      it doesn't match what the source code is doing.  For example,
+      the nest depth at file scope should always be 0.  If it isn't
+      zero then the parser is lost.
+
+  2.  The instrumentation runtime might malfunction causing a crash.
+      This is unlikely because the datastructures used are entirely
+      STL containers with little or no pointer arithmetic.  There are
+      no vectors or arrays, and no deletes occur during
+      instrumentation.  However, things happen.  There may well be
+      bugs I haven't yet caught.  If you encounter a crash and you
+      suspect the instrumentation code do the following:
+
+	1.  Verify that the program doesn't crash if you don't
+	    instrument it.  If it crashes without instrumentation,
+	    obviously it isn't covtool's fault.
+	
+	2.  Verify that the program doesn't crash if you instrument
+	    but don't actually record.  The easiest way to do this
+	    is to compile your main function without
+	    instrumentation.  That is, g++ not cov++ to compile it.
+
+	    If the program crashes with instrumentation but without
+	    recording, see if you have a missing return statement
+	    somewhere as described above in the section PROGRAM BUGS
+	    UNCOVERED BY INSTRUMENTATION.
+
+	    It is unlikely that the a successfully compiling program
+	    will have an instrumentation bug that leads to
+	    misbehavior, but things happen.  Send me the .i file
+	    containing the misbehaving function at the address above
+	    and I will see if I can figure out what is going on.
+	
+	3.  If the program runs correctly when instrumented but not
+	    recording and fails when you turn recording on, it is
+	    most likely that instrumentation data structures are
+	    being overwritten during your program's execution.
+	    Or, you might be using a pointer which you have deleted.
+	    See PROGRAM BUGS UNCOVERED BY INSTRUMENTATION.  The
+	    instrumentation runtime code using STL maps, sets, etc,
+	    and no writable pointers.
+	
+	    As a work around, try not instrumenting some files and
+	    see how this affects behavior.  It might help you isolate
+	    which modules have a missing return statement or are
+	    using a deleted heap packet.
+	
+	    If the program is still crashing and you can't figure
+	    out why, compile the module 'covtoolhelper.o' for
+	    debug and verify that the program crashes in one of
+	    its functions.  Sadly, you'll probably have to debug
+	    this problem yourself.  I'll be happy to consult about
+	    the implementation of covtoolhelper, but when programs
+	    write on the wrong data structures, it becomes almost
+	    impossible for an outsider to have much insight.
+	
+	4.  If covannotate.exe tells you that it does not have any
+	    information on a file you wish to annotate, verify that
+	    the file name does in fact exist in your *.covexp or *.db
+	    file and that you are spelling the name correctly.  If
+	    the *.covexp files don't have any information about your
+	    file, verify that you have instrumented it.  If it still
+	    can't find the file, try specifying the exact pathname
+	    in the file as found in the *.covexp file.  If that doesn't
+	    work, then send me any one of the *.covexp files containing
+	    the collected data and the full pathname of the file you
+	    are trying to get an annotation for.
+	
+	5.  If you have any problem with cov++, other than being happy
+	    with the limitations it places on you by giving you error
+	    messages, use the -VER option as the first option and send me
+	    the output it gives.
+	
+
+Good luck!

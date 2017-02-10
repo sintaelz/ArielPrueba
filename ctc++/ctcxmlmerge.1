@@ -1,0 +1,127 @@
+.\"--------------------------------------------------------
+.\" MODULE      : $RCSfile: ctcxmlmerge.1 $
+.\" PART OF     : CTC++
+.\" VERSION     : $Revision: 1.7 $, $Date: 2016/12/23 13:59:49 $
+.\" AUTHOR      : $Author: olavi $
+.\" DESCRIPTION : ctcxmlmerge manual page
+.\"
+.\"             Copyright (c) 2012-2013 Testwell Oy
+.\"             Copyright (c) 2013-2016 Verifysoft Technology GmbH
+.\"
+.\" LAST EDITED : 23.12.2016
+.\"--------------------------------------------------------
+.TH ctcxmlmerge 1 "23 December 2016"
+.SH NAME
+ctcxmlmerge - CTC++ XML Merger utility (v3.2)
+         (CTC++, Test Coverage Analyzer for C/C++)
+
+.SH SYNOPSIS
+.HP 9
+.B ctcxmlmerge
+input.xml...
+.RB [ -p " profilefile]"
+.br
+.RB [ -x " xmlfile]"
+.br
+.RB [ @ "optionsfile]"
+.br
+.RB [ -f " srcfile[;srcfile]...]..."
+.br
+.RB [ -nf " srcfile[;srcfile]...]..."
+.br
+.RB [ -ndl ]
+.br
+.RB [ -h ]
+
+.SH DESCRIPTION
+CTC++ utility ctcxmlmerge reads ctcpost-generated XML coverage
+report(s), extracts instrumented header files to their own entities
+(if not yet done by ctcpost), sums up execution hits, recalculates
+TER, and writes merged textual execution profile listing (-p)
+and/or summary XML report (-x, TERs only).
+
+The tool is primarily meant for a situation when of a source file
+there are many e.g. conditionally compiled variations and one merged
+coverage report of the tests is wanted. If the need is just to
+combine (sum up) coverage results of different test runs of same
+code, the basic ctcpost tool is more appropriate for it.
+
+.SH OPTIONS
+.PP
+.BR input.xml
+.RS
+Specifies the input CTC++ XML form coverage report file names (one or more).
+These files must be produced by ctcpost.
+.RE
+.PP
+.BR -p " profilefile"
+.RS
+Output CTC++ Execution Profile Listing.
+.RE
+.PP
+.BR -x " xmlfile"
+.RS
+Output summary XML report.
+.RE
+.PP
+.BR @ "optionsfile"
+.RS
+Inputs and options can be given also at optionsfile.
+.RE
+.PP
+.BR -f " srcfile[;srcfile]...]..."
+.RS
+Only these instrumented files are reported.
+.RE
+.PP
+.BR -nf " srcfile[;srcfile]...]..."
+.RS
+These instrumented files are not reported.
+.RE
+.PP
+.B -ndl
+.RS
+No drive letter (removed from reported filenames).
+.RE
+.PP
+.B -h 
+.RS
+Prints a brief description of the command-line options.
+.RE
+
+Examples:
+.RS
+.B  ctcxmlmerge input1.xml input2.xml -p profile.txt -x summary.xml
+.RE
+.RS
+.B  ctcxmlmerge @options.rsp
+.RE
+.RS
+.B  ctcxmlmerge input.xml -p - -f ctc*.cpp | ctc2html
+.RE
+
+.SH FILES
+.PD 0
+.TP 12
+.I /usr/local/bin/ctcxmlmerge
+CTC++ XML Merger Utility
+
+.SH VENDOR
+Verifysoft Technology GmbH
+.br
+In der Spoeck 10, 77656 Offenburg, Germany
+.br
+URL: http://www.verifysoft.com
+
+.SH SEE ALSO
+.BR ctc (1),
+.BR ctcpost (1),
+.BR ctcwrap (1),
+.BR ctc2dat (1),
+.BR ctc2html (1),
+.BR ctc2excel (1),
+.br
+.I CTC++ User's Guide
+(ctcug.pdf)
+
+.\" EOF $RCSfile: ctcxmlmerge.1 $

@@ -1,0 +1,67 @@
+.\" $RCSfile: ctc2dat.1 $
+.\" $Revision: 1.6 $
+.\" $Author: olavi $
+.\"
+.\" Copyright (c) 2012-2013 Testwell Oy
+.\" Copyright (c) 2013-2016 Verifysoft Technology GmbH
+.\"
+.\" LAST EDITED : 22.12.2016
+.\"
+.\"
+.TH ctc2dat 1 "23 December 2016"
+.SH NAME
+ctc2dat - CTC++, Test Coverage Analyzer for C/C++
+.nf
+          CTC++ to Datafile Converter (v3.5)
+
+.SH SYNOPSIS
+ctc2dat -h
+.br
+ctc2dat [-i inputfile] [-o outputfile] [-b] [-s]
+
+.SH DESCRIPTION
+.B ctc2dat 
+is CTC++ Host-Target utility for reading textual encoded coverage
+data and converting it to a binary form datafile.
+
+.SH OPTIONS
+.TP
+.B -h
+Displays a brief help and the command-line options.
+.TP
+.BI -i " inputfile"
+Input file name. Default piped stdin
+.TP
+.BI -o " outputfile[.dat]"
+Output file name. Default the given MON.dat(s) from input
+.TP
+.BI -b
+Brief. Detailed information of the transfer is not printed
+.TP
+.BI -s
+Silent. Do not print execution progress information
+
+.SH EXAMPLE
+ctc2dat -i MON.txt
+.br
+ctc2dat -o MON-TEST5.dat -s < MON5.txt
+
+.SH VENDOR
+Verifysoft Technology GmbH
+.br
+In der Spoeck 10, 77656 Offenburg, Germany
+.br
+URL: http://www.verifysoft.com
+
+.SH SEE ALSO
+.BR ctc (1),
+.BR ctcpost (1),
+.BR ctcwrap (1),
+.BR ctcxmlmerge (1),
+.BR ctc2html (1),
+.BR ctc2excel (1),
+.br
+.I CTC++ User's Guide
+(ctcug.pdf)
+
+.\" EOF $RCSfile: ctc2dat.1 $

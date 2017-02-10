@@ -1,0 +1,128 @@
+Testwell Oy                             CTC++ System Version 7.2
+Verifysoft Technology GmbH
+12 March 2014
+
+
+Using CTC++ for getting a function call trace of a program
+----------------------------------------------------------
+
+This is one of the little hidden CTC++ features, which may be useful to
+some CTC++ users.
+
+With a function call trace we mean here the following arrangement
+
+- You can introduce your own function which CTC++ will call at the
+  beginning of each instrumented function [for the files that have been
+  instrumented in this special way]. Let us call this function a
+  "tracer function"
+- In the tracer function you can do what you see appropriate, for example,
+  -- display to the screen (stdout) something like "ctc-tracer: foo"
+     where "foo" is the name of the called function
+  -- write the trace to a text file (if speed is not a concern, open and
+     close the file at each writing; in this way you avoid the problem
+     when to close the file...)
+  -- write the trace to the memory to a ring buffer and only periodically
+     (say, every n'th trace entry), write the buffer to a disk file or
+     analyze the buffer with a debugger
+  -- implement whatever filter or other intelligence you want
+
+As of CTC++ version 6.0, you can also call your own function at the end
+of an instrumented function (at the ending brace), and at each return
+and throw statement (immediately before the return or throw statement is
+executed).
+
+Here is an example of a simple use of a tracer function. The trace is
+displayed to the screen along with the program execution. Here, the
+environment is Windows with the Visual C++ compiler, but the idea works
+also in other environments. The steps to be taken are the following:
+
+1. Edit a file ctcalt.h (name must be this!) as follows:
+
+   #ifdef __cplusplus
+   extern "C"
+   #endif
+   void mytracer(const char* function_name,
+                 const char* description);
+
+   /* redefining the CTC++ macros that are emitted at the beginning
+      and end of an instrumented function, and at the return and throw
+      statements of an instrumented function
+   */
+   #undef CTC_FSTART
+   #undef CTC_FEND
+   #undef CTC_FEND_MAIN
+   #undef CTC_STMT_RETURN
+   #undef CTC_STMT_TIMER_RETURN
+
+   #define CTC_FSTART(name, sindex) \
+      CTC_TIMER_TMP CTC_INIT CTC_IS(sindex); \
+         CTC_START(sindex); mytracer(name, "start"); {
+   /*                       ^^^^^^^^^^^^^^^^^^^^^^^^   new! */
+
+   #define CTC_FEND(name, eindex, tindex) \
+      CTC_STOP(tindex); CTC_IE(eindex); mytracer(name, "end"); }
+   /*                                   ^^^^^^^^^^^^^^^^^^^^^^   new! */
+
+   #define CTC_FEND_MAIN(name, eindex, tindex) \
+      CTC_STOP(tindex) CTC_IE(eindex); ctc_append_all(); \
+         mytracer(name, "end-embed"); }
+   /*    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^   new! */
+
+   #define CTC_STMT_RETURN(name, jindex, tindex) \
+      { CTC_STOP(tindex); CTC_IJ(jindex); \
+         mytracer(name, "return/throw");
+   /*    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^   new! */
+
+   #define CTC_STMT_TIMER_RETURN(name, tindex) \
+      { CTC_STOP(tindex); mytracer(name, "timer-return");
+   /*                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^   new! */
+
+
+2. Edit the following C file mytracer.c and compile it with a C compiler
+(C linkage) to an object file mytracer.obj
+
+   #include <stdio.h>
+   void mytracer(const char* function_name,
+                 const char* description)
+   {
+      printf("ctc-tracer: %s %s\n", description, function_name);
+   }
+
+
+3. Instrument the code under test (either C or C++) in the following way
+
+   ctc -C OPT_ADD_COMPILE+-DCTC_SPECIAL \
+       -C LIBRARY+mytracer.obj ... \
+       cl ... yourfiles*.cpp
+
+If you look at the bottom of the %CTCHOME%\ctc.h file, you'll find that
+it is the macro CTC_SPECIAL that determines the inclusion of ctcalt.h.
+Then ctcalt.h modifies the instrumentation at the beginning of a
+function in the way described above. With the -C LIBRARY+... setting we
+add to the "CTC++ linkage" the file mytracer.obj so that the calls to
+mytracer() can be resolved at linkage time.
+
+The ctcalt.h file needs to be found by the compiler (at the time the
+instrumented code is compiled). If you can put ctcalt.h to the same
+directory where ctc.h resides (%CTCHOME%), it will be found. If you
+have ctcalt.h in some other place where it is not found, you can always
+provide more information. Also, the mytracer.obj file needs to be found
+by the linker. For example,
+
+   ctc -C OPT_ADD_COMPILE+-DCTC_SPECIAL,-Ithe_ctcalt_h_directory \
+       -C LIBRARY+the_mytracer_obj_directory\mytracer.obj ... \
+       cl ... yourfiles*.cpp
+
+
+4. Now when you run the instrumented program, you get the call sequence
+trace on the screen for all the functions that have been instrumented
+in this special way and have been called.
+
+
+Above we described only the basic idea of the call tracer. We assumed
+that the same function 'mytracer' was called at the beginning and end of
+the function as well as at the return and throw statements, the parameter
+'description' indicating the case. You can fine-tune the tracer function
+as you feel appropriate.
+
+--- end of TRACER.TXT ---

@@ -1,0 +1,28 @@
+This directory shows an example of building a trivial program
+and running its tests to get coverage instrumentaton.
+
+If you run 'make' in this directory, when it has just been
+cleaned, you will build without instrumentation.  There are
+no tests of interest when you build in this mode.
+
+If you want to build for instrumentation, do this:
+
+  make clean
+  make INSTRUMENTATION=1
+  make INSTRUMENTATION=1 tests
+
+At the completion of this run, you will have
+
+    1.ann  a copy of program.c annotated to show lines covered in test 1
+    2.ann  ditto for test 2
+    3.ann  ditto for test 3
+    4.ann  a combined annotation for tests 1, 2, and 3
+
+You will also have merged.db a numerical listing of lines
+instrumented and executed, etc.
+
+The test runs simply invoke 'program' with 0, then 1, then 2 parameters
+and the program goes through different paths based thereon.  These
+paths can be seen the .ann files.
+
+

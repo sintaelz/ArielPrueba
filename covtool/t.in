@@ -1,0 +1,30 @@
+#1 "t.in"
+
+class Erlang: public Random {
+protected:
+    double pMean;
+    double pVariance;
+    int k;
+    double a;
+    void setState();
+public:
+    Erlang(double mean, double variance, RNG *gen);
+
+    double mean();
+    double mean(double x);
+    double variance();
+    double variance(double x);
+
+    virtual double operator()();
+
+};
+
+
+inline void Erlang::setState() {
+  k = int( (pMean * pMean ) / pVariance + 0.5 );
+  k = (k > 0) ? k : 1;
+  a = k / pMean;
+}
+
+
+

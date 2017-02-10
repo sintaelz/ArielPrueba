@@ -1,0 +1,116 @@
+#!/bin/sh
+#
+# read a merged coverage database and produce a collection
+# of html files with coverage annotation
+#
+#set -x
+
+db="$1"
+
+if [ ! -f "$db" ]
+then
+  echo "can't find merged covexp database file: '$db'"
+  echo ""
+  echo "You must supply the name of a MERGED covexp file"
+  echo "The covmerge.exe program adds additional information"
+  echo "needed by this script"
+  exit 1
+fi
+
+rm -fr coverage_html/.  # remove all coverage info
+
+mkdir -p coverage_html
+
+if [ ! -d coverage_html ]
+then
+  echo "can't make directory 'coverage_html'"
+  exit 1
+fi
+
+get_files_in_dir()
+{
+  # expect $1 to be a directory,
+  #        $2 is the name of the .db file
+  #        $3 is the directory for files
+  #        $4 is the prefix for this directory in the generated html
+
+  db="$2"
+  prefix="$3/$4"
+
+  (
+
+  echo "Files in directory $1<br>"
+
+  echo "<table cols=5 border>"
+  echo "<tr><th>Percent<br>Coverged</th><th>Instrumented<br>Lines</th><th>Executed<br>Lines</th><th>Directory Name</th></tr>"
+
+  grep "^file: $1/" "$2" |
+  while read tag file il el percent
+  do
+      if [ ! -r "$3$file" ]
+      then
+	mkdir -p `dirname $3$file`
+	covannotate.exe "$file" "$db" >"$3$file.txt"
+      fi
+
+      link="<a href=.$file.txt>"
+      echo "<tr><td> $percent </td> <td> $il </td> <td> $el </td> <td> $link $file </a> </td> </tr>"
+  done
+
+  echo "</table>"
+
+  ) >$prefix.html
+}
+
+
+echo ""
+echo ""
+echo ""
+echo "Building annotated source and directory statistics"
+echo "in subdirectory, coverage_hmtl.  Use your browser"
+echo "to look at "
+echo "  coverage_html/index.html"
+echo "to review your project coverage status."
+echo ""
+echo ""
+
+(
+
+echo "<title>`pwd`/$db</title>"
+echo "<H1>Coverage information documented in `pwd`/$db</h1>"
+
+dir_count=1
+
+echo "<table cols=5 border>"
+echo "<tr><th>Percent<br>Coverged</th><th>Instrumented<br>Lines</th><th>Executed<br>Lines</th><th>Directory Name</th></tr>"
+
+dir_lines=`grep '^dir:' $db`
+
+echo "$dir_lines" |
+while read tag name il el per
+do
+
+  case "$tag" in
+    "dir:"*)
+	    link="<a href=$dir_count.html>"
+
+	    mkdir -p coverage_html/$name
+
+	    get_files_in_dir $name $db coverage_html $dir_count
+
+	    dir_count=`expr $dir_count + 1`
+	    echo "<tr><td> $per </td> <td> $il </td> <td> $el </td> <td> $link $name </a> </td> </tr>"
+	;;
+  esac
+
+
+done
+
+echo "</table>"
+
+
+
+
+exit 0
+
+) >coverage_html/index.html

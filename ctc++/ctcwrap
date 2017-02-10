@@ -1,0 +1,139 @@
+#!/usr/bin/perl
+##########################################################################
+#  RCSfile     : $RCSfile: ctcwrap.pl $
+#  Version     : $Revision: 1.5 $, $Date: 2014/01/02 12:52:25 $
+#  Last Edited : 2.1.2014
+#  Author      : $Author: seppo $
+#
+#                Copyright (C) 2007-2013 Testwell Oy
+#                Copyright (c) 2013-2014 Verifysoft Technology GmbH
+##########################################################################
+
+# CTC++ Wrapper for Unix. Handling of ctcwrap command.
+
+$version="v1.4";
+
+$help =<<END;
+
+ctcwrap - CTC++ Wrapper for Unix ($version)
+
+Usage:
+  ctcwrap [ctc-options] command [arguments]
+  ctcwrap -h
+
+This utility executes the given command with its possible arguments.
+If the command execution causes any C/C++ compile or link subcommand
+executions, they are prepended with "ctc ctc-options" making the
+subcommands as "ctc-compile" or "ctc-link".
+
+examples:
+  ctcwrap -v make
+  ctcwrap -i m -C "EXCLUDE+*/dir2/*" -v make -f mymakefile.mak
+  ctcwrap ./mybuildscript.sh
+
+END
+
+##########################################################################
+# execution starts here !
+##########################################################################
+
+*INPUT = *STDIN;
+@ctcopts = ();
+$ctcopts = "";
+$addnext = 0;    # 1, if next ctc-arg to be associated to previous
+$for = 0;        # 1, if no more ctc-args
+@cmd = ();
+
+$i;
+
+# If help is asked, give it and exit...
+if (@ARGV == 0) {
+   print $help;
+   exit(0);
+}
+if (@ARGV == 1 and $ARGV[0] eq "-h") {
+   print $help;
+   exit(0);
+}
+
+# One sanity check about the environment...
+foreach $i (split (':', $ENV{'PATH'})) {
+   if (-x "$i/ctcagent") {
+      die "*** ctcwrap error: Found $i/ctcagent in \$PATH.\n" .
+          "    Most likely, this wouldn't work.\n";
+   }
+}
+
+# Parse the ctc-options, the command, and the command arguments...
+foreach $i (@ARGV) {
+   # do we have an argument to a ctc-option...
+   if ($addnext == 1 ) {
+      push(@ctcopts, '"' . $i . '"');
+      $addnext = 0;
+   }
+   elsif ( $for == 0 ) {
+      # do we have an argumentless ctc-option...
+      if ( $i eq '-no-templates' ||
+           $i eq '-V' ||
+           $i eq '-v' ||
+           $i eq '-k' ||
+           $i eq '-2comp' ||
+           $i eq '-no-comp' ||
+           $i eq '-no-warnings' ||
+           substr($i, 0, 1) eq '@' ) {
+         push(@ctcopts, $i);
+      }
+      # if we have -h here, give help and forget the rest...
+      elsif ($i eq '-h') {
+         print $help;
+         exit(0);
+      }
+      # do we have a ctc-option that has one argument...
+      elsif ( $i eq '-c' ||
+              $i eq '-C' ||
+              $i eq '-n' ||
+              $i eq '-i' ) {
+         push(@ctcopts, $i);
+         $addnext = 1;
+      }
+      # no more ctc-options, start collecting command...
+      else {
+         push @cmd, $i;
+         $for = 1;
+      }
+   }
+   # these are command arguments, collect...
+   else {
+      push @cmd, $i;
+   }
+}
+
+# there must have been some command...
+if ( $cmd[0] eq "" ) {
+   die "*** ctcwrap error: No command to be applied on.\n" .
+       "    Type 'ctcwrap -h' for help.\n";
+}
+
+# stringize the ctc-options and set to CTCOPTS env variable...
+foreach $i (@ctcopts) {
+   $ctcopts = $ctcopts . " $i";
+}
+if (!defined $ENV{'CTCOPTS'}) {
+    $ENV{'CTCOPTS'} = "$ctcopts";
+} else {
+    $ENV{'CTCOPTS'} .= " $ctcopts";
+}
+
+# run the command with its arguments under a modified PATH...
+$ENV{'CTCWRAPDIR'} = "/usr/local/lib/ctc/wrap"; # inst. makefile sets...
+# sanity check: file $CTCWRAPDIR/ctcagent must exist...
+if (not -e $ENV{'CTCWRAPDIR'} . "/ctcagent") {
+   die "*** ctcwrap error: Cannot find $ENV{'CTCWRAPDIR'}/ctcagent.\n";
+}
+$ENV{'PATH'} = $ENV{'CTCWRAPDIR'} . ':' . $ENV{'PATH'};
+exec (@cmd) or die "*** ctcwrap error: Could not execute '$cmd[0]'.\n";
+
+# execution ends here...
+1;
+
+#EOF $RCSfile: ctcwrap.pl $

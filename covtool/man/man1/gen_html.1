@@ -1,0 +1,52 @@
+
+NAME
+
+  gen_html -- generate html pages describing test coverage
+
+SYNOPSIS
+
+  gen_html  merged.db
+
+
+DESCRIPTION
+
+  This script generates html pages given the name of a merged.db
+  file.  This file should have been created after running all
+  your project's tests with instrumented executables.  Here is a
+  general overview of the process:
+
+    replace your calls to g++ with calls to cov++
+
+    make clean, then make, then run all your tests
+
+    merge your coverage files like this:
+
+      covmerge.exe `find * -name '*.covexp'` >merged.db
+
+    use gen_html to build html pages:
+
+      gen_html merged.db
+
+  Once gen_html has done its job, you will have a new directory
+  named 'coverage_html'.  This directory will contain a variety
+  of numbered .html files.  There will also be an 'index.html'
+  file.  Point your browser at that and you will see a
+  collection of html files describing the test coverage
+  information and more importantly, you will see annotated copies
+  of your source code.
+
+  An annotated sourcefile will look like this:
+
+    #include <stdio.h>
+    int main()
+   +{
+   +  printf("hello world");
+   +  exit(0);
+     }
+
+  Where the lines beginning with '-' have been instrumented but
+  not executed.  Lines beginning with '+' were executed.  Lines
+  with never were not executed.  Global variables are never
+  shown as instrumented due to the limitations of the
+  instrumentation technique.
+

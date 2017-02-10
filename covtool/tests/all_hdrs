@@ -1,0 +1,122 @@
+#!/bin/sh
+#set -x
+#
+# instrument all headers and see if we get compile errors
+#
+covtool="$1"
+
+if [ ! -x "$covtool" ]
+then
+    echo " can't execute covtool program '$covtool'"
+    exit 1
+fi
+
+#
+# a get a list of all header files in /usr/include
+#
+x=`pwd`
+
+
+
+files=`
+
+./find_default_include_paths | head -1 | sed -e 's/^-I//g' |
+while read f
+do
+  cd "$f"
+  for g in *
+  do
+    if [ ! -d $g ]
+    then
+	echo "$g"
+    fi
+  done
+  cd "$x"
+done
+`
+
+
+if [ "" = "$files" ]
+then
+  echo "Sorry, all_hdrs test can not be run"
+  echo ""
+  echo "Can not find the system headers"
+  exit 0
+fi
+
+
+
+#
+# create a .c file that forces their compilation
+#
+
+cd "$x"
+
+for f in $files
+do
+    if [ "$f" != "bitdo1.h"   -a \
+	 "$f" != "bitdo2.h"   -a \
+	 "$f" != "defalloc.h" -a \
+	 "$f" != "Fix.h"      -a \
+	 "$f" != "ropeimpl.h" -a \
+	 "$f" != "Integer.h"  -a \
+	 "$f" != "strfile.h"  -a \
+	 "$f" != "Rational.h" -a \
+	 "$f" != "Randint.h"  -a \
+	 "$f" != "varargs.h"  -a \
+	 "$f" != "regexp.h"   -a \
+	 "$f" != "algobase.h" -a \
+	 "$f" != "algo.h"     -a \
+	 "$f" != "alloc.h"    -a \
+	 1 = 1                   \
+       ]
+    then
+      echo "#include <$f>"
+    fi
+done >all_headers.c
+
+echo '
+
+void fred()
+{
+  std::vector< std::string > vs;
+
+  vs.push_back( "s1" );
+}
+
+int main()
+{
+
+  exit(0);
+  return 0;
+}
+
+
+' >>all_headers.c
+
+g++ -c -I. all_headers.c
+
+if [ $? != 0 ]
+then
+  echo "g++ headers are broken"
+  exit 1
+fi
+
+
+g++ -E -D__extension__= -I. all_headers.c > all_headers.i
+
+$covtool -instrument <all_headers.i >all_headers.c++
+
+g++ -o all_headers.exe all_headers.c++ ../covtoolhelper.o >all_headers.err 2>&1
+
+if [  -e all_headers.exe ]
+then 
+    rm all_headers.*
+    exit 0 
+fi
+
+echo "Error compiling all g++ headers into 1 program"
+echo "See all_headers.err"
+
+
+exit 1

@@ -1,0 +1,153 @@
+#!/bin/sh
+
+#
+# Print the default -I statement list for your compiler.
+#
+# 
+# If you want to force g++ as your compiler, regardless of the
+# current machine, change the variable force_gpp to '1'
+#
+
+force_gpp=0  # 
+CC=g++       # default is g++
+
+
+#
+# Implement a properly working version of the which command doh!
+# you can not trust ibm or microsoft to do anything right ;-<
+#
+my_which()
+{
+
+  target="$1"
+
+  echo "$PATH" | tr : '\012' |
+  while read name
+  do
+    if [ -x "$name/$target" ]
+    then
+      echo "$name/$target"
+    fi
+  done | head -1
+}
+
+#
+# Unless forcing g++, detect the standard compiler for the
+# platform
+#
+
+if [ $force_gpp = 0 ]
+then
+
+
+  case `uname` in
+    H*)
+	CC=aCC
+	;;
+    S*)
+	CC=CC
+	;;
+    A*)
+	#
+	# IBM is almost as annoying s MS.  You can not even trust a simple
+	# program like which to work correctly on aix!
+	#
+	CC=`my_which xlC`
+  
+	case "$CC" in
+	  "/"*)
+	      dir=`dirname $CC`
+	      dir=`dirname $dir`
+	      echo "-I$dir/include"
+	      echo "-I/usr/include"
+	      exit 0
+	    ;;
+	  *)
+	    echo "Error:  cannot find the xlC compiler!" 1>&2
+	    echo "$PATH" 1>&2
+	    exit 1
+	    ;;
+	esac
+	;;
+  esac
+
+fi
+
+compiler_path=`my_which $CC`
+
+if [ "$compiler_path" = "" ]
+then
+  echo "Error:  can not find the compiler named '$CC'" >&2
+  exit 1
+fi
+
+#
+# handle the strange output from g++
+#
+
+file=j9901-1432
+
+echo "int main() { return 0; }" >$file.c
+
+if [ "$CC" = "g++" ]
+then
+
+  flag=0
+
+  g++ -v -c $file.c 2>&1 |
+  while read line
+  do
+    case "$line" in
+
+     "#include"*)
+       flag=1
+       ;;
+     
+     "End of search list."*)
+       flag=0
+       ;;
+
+      *)
+	if [ $flag != 0 ]
+	then
+	  echo "-I$line"
+	fi
+    esac
+  done
+fi
+
+
+#
+# handle the normal compilers
+#
+
+flag=0
+
+$CC -v -c $file.c 2>&1 | tr ' ' '\012' |
+while read name 
+do
+  case $name in
+  
+    -I*)
+       if [ "$name" != "-I" ]
+       then 
+	 echo "$name"
+	 flag=0
+       else
+	 flag=1
+       fi
+      ;; 
+	 
+    *)   
+      if [ "$flag" = "1" ]
+      then 
+	echo "-I$name"
+	flag=0
+      fi
+      ;;
+  esac  
+done    
+
+rm -f $file.c $file.o $file.obj
+
+exit 0                                 

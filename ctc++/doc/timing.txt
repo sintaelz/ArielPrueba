@@ -1,0 +1,114 @@
+Testwell Oy                             CTC++ System Version 7.2
+Verifysoft Technology GmbH
+12 March 2014
+
+
+Some CTC++ timing instrumentation matters
+-----------------------------------------
+
+The CTC++ timing instrumentation is a somewhat complicated thing.
+Collecting into this text various aspects of this matter.
+
+
+1. Exclusive timing and inclusive timing
+
+In exclusive timing instrumentation, the time spent in a called
+instrumented function is subtracted from the time of the calling
+instrumented function.
+
+In inclusive timing, such subtraction is not done, i.e. the time of
+the caller includes also the time of its callees.
+
+These two timing instrumentations (what kind of code is generated)
+differ significantly from each other.
+
+As of CTC++ v7.0 the exclusive/inclusive timing selection has been brought
+to ctc option, "-i te" and "-i ti" correspondingly. Before v7.0 the
+exclusive/inclusive selection had to be done with CTC_INCLUSIVE_TIMING
+macro during the instrumentation process
+
+Exclusive timing uses certain global variables from the CTC++ run-time
+library interface. Thus, in multithreaded cases, you should perhaps not
+use exclusive timing. Actually, in multithreaded cases, the whole timing
+instrumentation may be bogus.
+
+
+2. C-like timing and C++-like timing
+
+By default, when the code to be instrumented is C-code, the so-called
+C-like timing is used. And when the code to be instrumented is C++-code,
+the so-called C++-like timing is used.
+
+These two kinds of timing instrumentation differ significantly from each
+other (in what kind of code is generated). Consider a function foo
+
+   int foo() {
+      local_variables;
+      statements;
+      return 5;
+   }
+
+In C-like timing, the start time is taken, when the opening brace has been
+passed, and the end time is taken just before the return statement.
+
+In C++-like timing, the time taking is arranged by a CTC++-specific timer
+class object constructor and destructor. The start time is taken in the
+object's constructor, when the opening brace has been passed. The end time
+is taken in the object's destructor, when the function's scope is exited.
+Thus, in C++-timing also such time is captured, which is consumed in
+evaluating the expression of the return statement and in executing the
+possible other destructors. The C++-like timing works also if the function
+is exited with an unhandled exception.
+
+If you want to use C-like timing when instrumenting C++ code, you have
+to define the macro CTC_CLIKE_TIMING, either at the command line or edit
+it permanently into the ctc.h or ctc.ini file. This macro takes effect
+when the instrumented code is compiled. For example,
+
+   ctc -i mti -C OPT_ADD_COMPILE+-DCTC_CLIKE_TIMING cl -c ....
+
+
+3. Introducing your own time-taker function
+
+By default, CTC++ uses clock() from <time.h> as the time-taker function.
+CTC++ allows you to use your own time-taker function instead of clock().
+
+You can do this for example as follows, either at the command line or by
+editing it permanently into the ctc.ini file.
+
+   ctc -i mti -C TIMER=mytimer -C LIBRARY+mytimer.obj cl -c ....
+
+The configuration parameter setting -C TIMER=... means that instead of
+generating calls to clock(), calls to mytimer() will be generated when
+time taking is needed. The setting -C LIBRARY+... means that when the
+instrumented executable is linked, the object module of your time-taker
+function is linked as well.
+
+
+4. Time-taker function with C-binding or with C++-binding
+
+By default, the time-taker function, either clock() from <time.h> or the
+time-taker function you have brought in, is assumed to have C-binding.
+I.e. the instrumented code, which is either C-code or C++-code, calls the
+the time-taker function as a C-function (it has C-binding).
+
+If you want to  introduce such a time-taker function that has C++ binding,
+you have to advise CTC++ of this by defining the macro CTC_CPP_TIMER_FUNC,
+either at the command line or edit it permanently into the ctc.h or ctc.ini
+file. This macro takes effect when the instrumented code is compiled.
+For example,
+
+   ctc -i mti -C OPT_ADD_COMPILE+-DCTC_CPP_TIMER_FUNC \
+              -C TIMER=myCPPtimer \
+              -C LIBRARY+myCPPtimer.obj cl ...
+
+Here, 'myCPPtimer' is your stand-alone function, which has been compiled
+as C++ code. The myCPPtimer function can measure whatever you want it to
+measure, it just has to return values that are compatible with the type
+long.
+
+The effect of the CTC_CPP_TIMER_FUNC macro is that, even if the code to be
+instrumented is C++, the 'extern "C" ....' wrapper is omitted around the
+declaration of the time-taker function, 'myCPPtimer'.
+
+--- end of timing.txt ---

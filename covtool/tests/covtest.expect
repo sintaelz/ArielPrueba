@@ -1,0 +1,542 @@
+/*file	1	:0	*/int x = 903 ; 
+/*file	2	:0	*/
+/*file	3	:0	*/enum hank 
+/*file	4	:0	*/{ 
+/*enum	5	:1	*/fred = 99 , bill = 37 , 
+/*enum	6	:1	*/hank , 
+/*enum	7	:1	*/john 
+/*enum	8	:1	*/} ; 
+/*file	9	:0	*/
+/*file	10	:0	*/class Fred 
+/*file	11	:0	*/{ 
+/*class	12	:1	*/int fred ; 
+/*class	13	:1	*/enum { 
+/*enum	14	:2	*/stuff } ; 
+/*class	15	:1	*/void bill ( ) ; 
+/*class	16	:1	*/struct iterator 
+/*class	17	:1	*/{ 
+/*strct	18	:2	*/int hank ; 
+/*strct	19	:2	*/} ; 
+/*class	20	:1	*/} ; 
+/*file	21	:0	*/
+/*file	22	:0	*/template < class T , class v > 
+/*file	23	:0	*/bool fred ( ) ; 
+/*file	24	:0	*/
+/*file	25	:0	*/template < class T > 
+/*file	26	:0	*/struct SomeBag 
+/*file	27	:0	*/{ 
+/*strct	28	:1	*/} ; 
+/*file	29	:0	*/
+/*file	30	:0	*/typedef CovStream :: iterator iterator ; 
+/*file	31	:0	*/
+/*file	32	:0	*/namespace std 
+/*file	33	:0	*/{ 
+/*namsp	34	:1	*/
+/*namsp	35	:1	*/class C 
+/*namsp	36	:1	*/{ 
+/*class	37	:2	*/struct iterator 
+/*class	38	:2	*/{ 
+/*strct	39	:3	*/iterator ( ) { } ; 
+/*strct	40	:3	*/} ; 
+/*class	41	:2	*/void bill ( ) { int x = 9 / 10 ; return 32 ; } 
+/*class	42	:2	*/void sue ( ) { int x = 9 / 10 ; return 32 ; } 
+/*class	43	:2	*/} ; 
+/*namsp	44	:1	*/
+/*namsp	45	:1	*/} ; 
+/*file	46	:0	*/# 214 "else" 
+/*file	214	:0	*/
+/*file	215	:0	*/# 300 "something" 
+/*file	300	:0	*/int should_be_line_300 ; 
+/*file	301	:0	*/# 329 "crap" 
+/*file	329	:0	*/
+/*file	330	:0	*/template < class T , class U > 
+/*file	331	:0	*/int function ( T * parm1 , 
+/*file	332	:0	*/U const & parm2 , 
+/*file	333	:0	*/) 
+/*file	334	:0	*/{ 
+/*func	335	:1	*/if ( parm1 == parm2 ) 
+/*func	336	:1	*/if ( parm1 == 0 ) 
+/*func	337	:1	*/{ 
+/*block	338	:2	*/parm2 == 0 ; 
+/*block	339	:2	*/} 
+/*func	340	:1	*/else 
+/*func	341	:1	*/return sizeof ( T ) / sizeof ( U ) ; 
+/*func	342	:1	*/else 
+/*func	343	:1	*/{ 
+/*block	344	:2	*/return 99 ; 
+/*block	345	:2	*/} 
+/*func	346	:1	*/} ; 
+/*file	347	:0	*/
+/*file	348	:0	*/int function ( ) 
+/*file	349	:0	*/{ 
+/*func	350	:1	*/while ( tom ) 9 = 10 ; 
+/*func	351	:1	*/
+/*func	352	:1	*/while ( 1 == 2 ) 
+/*func	353	:1	*/{ 
+/*block	354	:2	*/printf ( "stuff" ) ; 
+/*block	355	:2	*/} 
+/*func	356	:1	*/
+/*func	357	:1	*/do 
+/*func	358	:1	*/fred = 99 ; 
+/*func	359	:1	*/while ( crap == junk ) ;
+/*func	360	:1	*/
+/*func	361	:1	*/do 
+/*func	362	:1	*/{ 
+/*block	363	:2	*/{ 
+/*block	364	:3	*/9 = 10 ; 
+/*block	365	:3	*/} 
+/*block	366	:2	*/} 
+/*func	367	:1	*/while ( 1 == 3 ) ;
+/*func	368	:1	*/
+/*func	369	:1	*/} 
+/*file	370	:0	*/extern int bill ( ) ; 
+/*file	371	:0	*/extern "C" void f ( ) ; 
+/*file	372	:0	*/
+/*file	373	:0	*/extern "C" 
+/*file	374	:0	*/{ 
+/*extrn	375	:1	*/int x ; 
+/*extrn	376	:1	*/struct crap 
+/*extrn	377	:1	*/{ 
+/*strct	378	:2	*/float junk ; 
+/*strct	379	:2	*/
+/*strct	380	:2	*/crap ( ) 
+/*strct	381	:2	*/{ 
+/*func	382	:3	*/} 
+/*strct	383	:2	*/~ crap ( ) 
+/*strct	384	:2	*/{ 
+/*func	385	:3	*/} 
+/*strct	386	:2	*/} 
+/*extrn	387	:1	*/} ; 
+/*file	388	:0	*/
+/*file	389	:0	*/
+/*file	390	:0	*/bool operator == ( iterator const & r ) const 
+/*file	391	:0	*/{ 
+/*func	392	:1	*/return ptr_ == r . ptr_ ; 
+/*func	393	:1	*/} 
+/*file	394	:0	*/
+/*file	395	:0	*/
+/*file	396	:0	*/struct iterator 
+/*file	397	:0	*/{ 
+/*strct	398	:1	*/
+/*strct	399	:1	*/bool operator != ( iterator const & r ) const { return ptr_ != r . ptr_ ; } 
+/*strct	400	:1	*/
+/*strct	401	:1	*/char * ptr_ ; 
+/*strct	402	:1	*/char * end_ ; // a copy of chunk_ -> end_ to speed up comparisons 
+/*strct	403	:1	*/
+/*strct	404	:1	*/chunk * chunk_ ; 
+/*strct	405	:1	*/
+/*strct	406	:1	*/char operator * ( ) const { return * ptr_ ; } 
+/*strct	407	:1	*/
+/*strct	408	:1	*/iterator & operator ++ ( ) 
+/*strct	409	:1	*/{ 
+/*func	410	:2	*/if ( ptr_ == end_ ) 
+/*func	411	:2	*/{ 
+/*block	412	:3	*/if ( chunk_ -> next_ ) 
+/*block	413	:3	*/{ 
+/*block	414	:4	*/chunk_ = chunk_ -> next_ ; 
+/*block	415	:4	*/ptr_ = & chunk_ -> data_ [ 0 ] ; 
+/*block	416	:4	*/end_ = chunk_ -> end_ ; 
+/*block	417	:4	*/} 
+/*block	418	:3	*/else 
+/*block	419	:3	*/{ 
+/*block	420	:4	*/ptr_ = 0 ; 
+/*block	421	:4	*/end_ = 0 ; 
+/*block	422	:4	*/} 
+/*block	423	:3	*/
+/*block	424	:3	*/} 
+/*func	425	:2	*/else 
+/*func	426	:2	*/{ 
+/*block	427	:3	*/++ ptr_ ; 
+/*block	428	:3	*/
+/*block	429	:3	*/if ( ptr_ == end_ ) 
+/*block	430	:3	*/{ 
+/*block	431	:4	*/
+/*block	432	:4	*/if ( chunk_ -> next_ ) 
+/*block	433	:4	*/{ 
+/*block	434	:5	*/chunk_ = chunk_ -> next_ ; 
+/*block	435	:5	*/ptr_ = & chunk_ -> data_ [ 0 ] ; 
+/*block	436	:5	*/end_ = chunk_ -> end_ ; 
+/*block	437	:5	*/} 
+/*block	438	:4	*/else 
+/*block	439	:4	*/{ 
+/*block	440	:5	*/ptr_ = 0 ; 
+/*block	441	:5	*/end_ = 0 ; 
+/*block	442	:5	*/} 
+/*block	443	:4	*/} 
+/*block	444	:3	*/
+/*block	445	:3	*/} 
+/*func	446	:2	*/
+/*func	447	:2	*/return * this ; 
+/*func	448	:2	*/} 
+/*strct	449	:1	*/
+/*strct	450	:1	*/iterator operator ++ ( int ) 
+/*strct	451	:1	*/{ 
+/*func	452	:2	*/iterator old = * this ; 
+/*func	453	:2	*/
+/*func	454	:2	*/if ( ptr_ == end_ ) 
+/*func	455	:2	*/{ 
+/*block	456	:3	*/if ( chunk_ -> next_ ) 
+/*block	457	:3	*/{ 
+/*block	458	:4	*/chunk_ = chunk_ -> next_ ; 
+/*block	459	:4	*/ptr_ = & chunk_ -> data_ [ 0 ] ; 
+/*block	460	:4	*/end_ = chunk_ -> end_ ; 
+/*block	461	:4	*/} 
+/*block	462	:3	*/else 
+/*block	463	:3	*/{ 
+/*block	464	:4	*/ptr_ = 0 ; 
+/*block	465	:4	*/end_ = 0 ; 
+/*block	466	:4	*/} 
+/*block	467	:3	*/
+/*block	468	:3	*/} 
+/*func	469	:2	*/else 
+/*func	470	:2	*/{ 
+/*block	471	:3	*/++ ptr_ ; 
+/*block	472	:3	*/
+/*block	473	:3	*/if ( ptr_ == end_ ) 
+/*block	474	:3	*/{ 
+/*block	475	:4	*/
+/*block	476	:4	*/if ( chunk_ -> next_ ) 
+/*block	477	:4	*/{ 
+/*block	478	:5	*/chunk_ = chunk_ -> next_ ; 
+/*block	479	:5	*/ptr_ = & chunk_ -> data_ [ 0 ] ; 
+/*block	480	:5	*/end_ = chunk_ -> end_ ; 
+/*block	481	:5	*/} 
+/*block	482	:4	*/else 
+/*block	483	:4	*/{ 
+/*block	484	:5	*/ptr_ = 0 ; 
+/*block	485	:5	*/end_ = 0 ; 
+/*block	486	:5	*/} 
+/*block	487	:4	*/} 
+/*block	488	:3	*/
+/*block	489	:3	*/} 
+/*func	490	:2	*/
+/*func	491	:2	*/return old ; 
+/*func	492	:2	*/} 
+/*strct	493	:1	*/
+/*strct	494	:1	*/} ; 
+/*file	495	:0	*/
+/*file	496	:0	*/template < class F , class S > 
+/*file	497	:0	*/class Pair 
+/*file	498	:0	*/{ 
+/*class	499	:1	*/public : 
+/*class	500	:1	*/typedef Pair < F , S > self ; 
+/*class	501	:1	*/
+/*class	502	:1	*/Pair ( self const & ) ; 
+/*class	503	:1	*/~ Pair ( ) ; 
+/*class	504	:1	*/} ; 
+/*file	505	:0	*/
+/*file	506	:0	*/template < class T , class K > 
+/*file	507	:0	*/class Map 
+/*file	508	:0	*/{ 
+/*class	509	:1	*/public : 
+/*class	510	:1	*/typedef pair < T , K > value_type ; 
+/*class	511	:1	*/private : 
+/*class	512	:1	*/
+/*class	513	:1	*/struct node 
+/*class	514	:1	*/{ 
+/*strct	515	:2	*/node * next_ ; 
+/*strct	516	:2	*/
+/*strct	517	:2	*/value_type data_ ; 
+/*strct	518	:2	*/
+/*strct	519	:2	*/node ( value_type const & v , node * next ) 
+/*strct	520	:2	*/: data_ ( v ) , 
+/*strct	521	:2	*/next_ ( next ) 
+/*strct	522	:2	*/{ 
+/*func	523	:3	*/} 
+/*strct	524	:2	*/
+/*strct	525	:2	*/} ; 
+/*class	526	:1	*/
+/*class	527	:1	*/node * data_ ; 
+/*class	528	:1	*/
+/*class	529	:1	*/public : 
+/*class	530	:1	*/
+/*class	531	:1	*/Map ( ) 
+/*class	532	:1	*/: data_ ( 0 ) 
+/*class	533	:1	*/{ 
+/*func	534	:2	*/} 
+/*class	535	:1	*/
+/*class	536	:1	*/~ Map ( ) 
+/*class	537	:1	*/{ 
+/*func	538	:2	*/while ( data_ ) 
+/*func	539	:2	*/{ 
+/*block	540	:3	*/node * next = data_ -> next_ ; 
+/*block	541	:3	*/delete data_ ; 
+/*block	542	:3	*/data_ = next ; 
+/*block	543	:3	*/} 
+/*func	544	:2	*/} 
+/*class	545	:1	*/
+/*class	546	:1	*/struct iterator 
+/*class	547	:1	*/{ 
+/*strct	548	:2	*/node * thisn_ ; 
+/*strct	549	:2	*/
+/*strct	550	:2	*/iterator ( node * n ) : thisn_ ( n ) { } 
+/*strct	551	:2	*/
+/*strct	552	:2	*/~ iterator ( ) 
+/*strct	553	:2	*/{ 
+/*func	554	:3	*/} 
+/*strct	555	:2	*/
+/*strct	556	:2	*/iterator & operator ++ ( ) 
+/*strct	557	:2	*/{ 
+/*func	558	:3	*/thisn_ = thisn_ -> next_ ; 
+/*func	559	:3	*/return * this ; 
+/*func	560	:3	*/} 
+/*strct	561	:2	*/
+/*strct	562	:2	*/value_type & operator * ( ) 
+/*strct	563	:2	*/{ 
+/*func	564	:3	*/return thisn_ -> data_ ; 
+/*func	565	:3	*/} 
+/*strct	566	:2	*/
+/*strct	567	:2	*/
+/*strct	568	:2	*/} ; 
+/*class	569	:1	*/
+/*class	570	:1	*/iterator begin ( ) { return data_ ; } 
+/*class	571	:1	*/iterator end ( ) { return 0 ; } 
+/*class	572	:1	*/
+/*class	573	:1	*/iterator insert ( value_type const & v ) 
+/*class	574	:1	*/{ 
+/*func	575	:2	*/data_ = new node ( v , data_ ) ; 
+/*func	576	:2	*/} 
+/*class	577	:1	*/
+/*class	578	:1	*/} ; 
+/*file	579	:0	*/
+/*file	580	:0	*/extern void bob ( Map < float , int >* ) ; 
+/*file	581	:0	*/
+/*file	582	:0	*/Map < float , int > const & function ( 
+/*file	583	:0	*/void ( * funcparm ) ( Map < float , int >* p ) = bob , 
+/*file	584	:0	*/int bill = 99 
+/*file	585	:0	*/) 
+/*file	586	:0	*/{ 
+/*func	587	:1	*/return bill + bob ; 
+/*func	588	:1	*/} 
+/*file	589	:0	*/
+/*file	590	:0	*/template <> int x ; 
+/*file	591	:0	*/
+/*file	592	:0	*/template < class T > 
+/*file	593	:0	*/void f ( ) try 
+/*file	594	:0	*/{ 
+/*func	595	:1	*/int member ; 
+/*func	596	:1	*/return 99 ; 
+/*func	597	:1	*/} 
+/*file	598	:0	*/catch ( CLASS ) 
+/*file	599	:0	*/{ 
+/*block	600	:1	*/int x ; 
+/*block	601	:1	*/} 
+/*file	602	:0	*/
+/*file	603	:0	*/int x ; 
+/*file	604	:0	*/
+/*file	605	:0	*/
+/*file	606	:0	*/struct S 
+/*file	607	:0	*/{ 
+/*strct	608	:1	*/private : 
+/*strct	609	:1	*/int x_ ; 
+/*strct	610	:1	*/int y_ ; 
+/*strct	611	:1	*/
+/*strct	612	:1	*/S ( int x , int y ) 
+/*strct	613	:1	*/const try 
+/*strct	614	:1	*/: x_ ( x ) , 
+/*strct	615	:1	*/y_ ( y ) 
+/*strct	616	:1	*/{ 
+/*func	617	:2	*/} 
+/*strct	618	:1	*/catch ( carap ) 
+/*strct	619	:1	*/{ 
+/*block	620	:2	*/printf ( "boooo hoooo\n" ) ; 
+/*block	621	:2	*/} 
+/*strct	622	:1	*/
+/*strct	623	:1	*/~ S ( ) 
+/*strct	624	:1	*/{ 
+/*func	625	:2	*/} 
+/*strct	626	:1	*/
+/*strct	627	:1	*/void member ( ) const 
+/*strct	628	:1	*/try 
+/*strct	629	:1	*/{ 
+/*func	630	:2	*/printf ( "yeah!\n" ) ; 
+/*func	631	:2	*/} 
+/*strct	632	:1	*/catch ( ola ) 
+/*strct	633	:1	*/{ 
+/*block	634	:2	*/printf ( "boooo hoooo\n" ) ; 
+/*block	635	:2	*/} 
+/*strct	636	:1	*/
+/*strct	637	:1	*/} ; 
+/*file	638	:0	*/
+/*file	639	:0	*/# 1 "t.in" 
+/*file	1	:0	*/
+/*file	2	:0	*/struct S 
+/*file	3	:0	*/{ 
+/*strct	4	:1	*/private : 
+/*strct	5	:1	*/void other_member ( ) 
+/*strct	6	:1	*/{ 
+/*func	7	:2	*/a = b ; return 99 ; 
+/*func	8	:2	*/otehr ( ) ; 
+/*func	9	:2	*/} 
+/*strct	10	:1	*/public : 
+/*strct	11	:1	*/int x_ ; 
+/*strct	12	:1	*/int y_ ; 
+/*strct	13	:1	*/
+/*strct	14	:1	*/# 37 "crapola" 
+/*strct	37	:1	*/
+/*strct	38	:1	*/S ( int x , int y ) 
+/*strct	39	:1	*/const try 
+/*strct	40	:1	*/: x_ ( x ) , 
+/*strct	41	:1	*/y_ ( y ) 
+/*strct	42	:1	*/{ 
+/*func	43	:2	*/x = y_ ; 
+/*func	44	:2	*/} 
+/*strct	45	:1	*/catch ( carap ) 
+/*strct	46	:1	*/{ 
+/*block	47	:2	*/printf ( "boooo hoooo\n" ) ; 
+/*block	48	:2	*/} 
+/*strct	49	:1	*/# 19 "t.in" 
+/*strct	19	:1	*/
+/*strct	20	:1	*/~ S ( ) 
+/*strct	21	:1	*/{ 
+/*func	22	:2	*/x_ = y_ ; 
+/*func	23	:2	*/} 
+/*strct	24	:1	*/
+/*strct	25	:1	*/void member ( ) const 
+/*strct	26	:1	*/try 
+/*strct	27	:1	*/{ 
+/*func	28	:2	*/printf ( "yeah!\n" ) ; 
+/*func	29	:2	*/} 
+/*strct	30	:1	*/catch ( ola ) 
+/*strct	31	:1	*/{ 
+/*block	32	:2	*/printf ( "boooo hoooo\n" ) ; 
+/*block	33	:2	*/} 
+/*strct	34	:1	*/
+/*strct	35	:1	*/} ; 
+/*file	36	:0	*/
+/*file	37	:0	*/# 1 "t.in" 
+/*file	1	:0	*/
+/*file	2	:0	*/namespace hank = bill ; 
+/*file	3	:0	*/
+/*file	4	:0	*/int f ( ) 
+/*file	5	:0	*/{ 
+/*func	6	:1	*/namespace bob = tom ; 
+/*func	7	:1	*/using bob ; 
+/*func	8	:1	*/
+/*func	9	:1	*/if ( 1 ) 
+/*func	10	:1	*/switch ( 4 ) 
+/*func	11	:1	*/{ 
+/*block	12	:2	*/case 9 : 
+/*block	13	:2	*/break ; 
+/*block	14	:2	*/
+/*block	15	:2	*/case class :: member :: value : 
+/*block	16	:2	*/break ; 
+/*block	17	:2	*/
+/*block	18	:2	*/default : 
+/*block	19	:2	*/break ; 
+/*block	20	:2	*/} 
+/*func	21	:1	*/
+/*func	22	:1	*/} 
+/*file	23	:0	*/
+/*file	24	:0	*/int scan ( char const * fmt0 ... ) ; 
+/*file	25	:0	*/
+/*file	26	:0	*/# 2 "junk.in" 
+/*file	2	:0	*/template < class Category , class T , 
+/*file	3	:0	*/class Distance = ptrdiff_t , 
+/*file	4	:0	*/class Pointer = T * , 
+/*file	5	:0	*/class Reference = T & > 
+/*file	6	:0	*/struct iterator 
+/*file	7	:0	*/{ 
+/*strct	8	:1	*/typedef T value_type ; 
+/*strct	9	:1	*/typedef Distance difference_type ; 
+/*strct	10	:1	*/typedef Pointer pointer ; 
+/*strct	11	:1	*/typedef Reference reference ; 
+/*strct	12	:1	*/typedef Category iterator_category ; 
+/*strct	13	:1	*/} ; 
+/*file	14	:0	*/
+/*file	15	:0	*/int g ( ) 
+/*file	16	:0	*/{ 
+/*func	17	:1	*/switch ( __last - __first ) 
+/*func	18	:1	*/{ 
+/*block	19	:2	*/int c ; 
+/*block	20	:2	*/char bill [ 4 ] ; 
+/*block	21	:2	*/
+/*block	22	:2	*/case 3 : 
+/*block	23	:2	*/if ( * __first == __val ) 
+/*block	24	:2	*/return __first ; 
+/*block	25	:2	*/++ __first ; 
+/*block	26	:2	*/case 2 : 
+/*block	27	:2	*/if ( * __first == __val ) 
+/*block	28	:2	*/return __first ; 
+/*block	29	:2	*/++ __first ; 
+/*block	30	:2	*/case 1 : 
+/*block	31	:2	*/if ( * __first == __val ) 
+/*block	32	:2	*/return __first ; 
+/*block	33	:2	*/++ __first ; 
+/*block	34	:2	*/case 0 : 
+/*block	35	:2	*/default : 
+/*block	36	:2	*/return __last ; 
+/*block	37	:2	*/} 
+/*func	38	:1	*/
+/*func	39	:1	*/} 
+/*file	40	:0	*/
+/*file	41	:0	*/
+/*file	42	:0	*/
+/*file	43	:0	*/
+/*file	44	:0	*/
+/*file	45	:0	*/int f ( ) 
+/*file	46	:0	*/{ 
+/*func	47	:1	*/switch ( one ) 
+/*func	48	:1	*/{ 
+/*block	49	:2	*/mark_line : 
+/*block	50	:2	*/{ 
+/*block	51	:2	*/if ( impl_ -> first_mark_ == impl_ -> last_mark_ ) 
+/*block	52	:2	*/{ 
+/*block	53	:2	*/// no lines currently marked 
+/*block	54	:2	*/
+/*block	55	:2	*/impl_ -> first_mark_ = impl_ -> cur_ ; 
+/*block	56	:2	*/impl_ -> last_mark_ = impl_ -> cur_ + 1 ; 
+/*block	57	:2	*/} 
+/*func	58	:1	*/
+/*func	59	:1	*/else { 
+/*func	60	:1	*/// there is already a marked region 
+/*func	61	:1	*/
+/*func	62	:1	*/if ( impl_ -> last_mark_ == impl_ -> first_mark_ + 1 ) 
+/*func	63	:1	*/{ 
+/*func	64	:1	*/// the marked region is exactly one line 
+/*func	65	:1	*/
+/*func	66	:1	*/if ( impl_ -> cur_ == impl_ -> first_mark_ ) 
+/*func	67	:1	*/{ 
+/*func	68	:1	*/// and the cursor is sitting on that one line , 
+/*func	69	:1	*/// then unmark 
+/*func	70	:1	*/
+/*func	71	:1	*/impl_ -> last_mark_ = impl_ -> first_mark_ = 0 ; 
+/*func	72	:1	*/
+/*func	73	:1	*/} 
+/*file	74	:0	*/else 
+/*file	75	:0	*/{ 
+/*func	76	:1	*/// the cursor is not sitting on the currently marked line 
+/*func	77	:1	*/
+/*func	78	:1	*/if ( impl_ -> cur_ < impl_ -> first_mark_ ) 
+/*func	79	:1	*/impl_ -> first_mark_ = impl_ -> cur_ ; 
+/*func	80	:1	*/
+/*func	81	:1	*/else impl_ -> last_mark_ = impl_ -> cur_ + 1 ; 
+/*func	82	:1	*/} 
+/*file	83	:0	*/
+/*file	84	:0	*/} 
+/*file	85	:0	*/else 
+/*file	86	:0	*/impl_ -> first_mark_ = impl_ -> last_mark_ = 0 ; 
+/*file	87	:0	*/
+/*file	88	:0	*/} 
+/*file	89	:0	*/
+/*file	90	:0	*/( * this ) ( vp , 0 ) ; // repaint to highlight the marks 
+/*file	91	:0	*/
+/*file	92	:0	*/} 
+/*file	93	:0	*/break ; 
+/*file	94	:0	*/} 
+/*file	95	:0	*/} 
+/*file	96	:0	*/
+/*file	97	:0	*/template < class Category , class T , 
+/*file	98	:0	*/class Distance = ptrdiff_t , 
+/*file	99	:0	*/class Pointer = T * , 
+/*file	100	:0	*/class Reference = T & > 
+/*file	101	:0	*/struct iterator 
+/*file	102	:0	*/{ 
+/*strct	103	:1	*/typedef T value_type ; 
+/*strct	104	:1	*/typedef Distance difference_type ; 
+/*strct	105	:1	*/typedef Pointer pointer ; 
+/*strct	106	:1	*/typedef Reference reference ; 
+/*strct	107	:1	*/typedef Category iterator_category ; 
+/*strct	108	:1	*/} ; 
+/*file	109	:0	*/
+/*file	110	:0	*/

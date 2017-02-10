@@ -1,0 +1,8 @@
+file: hard.c 5 4 80
+el:  11 12 14 16
+il:  9 11 12 14 16
+file: /usr/include/g++/string 0 0 0
+file: /test1/file.c 10 10 100
+il: 1 2 3 4 5 6 7 8 9 10
+el: 1 2 3 4 5 6 7 8 9 10
+

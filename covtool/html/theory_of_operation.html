@@ -1,0 +1,167 @@
+<html>
+  <head>
+    <title>COVTOOL Theory of operations</title>
+  </head
+  <body>
+
+  <A href="http://sourceforge.net">
+    <IMG src="http://sourceforge.net/sflogo.php?group_id=57150&amp;type=5" width="210" height="62" border="0" alt="SourceForge Logo">
+  </A>
+
+  <hr>
+    <h1>Theory of Operations</h1>
+
+    <h2>Introduction</h2>
+    <p>
+    The COVTOOL instrumentor is a C++ program that copies stdin to
+    stdout.  It presumes that the source text is a C++ program that
+    has been passed through the C++ preprocessor.  The instrumentor
+    modifies that text as it is copied.  The modifications are as
+    follows:
+    <ul>
+      <li> It adds a header that declares a small number of static
+	   objects that are added to the existing program definitions
+      <li> It adds a footer that defines these objects.  The added
+	   objects help keep track of what files were envolved in the
+	   compilation and which lines of code have instrumentation.
+      <li> Each C++ statement is preceeded by a function call which passes
+	   the filename and line number to a recording function.
+    </ul>
+
+    The recording function is implemented in a module called "covtoolhelper.c"
+    which must be compiled and linked into the program.  The cov++ script
+    normally does this for you.
+
+    <h2>Instrumentor design</h2>
+
+    <p>
+    The instrumentor is much less sophisticated that one might imagine.  It
+    does not in fact parse the whole of the C++ language and it does not
+    store any kind of "abstract syntax tree" for the program it is working
+    on.  Instead, it detects only the most large scale features of the
+    program:
+
+    <ul>
+      <li> What file am I in?
+      <li> What line number am I currently on?
+      <li> Am I in a namespace?
+      <li> Am I in a class, a variable declaration, or a function, or none
+	   of the above?
+      <li> If I am in a function, am I outside a statement or inside it?
+    </ul>
+
+    <p>
+    The general idea is that the each statement is prefixed by a
+    function call that logs the fact that a statement is being executed.
+    Consider the following instrumented version of a return statement:
+
+    <blockquote>
+      CvT_record_line___(fileRef,LineNumber); <b>return 42;</b>
+    </blockquote>
+
+    <p>
+    Note that is a most trivial intrusion into the program.  It adds no
+    variable declarations and has no scope affects.  The worse case scenario
+    is when you have a program conditional structure.  Suppose you mean to
+    instrument the following code:
+
+    <blockquote>
+      if(expression)<br>
+	&nbsp;&nbsp;return 19;
+    </blockquote>
+
+    <p>
+    In a case like this, you can not just inject the line recording function
+    call.  Instead, you have to go the extra mile and add {} around the
+    return statement as well as sticking in the line recording directives:
+
+    <blockquote>
+      CvT_record_line___(fileRef,LineNumber);<b>if(expression)<br></b>
+	&nbsp;&nbsp;{CvT_record_line___(fileRef,LineNumber);<b>return 19;</b>}
+    </blockquote>
+
+    <p>
+    Even this worst case intrusion is relatively simple to implement --
+    if you can recognize program statements.
+
+    <p>
+    As it runs, the instrumentor keeps track of lines in various files
+    parsed.  It looks for the compiler supplied hints.  They typically
+    take on of the following forms:
+
+      <blockquote>
+	&nbsp;&nbsp;#line number "filename"<br>
+	or<br>
+	&nbsp;&nbsp;#number "filename"<br>
+	
+      </blockquote>
+
+    <p>
+    the filename part is easily understood, but the '#number' or '#line number'
+    part must be explained:  it is the line number within 'filename' of the
+    next line after '#' line.  That is, the compiler puts in # directives to
+    let you know where it is in the file.  A preprocessed C++ file might
+    look something like this:
+
+    <blockquote>
+
+     #1 "somefile.c"   <br>
+		       <br>
+     #1 "included_file"<br>
+		       <br>
+     &nbsp;&nbsp;...   <br>
+		       <br>
+     #2 "somefile.c"   <br>
+     line 2 of somefile.c
+
+    </blockquote>
+
+    <p>
+    the key is understand that the compiler gives you directions about
+    which file is currently being processed.  The instrumentor makes no
+    attempt to instrument lines in absence of the # directives.  so, you
+    can't instrument a file unless it has at least one line looking
+    something like this:
+
+    <blockquote>
+      # 1 "filename"
+    </blockquote>
+
+    <p>
+    In absence of this syntax, it will simply copy stdin to stdout without
+    adding instrumentation.
+
+    <h2>Instrumentor options</h2>
+
+    <p>
+    At this time, there are only two options to the instrumentor:
+    <ul>
+     <li> -instrument
+     <li> -skip
+    </ul>
+
+    <p>
+    The -instrument option lets you instruct the covtool.exe program
+    to actually include instrumentation.  Without instrumentation, the
+    program adds commentary about its internal state.  This is mainly
+    a debugging tool.
+
+    <p>
+    The -skip option(s) let you instruct the instrumentor to ignore
+    directoroies.  For example, you rarely want to instrument the C++
+    runtime header files.  So you will almost <u>always</u> specify
+    the -skip /usr option to ignore the /usr/ directgory and all
+    subdirectories thereof.
+
+    <H2>Using cov++</h2>
+
+    <p>
+    More often than not, you are going to be using the cov++ script
+    rather than the covtool.exe instrumentor directly.  This is because
+    the cov++ script was intended as the public interface.  It uses
+    script language commands to handle the myriad of minor string
+    substituions needed to pull off an easy to use public interface.
+
+
+  </body>
+</html>

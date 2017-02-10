@@ -1,0 +1,95 @@
+.\"--------------------------------------------------------
+.\" MODULE      : $RCSfile: ctcwrap.1 $
+.\" PART OF     : CTC++
+.\" VERSION     : $Revision: 1.7 $, $Date: 2016/06/21 13:34:36 $
+.\" AUTHOR      : $Author: olavi $
+.\" DESCRIPTION : ctcwrap manual page
+.\"
+.\"             Copyright (c) 2012-2013 Testwell Oy
+.\"             Copyright (c) 2013-2016 Verifysoft Technology GmbH
+.\"
+.\" LAST EDITED : 21.06.2016
+.\"--------------------------------------------------------
+.TH ctcwrap 1 "21 June 2016"
+.SH NAME
+ctcwrap - CTC++ Wrapper for Unix (v1.4)
+           (CTC++, Test Coverage Analyzer for C/C++)
+
+.SH SYNOPSIS
+.HP 9
+.B ctcwrap [ctc-options] command [arguments]
+.P
+.B ctcwrap -h
+
+.SH DESCRIPTION
+This ctcwrap utility executes the given command (e.g. make) with its
+possible arguments. If the command execution causes any C/C++ compile
+(e.g. gcc or g++) or link (e.g. ld) subcommand executions, they are
+prepended with "ctc ctc-options" making the subcommands as "ctc-compile"
+or "ctc-link".
+
+For this ctcwrap arrangement to succeed, it must be
+.PP
+- the subcommand is invoked without path
+.PP
+- the subcommand is known in 'wrap' directory of the in CTC++ installation
+directory, see details from the CTC++ User's Guide.
+.PP
+- of course the subcommand must be known in ctc.ini file, see details
+from the CTC++ User's Guide
+
+.SH OPTIONS
+.PP
+.BR ctc-options
+.RS
+The CTC++ instrumentation options. See ctc manual page.
+.RE
+.TP
+.BR -h
+Displays a short command-line help.
+.PP
+
+Examples:
+.RS
+.B  ctcwrap -v make
+.RE
+.RS
+.B  ctcwrap -i m -C EXCLUDE+*/dir2/* -v make -f mymakefile.mak
+.RE
+.RS
+.B  ctcwrap ./mybuildscript.sh
+.RE
+
+.SH FILES
+/usr/local/bin/ctcwrap
+.RS
+CTC++ Wrapper for Unix
+.RE
+/usr/local/lib/ctc/wrap
+.RS
+Directory which contains symlinks of the wrapped commands (gcc, g++, ld, ...).
+.RE
+/usr/local/lib/ctc/wrap/ctcagent
+.RS
+The utility itself, which makes the commands as "ctc commands".
+.RE
+
+.SH VENDOR
+Verifysoft Technology GmbH
+.br
+In der Spoeck 10, 77656 Offenburg, Germany
+.br
+URL: http://www.verifysoft.com
+
+.SH SEE ALSO
+.BR ctc (1),
+.BR ctcpost (1),
+.BR ctcxmlmerge (1),
+.BR ctc2dat (1),
+.BR ctc2html (1),
+.BR ctc2excel (1),
+.br
+.I CTC++ User's Guide
+(ctcug.pdf)
+
+.\" EOF $RCSfile: ctcwrap.1 $

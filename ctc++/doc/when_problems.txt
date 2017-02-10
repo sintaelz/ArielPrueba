@@ -1,0 +1,130 @@
+Testwell Oy                             CTC++ System Version 7.2
+Verifysoft Technology GmbH
+12 March 2014
+
+
+Encountering problems with CTC++
+================================
+
+If you encounter problems when you use CTC++, you can ask for help.
+When asking for help, certain information is useful to know. This
+text lists some of those points. You may also find this text useful
+when trying to figure out the reason for the problem by yourself.
+
+If you have acquired the tool directly from Verifysoft, you are advised
+to send your questions by email to support@verifysoft.com. If you have
+acquired the tool via our distributor, you are advised to contact our
+distributor for help.
+
+You can be either a support customer or a tool evaluator.
+
+When asking for help, please provide the following information:
+
+
+1. Who are you.
+
+Your name, your title, your company, your email address, and the address
+where you are using the tool
+
+If you are a support customer, the support requests are assumed to come
+via the technical contact person. At least keep this person in the email
+circulation.
+
+
+2. What platform.
+
+What operating system. What C/C++ compiler and what version of it you have.
+
+
+3. What CTC++ version.
+
+You can find the tool version e.g. by running ctc -h
+
+
+4. Tell what you did and what happened.
+
+Not only describe it in your own words, but provide us as much as
+possible/reasonable textual copy-and-paste data about the command that
+you issued and the messages that were displayed on the screen.
+
+If the problem is in instrumenting and compiling/linking the code, please
+use -v (small v, verbose option) to CTC++ and include into the screen
+capture the top-level command (e.g. some "ctcwrap ....") by which you
+started the CTC++ use, all the way upto the  next command prompt. For
+analyzing it is often important to see the complete top-level command and
+what were the compile command options and arguments (come visible thanks
+to ctc's -v option), and the compiler or linker messages and CTC++ messages.
+
+
+5. In many cases it helps if you can send us...
+- a copy of symbolfile (MON.sym)
+- a copy of datafile (MON.dat)
+- if there is reason to suspect that CTC++ is not configured properly a
+  copy of the ctc.ini file for double-checking it (use "ctc -V" (big V) for
+  finding out what configuration files are found and loaded)
+
+
+6. If the problem is that CTC++ generates non-compilable instrumented code,
+you can first study the situation by running the instrumentation with -v and
+-k (keep) options. Now the intermediate files (the C-preprocessed file, some
+CTC.1234.1.i, and the instrumented code file, some CTC.1234.2.cpp, in the
+temp directory) are left undeleted. Studying these files may reveal the
+problem.
+
+If you cannot get the problem solved, and your compiler still refuses
+to compile the instrumented file (while it compiles the original source
+file), sending these intermediate files to us along with the other
+problem description is often needed. When doing so, remember also the
+following:
+- send a copy of the complete ctc instrumentation command
+- please run the ctc instrumentation command with -v (verbose) (and
+  with -k) options, and send a copy of the output lines that ctc
+  displayed on the screen
+
+If the pertinent source file is somehow secret, and you cannot send a
+copy of it, try to construct a small self-contained example demonstrating
+the CTC++ usage problem, but not revealing your company's secrets, and
+send us the corresponding files of this demo case instead.
+
+
+7. In some problem cases a copy of the MON.sym (a text file) and/or
+MON.dat (a binary file) file is needed. You might also study them
+yourself with the commands
+   ctcpost -L MON.sym
+   ctcpost -L MON.dat
+if there is anything surprising in the generated symbolfile and datafile
+contents listings.
+
+
+8. Usage via Visual Studio 2xxx integration does not work
+
+Check what settings you have in Visual Studio 2xxx for the CTC++
+commands in the Tools menu:
+   Tools > External Tools >
+      CTC++ &Set/Clean... and
+      CTC++ &Report...
+What are the values of the fields Command, Arguments and Initial directory?
+
+You should have the environment variable CTCWRAPDIR set, and it should
+point to %TEMP%\ctc.
+
+In Visual Studio 2xxx settings you should have $(CTCWRAPDIR) as the first
+directory in Visual Studio's internal PATH:
+   Tools > Options > Projects > VC++ Directories >
+   Directories for Executable files
+
+
+9. If you find that "CTC++ does not work with my project", please make an
+experiment and tell, if it works in the most basic and simple case. For
+example with the examples that were delivered along with the tool. Or in
+the following most simple example (Windows and 'cl' compiler assumed).
+Type the following at the command prompt (except the comments):
+
+   echo int main(){ return 5; } > foo.c  // make the source
+   ctc -v cl foo.c                       // instrument, -v "verbose"
+   foo                                   // run twice
+   foo
+   ctcpost -p -                          // see profile listing
+   ctcpost -p - | ctc2html               // .\CTCHTML should get born
+
+--- end of when_problems.txt ---

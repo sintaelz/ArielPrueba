@@ -1,0 +1,612 @@
+<html>
+
+<head>
+  <title>COVTOOL - Free test coverage analyzer for C++</title>
+</head>
+
+<body>
+
+  <A href="http://sourceforge.net">
+    <IMG src="http://sourceforge.net/sflogo.php?group_id=57150&amp;type=5" width="210" height="62" border="0" alt="SourceForge Logo">
+  </A>
+
+  <hr>
+
+  <table cols=2 width=100%>
+  <tr>
+      <td>
+	<h1>COVTOOL - Free test coverage analyzer for C++<h1>
+      </td>
+      <td align=right>
+	<table bgcolor=#e0e0e0 border><tr><td>
+	<center>
+	  LINKS<br><hr><br>
+	  <a href="#Installation"> Installation instructions</a>
+	  <br>
+	  <a href="http://sourceforge.net/projects/covtool">
+	    development home page
+	  </a>
+	  <br>
+	  <a href="https://lists.sourceforge.net/lists/listinfo/covtool-users">
+	    Mailing list page
+	  </a>
+	  <br>
+	  <a href="#Overview">Overview of usage</a>
+	  <br>
+	  <a href="#Caveats">Caveats</a>
+	  <br>
+	  <a href="#Intrumenting">Instrumenting</a>
+	  <br>
+	  <a href="#Annotating">Code Annotations and Statistics</a>
+	
+	</center>
+	</td></tr></table>
+      </td>
+  </tr>
+  </table>
+
+  <hr>
+
+      <h2>Introduction</h2>
+
+      COVTOOL is an open source test coverage analyzer for
+      C++ programs.  It lets you dynamically instrument your
+      source code as you compile.  An instrumented program
+      keeps track of the lines of code that were executed during
+      its run and produces a log of the same upon program
+      termination.  Multiple program runs will produce multiple
+      logs.
+
+      <p>
+      You can then use the many log files generated during
+      a suite of tests to analyze test coverage percentages.  Most
+      importantly, you can use the coverage information to annotate
+      your source.  Thus you can find which lines in which source
+      files did not get executed during your entire suite of tests.
+      Code that has been tested may still be buggy, but you should
+      have almost no confidence in code that is <b>never</b> tested.
+
+      <p>
+      Test coverage information is not specific to a
+      given executable.  You can annotate your program(s) and
+      performance analysis based on many runs of many programs.
+
+      <p>
+      With this information in hand, you can add additional tests to
+      ensure that all your lines of code are actually tested.  Presumably
+      the additional tests will check the accuracy of your program's
+      behavior, because without this, the test coverage numbers are
+      meaningless.
+
+      <p>
+      See <a href=theory_of_operation.html>theory of operations</a> for
+      a description of how the instrumentation process works.
+
+
+      <h2>Annotated source code example</h2>
+
+      Once you have run a suite of tests with an instrumented executable,
+      you can annotate sourcefiles.  The annotation program produces an
+      output like the following:
+
+      <a name="annotation_example">
+      <p>
+      <blockquote>
+	<table cols=2>
+	<tr><td width=10>&nbsp; </td><td>#include &lt;stdio.h&gt;</td></tr>
+	<tr><td>&nbsp; </td><td>&nbsp;</td></tr>
+	<tr><td>&nbsp; </td><td>void function(int count)</td></tr>
+	<tr><td>  +    </td><td>{</td></tr>
+	<tr><td>  +    </td><td>&nbsp;&nbsp;if(count < 10)</td></tr>
+	<tr><td>  -    </td><td>&nbsp;&nbsp;&nbsp;&nbsp;printf("too low\n");</td></tr>
+	<tr><td>&nbsp; </td><td>&nbsp;&nbsp;else</td></tr>
+	<tr><td>  +    </td><td>&nbsp;&nbsp;&nbsp;&nbsp;printf("ok!\n");</td></tr>
+	<tr><td>&nbsp; </td><td>}</td></tr>
+	</table>
+      </blockquote>
+      </a>
+
+      <p>
+      The annotator places a '+' in front of the lines that were both
+      instrumented and executed.  The lines that were instrumented but
+      not executed have a '-' in the front.  Lines that have a blank in
+      front of them do not contain executable statements.  The open
+      '{' for each function is treated as a statement, but the '}' for
+      the function is not.
+
+      <p>
+      In the above example, you can see that the count was never less than
+      10 in all the runs of the function.  That means <u>you need to add a
+      test that uses a count which is less than 10</u> before you ship your
+      product.
+
+      <p>
+      For a much more detailed example, see <a href="coverage_html/index.html">
+      this example</a>
+
+      <a name="statistics">
+      <h2>Summary data</h2>
+      </a>
+
+      <p>
+      In addition to finding out which lines were not executed,
+      the coverage log files (named *.covexp) can tell you the total
+      number of (instrumented) lines of code linked into your program,
+      as well as the total number that were executed.  It can provide
+      this information for directories, files, and your code base
+      as a whole.
+
+      <p>
+      Individual log files (*.covexp) contain information about individual runs.
+      When you compile multiple .covexp files into a single 'merged.db'
+      you can find out the total number of lines in your program that
+      were instrumented and executed.
+
+      <p>
+      You can merge the 'merged.db' files from many directories into a
+      single master copy.  In this way you can partition the data in any
+      way that makes sense to you.
+
+      <p>
+      The coverage logs are stored in ascii and are easily parsed with
+      a perl script to produce any output format you like.  See the
+      next section.
+
+      <h2>Coverage log and merged database format</h2>
+
+      <p>
+      Each individual coverage log file (*.covexp) and the merged database
+      file share the same format.  While an attempt is made to present the
+      information as attractively as possible, the log files should be
+      viewed as a stream of 'statements' each beginning with a uniquely
+      identifying token:
+
+      <blockquote>
+	<table>
+	<tr><td>file:</td>   <td>begins a description of a file</td>
+	<tr><td>el:</td>     <td>executed lines in a file</td>
+	<tr><td>il:</td>     <td>instrumented lines in a file</td>
+	<tr><td valign=top>dir:</td>
+	     <td>instrumented, executed, and percented covered in a directory
+		 and its daughter directories.
+	     </td>
+	<tr><td>totals:</td> <td>total instrumented and executed line info</td>
+	</table>
+      </blockquote>
+
+      <h3>file statements</h3>
+
+      <p>
+      A file statement begins with a file: tag and its associated fields.
+      It is then followed by one il: clause and at most one el: clause with
+      their associated fields.  The log file is a collection of file:
+      statements ending in a totals: statement.  Here is an example:
+
+      <blockquote>
+
+	file: /home/dir/file.c  6 3 50 <br>
+	  &nbsp;&nbsp;el: 1 2 6        <br>
+	  &nbsp;&nbsp;il: 1 2 3 4 5 6  <br>
+	totals: 6 3 50
+
+      </blockquote>
+
+      <p>
+      In this example, only one file was instrumented, "/home/dir/file.c".
+      That file has 6 instrumented lines.  Only 3 were executed, and thus
+      the test coverage percentage is 50%.  The executed lines were 1, 2,
+      and 6.  The instrumented lines were 1, 2, 3, 4, 5, and 6.  Since
+      only one file had instrumentation, the totals for all the coverage
+      runs was identical to that file's individual statistics.
+
+      <p>
+      Note that in coverage log files, the full pathname of the instrumented
+      files is kept.  This is useful because can run the various tools
+      from an directory and get identical text appearing in the logs.  Thus
+      when you merge logs made in different directories, you will get
+      answers you expect.
+
+      <a name=Caveats>
+      <h2>Caveats</h2>
+      </a>
+
+      <p>
+      Like any program, COVTOOL might have bugs that prevent you from
+      using it.  Let me apologize in advance for any bugs you encounter.
+      Please report them through the sourceforge problem reporting mechanism.
+      If your code won't compile after you start using the instrumentor,
+      please submit a .i file with a macro expanded version of the offending
+      .c file.  I can't help without this.
+
+      <p>
+      At this time, threads are not supported.
+
+      <p>
+      COVTOOL modifies your source code by injecting lots of calls to functions
+      found in covtoolhelper.o <b><i>AS YOU COMPILE!</i></b>.  These function calls slow down the
+      execution of your program -- maybe a lot.  A good guess is about
+      O(ln(N)) where N is the number of lines in the file where the source code
+      is found.
+
+
+      <p>
+      COVTOOL does not, at this time anyway, record execution statistics
+      during static initialization and destruction.  Execution order can
+      greatly confuse the issue of writing the runtime data collector.
+
+      <p>
+      You must also instrument the program at compile time or you won't
+      get any instrumented or executed line information (il: or el:).
+
+      <p>
+      The cov++ instrumentation wrapper script uses the file name extension,
+      .c++, for its own private use.  It assumes that you are using .c as the
+      file name extension of your C++ source files.  You can override
+      these two file name extensions with others of your own choosing -- but
+      your compiler has to accept both as valid C++ code.  For example, use
+      the -EXT option like this:
+      <blockquote>
+	cov++ -EXT .cpp .c++ ....
+      </blocKquote>
+
+      <p>
+      If you wish to use a different compiler or a linker, use the -CMD
+      option as follows:
+      <blockquote>
+	The "-CMD A B" option uses A as the compiler, and B as the linker
+      </blockquote>
+      For example:
+      <blockquote>
+	-CMD 'cl /TP' cl
+      </blockquote>
+
+      <p>Also, you can
+      override the compiler used by cov++ as well.  It is a script, please
+      review the documentation therein.
+
+      <p>
+      The true instrumentor program, covtool.exe, makes no assumptions about
+      file naming conventions because it processes stdin to stdout.  Few
+      of the examples in the source code distribution actually use cov++.
+      Check out any of the makefiles with a tests:: target in them to see
+      how to use covtool.exe directly.
+
+      <p>
+      The g++ -pedantic option causes an outrageous number of warnings when
+      you compile with cov++.  This is due to a bug in -pedantic.  The
+      g++ -E option produces code that g++ -pedantic doesn't like.  Feel
+      free to complaint to the GNU folks.
+
+      <a name="Overview">
+      <h2>Using the tools</h2>
+      </a>
+
+      <p>
+      Here are the major steps in using COVTOOL:
+
+      <ul>
+
+      <li>  develop the source code for your program without using COVTOOL
+
+      <li>  develop tests that you think cover the code well (make sure you
+	    check for correct program outputs).
+
+      <li>  run the tests and make sure they all give good answers.
+
+      <li>  recompile your program using the COVTOOL instrumentor (covtool.exe
+	    or more easily cov++).  You must also <b>link</b> your program
+	    using cov++ or if you choose to link manually, you should
+	    include covtoolhelper.o as <u>the last</u> object module on the
+	    link command line before the C++ runtime libraries -- at least
+	    on Linux.  Other platforms might require it be the first object
+	    not the last.
+
+      <li>  rerun the tests (if necessary fix bugs that instrumentation has
+	    brought to light.  Missing return statements and the use of
+	    pointers after they have been deleted are bugs that might finally
+	    show up when you instrument).
+	
+      <li>  merge the various coverage log files (*.covexp) into a merged.db
+	    file
+	
+      <li>  find the files with low coverage percentages and add additional
+	    tests to bring those percentages up.  You can use the annotation
+	    tool (covannotate.exe) to see which lines aren't getting tested.
+	    (Actually, using the html generating script, gen_html, is probably
+	    the easiest way to get annotated sources.  It reads your
+	    MERGED coverage database and produces all the html needed to view
+	    your coverage situation).
+	
+      <li>  repeat the above until you are satisfied with your coverage
+	    situation.
+
+      </ul>
+
+      <a name="Intrumenting">
+      <h3>Instrumenting your program</h3>
+      </a>
+
+      <p>
+      The easiest way to instrument a program is to change the compilation
+      directive from 'g++' to 'cov++'.  'cov++' is a wrapper around both
+      g++ and covtool.exe.  Its goal is to encapsulate the ugly steps that
+      would othewise have to be taken manually.  'cov++' also adds a #define
+      for COVTOOL_INST -- in case you want to do different things when
+      instrumenting -- like turning of threads.
+
+      <p>
+      If you have a makefile, and you defined your suffix rules like
+      this:
+
+      <blockquote>
+
+	.SUFFIXES: .c .o                                <br>
+	.c.o:                                           <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;g++ -c [options] $&lt;  <br>
+
+      </blockquote>
+
+      <p>
+      You would change it only slightly:
+
+      <blockquote>
+
+	.SUFFIXES: .c .o                                <br>
+	.c.o:                                           <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<b>cov++</b> -c [options] $&lt;<br>
+
+      </blockquote>
+
+      <p>
+      Actually, you can simply your life somewhat by making
+      the change permanent in your makefile, but controlled
+      with a flag.  Consider:
+
+      <blockquote>
+
+	.SUFFIXES: .c .o                                <br>
+							<br>
+	INSTRUMENTATION=0                               <br>
+							<br>
+	ifeq ($(INSTRUMENTATION),0)                     <br>
+	.c.o:                                           <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;g++ -c [options] $&lt;  <br>
+	else                                            <br>
+	.c.o:                                           <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;cov++ -c [options] $&lt;<br>
+	endif
+
+      </blockquote>
+
+      <p>
+      In this way, you can turn instrumentation on and off
+      just by changing the value of INSTRUMENTATION.
+
+      <p>
+      <b>Important note:</b>  You must also link your program
+      using cov++.  Or, if you choose to link without cov++,
+      you must include covtoolhelper.o as the last object
+      module before the C++ runtime libraries (at least on
+      Linux.  On other os's [if we ever port] that module
+      might have to go first, not last).
+
+      <p>
+      Also, you can choose to have cov++ include a debuggable
+      version of the runtime data collector.  Add the -CBG
+      option.  It will allow you to debug the source found
+      in the installation directory's file covtoolhelper.c.
+
+
+
+      <h3>Running an instrumented program</h3>
+
+      <p>
+      When running your instrumented program, you do not have
+      to do anything different than you normally do.  Each
+      invocation will produce a new *.covexp file.  When you
+      have run all your tests, you may want to merge your
+      log files into a single database file.  See the next
+      section.
+
+      <p>
+      Normally, the runtime data collector names the coverage
+      log files like this:
+
+      <blockquote>
+
+	 cov-run-[PID].covexp
+
+      </blockquote>
+
+      <p>
+      where [PID] is a number -- the process id of the program
+      run.
+
+      <p>
+      If you would like to group your *.covexp files, you can
+      set an environment variable, COVTOOL_PREFIX, before
+      running your program.  This will cause the collector to
+      replace the 'cov-run' part of the file name with something
+      of your choosing.  So, bash users can do either of the
+      following:
+
+      <blockquote>
+	export COVTOOL_PREFIX=group1<br>
+	run_your_program
+      </blockquote>
+	
+      <p>
+      Or you could do this:
+
+      <blockquote>
+	COVTOOL_PREFIX=group2  run_your_program
+      </blockquote>
+
+      <p>
+      From your makefile, you could do something like this (if you
+      are using gmake ;-)
+
+      <blockquote>
+
+	.EXPORT COVTOOL_PREFIX                            <br>
+							  <br>
+	COVTOOL_PREFIX=cov-run                            <br>
+							  <br>
+	test_group_name::  COVTOOL_PREFIX=this_group_name <br>
+							  <br>
+	test_group_name::  test1                          <br>
+	    ...                                           <br>
+	test_group_name::  test2                          <br>
+	    ...                                           <br>
+	test_group_name::  test3                          <br>
+							
+      </blockquote>
+
+      <p>
+      This lets the default prefix be cov-run, but for a specific
+      set of tests, the environment variable is overridden.  When
+      test1 - test3 runs, they will create log files of the form:
+
+      <blockquote>
+
+	this_group_name-[PID].covexp
+
+      </blockquote>
+
+      <h3>Merging coverage log files</h3>
+
+      <p>
+      The program, covmerge.exe, reads a list of coverage log files
+      and prints the merged output file to stdout.  Here is how you
+      would merge all the generated coverage log files in a directory
+      tree into a single merged database:
+
+      <blockquote>
+
+	covmerge.exe `find * -name '*.covexp' -print` &gt;merged.db
+
+      </blockquote>
+
+      <a name="Annotating">
+      <h3>Annotating source files</h3>
+      </a>
+
+      <p>
+      Annotating source files is best done using a merged database of
+      all the test runs -- but you can leave them un-merged if you
+      so choose.  Here is an example of how to annotate a file:
+
+      <blockquote>
+
+	covannotate.exe file.c *.covexp &gt;file.c.annotated
+
+      </blockquote>
+
+      <p>
+      For an example of an annotated source file, see
+      <a href="#annotation_example">the example in the introduction</a>
+
+      <p>
+      If you want the coverage statistics, you almost certainly need
+      a merged database.  See the previous section.
+
+      <p>
+      See <a href="#statistics">the section above</a> for a description
+      of the coverage information log/database files.  Here is how
+      to get the total coverage information:
+
+      <blockquote>
+
+	grep totals: merged.db
+
+      </blockquote>
+
+      <p>
+      This will produce a line that looks like this:
+
+      <blockquote>
+
+	totals:  [total_instrumented_lines]  [total_executed_lines] [percent_covered]
+
+      </blockquote>
+
+      <p>
+      for example:  "totals: 6 3 50"
+
+      <p>
+      To get the coverage statistics for a specific file, do this:
+
+
+      <blockquote>
+
+	grep /pathname/file.c merged.db
+
+      </blockquote>
+
+      <p>
+      and you should get something like this:
+
+      <blockquote>
+
+	file: /pathname/file.c [instrumented_lines] [executed_lines] [percent]
+
+      </blockquote>
+
+      <p>
+      for example:  "file: /home/lboggs/covtool/covtool.c 1228 1190 96"
+
+      <p>
+      Once you have merged all the coverage instrumenatation data into
+      a merged.db file, you can use the script, gen_html, to build web
+      pages showing all the annotationed source files and tabular descriptions
+      of the coverage statistics on a directory by directory basis.
+
+      <a name="Installation">
+      <h2>Installing COVTOOL</h2>
+      </a>
+
+      <p>
+      Downloadable version of COVTOOL can be found at
+      <a href="http://sourceforge.net/project/showfiles.php?group_id=57150">
+	the sourceforge COVTOOL project download site
+      </a>
+
+      <p>
+      Once you have downloaded the version you desire, use gunzip to extract
+      the tar file from the .gz file.  Then use tar xvf to extract the distribution
+      files from the tar ball.
+
+      <p>
+      Once downloaded and extracted, see the file README for more details.
+
+
+    <h2>The runtime data collector</h2>
+
+    <p>
+    The test coverage log files are created as your program runs by the
+    runtime data collector.  This is a collection of functions defined
+    in the file covtoolhelper.c.  As shipped, this program fragment
+    does nothing more than keep track of whether or not specific lines
+    in specific files are instrumented and executed.  It does not keep
+    track of how often they were executed -- although this would be a
+    simple change to the tools.
+
+    <p>
+    Further, the runtime data collector does not support threads -- so
+    if you need that feature you will have to put a thread lock around
+    the function CvT_record_line____().  Or rather _in_ that function.
+    Data collection is not turned on until after main completes running
+    so as to avoid static initialization problems.
+
+    <p>
+    The runtime data collector could also be modified, quite easily to
+    check for the validity of program state.  In absence of purify,
+    you could add heap validity testing to the data collection associated
+    with every line in your program -- of course the run time would
+    become almost infinite if you did.
+
+
+
+
+</body>
+</html>
