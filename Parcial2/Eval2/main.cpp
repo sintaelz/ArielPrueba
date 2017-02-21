@@ -5,9 +5,9 @@
 int main()
 {
     GameFactory* gf = new GameFactory();
-    VideoJuego* v1 = gf->createGame("Estrategia", VideoJuego::LUCHA, "myGame", 1);
+    VideoJuego* v1 = gf->createGame("Aventura", VideoJuego::LUCHA, "myGame", 1);
     Estrategia v2 = *(Estrategia*)v1;
-    VideoJuego* v3 = gf->createGame("Estrategia", VideoJuego::LUCHA, "thirdGame", 123);
+    VideoJuego* v3 = gf->createGame("Aventura", VideoJuego::LUCHA, "thirdGame", 123);
 
     Almacen<VideoJuego> a;
     a.add(v1);

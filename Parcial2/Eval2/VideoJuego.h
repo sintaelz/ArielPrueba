@@ -1,6 +1,7 @@
 #pragma once
 
 #include<string>
+#include<stdlib.h>
 #include"ClonTemplate.h"
 #include"mcheck.h"
 
@@ -56,8 +57,9 @@ public:
     }
     ~Estrategia()
     {
-      delete number_of_players;
-      number_of_players = NULL;
+      if(mprobe(number_of_players) != MCHECK_FREE)
+        {delete number_of_players;
+        number_of_players = NULL;}
     }
 protected:
     int* number_of_players;
