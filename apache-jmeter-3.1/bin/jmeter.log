@@ -1,54 +1,1302 @@
-2017/02/20 13:02:01 INFO  - jmeter.util.JMeterUtils: Setting Locale to en_US 
-2017/02/20 13:02:01 INFO  - jmeter.JMeter: Loading user properties from: /home/seung/ArielPruebas/apache-jmeter-3.1/bin/user.properties 
-2017/02/20 13:02:01 INFO  - jmeter.JMeter: Loading system properties from: /home/seung/ArielPruebas/apache-jmeter-3.1/bin/system.properties 
-2017/02/20 13:02:01 INFO  - jmeter.JMeter: Copyright (c) 1998-2016 The Apache Software Foundation 
-2017/02/20 13:02:01 INFO  - jmeter.JMeter: Version 3.1 r1770033 
-2017/02/20 13:02:01 INFO  - jmeter.JMeter: java.version=1.8.0_121 
-2017/02/20 13:02:01 INFO  - jmeter.JMeter: java.vm.name=OpenJDK 64-Bit Server VM 
-2017/02/20 13:02:01 INFO  - jmeter.JMeter: os.name=Linux 
-2017/02/20 13:02:01 INFO  - jmeter.JMeter: os.arch=amd64 
-2017/02/20 13:02:01 INFO  - jmeter.JMeter: os.version=4.4.0-62-lowlatency 
-2017/02/20 13:02:01 INFO  - jmeter.JMeter: file.encoding=UTF-8 
-2017/02/20 13:02:01 INFO  - jmeter.JMeter: Max memory     =514850816 
-2017/02/20 13:02:01 INFO  - jmeter.JMeter: Available Processors =8 
-2017/02/20 13:02:01 INFO  - jmeter.JMeter: Default Locale=English (United States) 
-2017/02/20 13:02:01 INFO  - jmeter.JMeter: JMeter  Locale=English (United States) 
-2017/02/20 13:02:01 INFO  - jmeter.JMeter: JMeterHome=/home/seung/ArielPruebas/apache-jmeter-3.1 
-2017/02/20 13:02:01 INFO  - jmeter.JMeter: user.dir  =/home/seung/ArielPruebas/apache-jmeter-3.1/bin 
-2017/02/20 13:02:01 INFO  - jmeter.JMeter: PWD       =/home/seung/ArielPruebas/apache-jmeter-3.1/bin 
-2017/02/20 13:02:01 INFO  - jmeter.JMeter: IP: 127.0.1.1 Name: seung-G750JX FullName: seung-G750JX 
-2017/02/20 13:02:02 INFO  - jmeter.gui.action.LookAndFeelCommand: Using look and feel: javax.swing.plaf.metal.MetalLookAndFeel [Metal, CrossPlatform, System] 
-2017/02/20 13:02:02 INFO  - jmeter.JMeter: Loaded icon properties from org/apache/jmeter/images/icon.properties 
-2017/02/20 13:02:03 INFO  - jmeter.engine.util.CompoundVariable: Note: Function class names must contain the string: '.functions.' 
-2017/02/20 13:02:03 INFO  - jmeter.engine.util.CompoundVariable: Note: Function class names must not contain the string: '.gui.' 
-2017/02/20 13:02:05 INFO  - org.jmeterplugins.repository.PluginManager: Plugins Status: [jmeter-ftp=3.1, jmeter-http=3.1, jmeter-jdbc=3.1, jmeter-jms=3.1, jmeter-monitors=3.1, jmeter-core=3.1, jmeter-junit=3.1, jmeter-java=3.1, jmeter-ldap=3.1, jmeter-mail=3.1, jmeter-mongodb=3.1, jmeter-native=3.1, jpgc-plugins-manager=0.11, ssh-sampler=1.1.1-SNAPSHOT, jmeter-tcp=3.1, jmeter-components=3.1] 
-2017/02/20 13:02:05 INFO  - jmeter.gui.util.MenuFactory: Skipping org.apache.jmeter.assertions.BSFAssertion 
-2017/02/20 13:02:05 INFO  - jmeter.gui.util.MenuFactory: Skipping org.apache.jmeter.extractor.BSFPostProcessor 
-2017/02/20 13:02:06 INFO  - jmeter.gui.util.MenuFactory: Skipping org.apache.jmeter.modifiers.BSFPreProcessor 
-2017/02/20 13:02:06 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser 
-2017/02/20 13:02:06 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser 
-2017/02/20 13:02:06 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser 
-2017/02/20 13:02:06 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser 
-2017/02/20 13:02:06 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser 
-2017/02/20 13:02:06 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser 
-2017/02/20 13:02:06 INFO  - jorphan.exec.KeyToolUtils: keytool found at 'keytool' 
-2017/02/20 13:02:06 INFO  - jmeter.protocol.http.proxy.ProxyControl: HTTP(S) Test Script Recorder SSL Proxy will use keys that support embedded 3rd party resources in file /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
-2017/02/20 13:02:06 INFO  - jmeter.gui.util.MenuFactory: Skipping org.apache.jmeter.protocol.java.sampler.BSFSampler 
-2017/02/20 13:02:06 INFO  - jmeter.gui.util.MenuFactory: Skipping org.apache.jmeter.protocol.mongodb.config.MongoSourceElement 
-2017/02/20 13:02:06 INFO  - jmeter.gui.util.MenuFactory: Skipping org.apache.jmeter.protocol.mongodb.sampler.MongoScriptSampler 
-2017/02/20 13:02:06 INFO  - jmeter.gui.util.MenuFactory: Skipping org.apache.jmeter.timers.BSFTimer 
-2017/02/20 13:02:06 INFO  - jmeter.gui.util.MenuFactory: Skipping org.apache.jmeter.visualizers.BSFListener 
-2017/02/20 13:02:06 INFO  - jmeter.gui.util.MenuFactory: Skipping org.apache.jmeter.visualizers.MonitorHealthVisualizer 
-2017/02/20 13:02:06 INFO  - jmeter.samplers.SampleResult: Note: Sample TimeStamps are START times 
-2017/02/20 13:02:06 INFO  - jmeter.samplers.SampleResult: sampleresult.default.encoding is set to ISO-8859-1 
-2017/02/20 13:02:06 INFO  - jmeter.samplers.SampleResult: sampleresult.useNanoTime=true 
-2017/02/20 13:02:06 INFO  - jmeter.samplers.SampleResult: sampleresult.nanoThreadSleep=5000 
-2017/02/20 13:02:12 INFO  - jmeter.services.FileServer: Default base='/home/seung/ArielPruebas/apache-jmeter-3.1/bin' 
-2017/02/20 13:02:12 INFO  - jmeter.gui.action.Load: Loading file: /home/seung/ArielPruebas/apache-jmeter-3.1/bin/JDBC CLASE.jmx 
-2017/02/20 13:02:12 INFO  - jmeter.services.FileServer: Set new base='/home/seung/ArielPruebas/apache-jmeter-3.1/bin' 
-2017/02/20 13:02:12 INFO  - jmeter.save.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2 
-2017/02/20 13:02:12 INFO  - jmeter.save.SaveService: Using SaveService properties file encoding UTF-8 
-2017/02/20 13:02:12 INFO  - jmeter.save.SaveService: Using SaveService properties version 3.1 
-2017/02/20 13:02:12 INFO  - jmeter.save.SaveService: All converter versions present and correct 
-2017/02/20 13:02:12 INFO  - jmeter.save.SaveService: Loading file: /home/seung/ArielPruebas/apache-jmeter-3.1/bin/JDBC CLASE.jmx 
-2017/02/20 13:02:12 INFO  - jmeter.services.FileServer: Set new base='/home/seung/ArielPruebas/apache-jmeter-3.1/bin' 
+2017/02/21 09:16:08 INFO  - jmeter.util.JMeterUtils: Setting Locale to en_US 
+2017/02/21 09:16:08 INFO  - jmeter.JMeter: Loading user properties from: /home/seung/ArielPruebas/apache-jmeter-3.1/bin/user.properties 
+2017/02/21 09:16:08 INFO  - jmeter.JMeter: Loading system properties from: /home/seung/ArielPruebas/apache-jmeter-3.1/bin/system.properties 
+2017/02/21 09:16:08 INFO  - jmeter.JMeter: Copyright (c) 1998-2016 The Apache Software Foundation 
+2017/02/21 09:16:08 INFO  - jmeter.JMeter: Version 3.1 r1770033 
+2017/02/21 09:16:08 INFO  - jmeter.JMeter: java.version=1.8.0_121 
+2017/02/21 09:16:08 INFO  - jmeter.JMeter: java.vm.name=OpenJDK 64-Bit Server VM 
+2017/02/21 09:16:08 INFO  - jmeter.JMeter: os.name=Linux 
+2017/02/21 09:16:08 INFO  - jmeter.JMeter: os.arch=amd64 
+2017/02/21 09:16:08 INFO  - jmeter.JMeter: os.version=4.4.0-62-lowlatency 
+2017/02/21 09:16:08 INFO  - jmeter.JMeter: file.encoding=UTF-8 
+2017/02/21 09:16:08 INFO  - jmeter.JMeter: Max memory     =514850816 
+2017/02/21 09:16:08 INFO  - jmeter.JMeter: Available Processors =8 
+2017/02/21 09:16:08 INFO  - jmeter.JMeter: Default Locale=English (United States) 
+2017/02/21 09:16:08 INFO  - jmeter.JMeter: JMeter  Locale=English (United States) 
+2017/02/21 09:16:08 INFO  - jmeter.JMeter: JMeterHome=/home/seung/ArielPruebas/apache-jmeter-3.1 
+2017/02/21 09:16:08 INFO  - jmeter.JMeter: user.dir  =/home/seung/ArielPruebas/apache-jmeter-3.1/bin 
+2017/02/21 09:16:08 INFO  - jmeter.JMeter: PWD       =/home/seung/ArielPruebas/apache-jmeter-3.1/bin 
+2017/02/21 09:16:08 INFO  - jmeter.JMeter: IP: 127.0.1.1 Name: seung-G750JX FullName: seung-G750JX 
+2017/02/21 09:16:08 INFO  - jmeter.gui.action.LookAndFeelCommand: Using look and feel: javax.swing.plaf.metal.MetalLookAndFeel [Metal, CrossPlatform, System] 
+2017/02/21 09:16:08 INFO  - jmeter.JMeter: Loaded icon properties from org/apache/jmeter/images/icon.properties 
+2017/02/21 09:16:08 INFO  - jmeter.engine.util.CompoundVariable: Note: Function class names must contain the string: '.functions.' 
+2017/02/21 09:16:08 INFO  - jmeter.engine.util.CompoundVariable: Note: Function class names must not contain the string: '.gui.' 
+2017/02/21 09:16:10 INFO  - org.jmeterplugins.repository.PluginManager: Plugins Status: [jmeter-ftp=3.1, jmeter-http=3.1, jmeter-jdbc=3.1, jmeter-jms=3.1, jmeter-monitors=3.1, jmeter-core=3.1, jmeter-junit=3.1, jmeter-java=3.1, jmeter-ldap=3.1, jmeter-mail=3.1, jmeter-mongodb=3.1, jmeter-native=3.1, jpgc-plugins-manager=0.11, ssh-sampler=1.1.1-SNAPSHOT, jmeter-tcp=3.1, jmeter-components=3.1] 
+2017/02/21 09:16:10 INFO  - jmeter.gui.util.MenuFactory: Skipping org.apache.jmeter.assertions.BSFAssertion 
+2017/02/21 09:16:11 INFO  - jmeter.gui.util.MenuFactory: Skipping org.apache.jmeter.extractor.BSFPostProcessor 
+2017/02/21 09:16:11 INFO  - jmeter.gui.util.MenuFactory: Skipping org.apache.jmeter.modifiers.BSFPreProcessor 
+2017/02/21 09:16:11 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser 
+2017/02/21 09:16:11 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser 
+2017/02/21 09:16:11 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser 
+2017/02/21 09:16:11 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser 
+2017/02/21 09:16:11 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser 
+2017/02/21 09:16:11 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser 
+2017/02/21 09:16:11 INFO  - jorphan.exec.KeyToolUtils: keytool found at 'keytool' 
+2017/02/21 09:16:11 INFO  - jmeter.protocol.http.proxy.ProxyControl: HTTP(S) Test Script Recorder SSL Proxy will use keys that support embedded 3rd party resources in file /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:16:11 INFO  - jmeter.gui.util.MenuFactory: Skipping org.apache.jmeter.protocol.java.sampler.BSFSampler 
+2017/02/21 09:16:11 INFO  - jmeter.gui.util.MenuFactory: Skipping org.apache.jmeter.protocol.mongodb.config.MongoSourceElement 
+2017/02/21 09:16:11 INFO  - jmeter.gui.util.MenuFactory: Skipping org.apache.jmeter.protocol.mongodb.sampler.MongoScriptSampler 
+2017/02/21 09:16:11 INFO  - jmeter.gui.util.MenuFactory: Skipping org.apache.jmeter.timers.BSFTimer 
+2017/02/21 09:16:11 INFO  - jmeter.gui.util.MenuFactory: Skipping org.apache.jmeter.visualizers.BSFListener 
+2017/02/21 09:16:11 INFO  - jmeter.gui.util.MenuFactory: Skipping org.apache.jmeter.visualizers.MonitorHealthVisualizer 
+2017/02/21 09:16:11 INFO  - jmeter.samplers.SampleResult: Note: Sample TimeStamps are START times 
+2017/02/21 09:16:11 INFO  - jmeter.samplers.SampleResult: sampleresult.default.encoding is set to ISO-8859-1 
+2017/02/21 09:16:11 INFO  - jmeter.samplers.SampleResult: sampleresult.useNanoTime=true 
+2017/02/21 09:16:11 INFO  - jmeter.samplers.SampleResult: sampleresult.nanoThreadSleep=5000 
+2017/02/21 09:20:49 INFO  - jmeter.protocol.http.proxy.ProxyControl: Valid alias found for :root_ca: 
+2017/02/21 09:20:49 INFO  - jmeter.protocol.http.proxy.ProxyControl: Valid alias found for :intermediate_ca: 
+2017/02/21 09:20:49 INFO  - jmeter.protocol.http.proxy.Daemon: Creating Daemon Socket on port: 8080 
+2017/02/21 09:20:49 INFO  - jmeter.protocol.http.proxy.Daemon: Test Script Recorder up and running! 
+2017/02/21 09:20:51 INFO  - jmeter.protocol.http.proxy.Proxy: Proxy will remove the headers: If-Modified-Since,If-None-Match,Host 
+2017/02/21 09:20:51 INFO  - jmeter.protocol.http.sampler.HTTPHCAbstractImpl: Local host = seung-G750JX 
+2017/02/21 09:20:51 INFO  - jmeter.protocol.http.sampler.HTTPHC4Impl: HTTP request retry count = 0 
+2017/02/21 09:20:52 INFO  - jmeter.protocol.http.proxy.ProxyControl: [46404] Creating entry amazon.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:20:52 INFO  - jmeter.samplers.SampleEvent: List of sample_variables: [] 
+2017/02/21 09:20:53 INFO  - jmeter.protocol.http.proxy.Proxy: [46404] KeyStore for SSL loaded OK and put host 'amazon.com' in map with key (amazon.com) 
+2017/02/21 09:20:53 INFO  - jmeter.protocol.http.sampler.LazySchemeSocketFactory: Setting up HTTPS TrustAll Socket Factory 
+2017/02/21 09:20:53 INFO  - jmeter.util.JsseSSLManager: Using default SSL protocol: TLS 
+2017/02/21 09:20:53 INFO  - jmeter.util.JsseSSLManager: SSL session context: per-thread 
+2017/02/21 09:20:53 INFO  - jmeter.util.SSLManager: JmeterKeyStore Location:  type JKS 
+2017/02/21 09:20:53 INFO  - jmeter.util.SSLManager: KeyStore created OK 
+2017/02/21 09:20:53 WARN  - jmeter.util.SSLManager: Keystore file not found, loading empty keystore 
+2017/02/21 09:20:53 INFO  - jmeter.protocol.http.proxy.ProxyControl: [46432] Creating entry www.amazon.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:20:54 INFO  - jmeter.protocol.http.proxy.Proxy: [46432] KeyStore for SSL loaded OK and put host 'www.amazon.com' in map with key (www.amazon.com) 
+2017/02/21 09:20:55 INFO  - jmeter.protocol.http.proxy.ProxyControl: [46484] Creating entry images-na.ssl-images-amazon.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:20:56 INFO  - jmeter.protocol.http.proxy.Proxy: [46484] KeyStore for SSL loaded OK and put host 'images-na.ssl-images-amazon.com' in map with key (images-na.ssl-images-amazon.com) 
+2017/02/21 09:20:56 WARN  - jmeter.protocol.http.proxy.HttpRequestHdr: Url 'https://images-na.ssl-images-amazon.com:443/images/I/61FUyhMqGML._RC|11Fd9tJOdtL.css,21NIi2PXUkL.css,31Q3id-QR0L.css,310HgKKWalL.css_.css?AUIClients/AmazonUI' contains unsafe characters, will escape it, message:Illegal character in path at index 68: https://images-na.ssl-images-amazon.com:443/images/I/61FUyhMqGML._RC|11Fd9tJOdtL.css,21NIi2PXUkL.css,31Q3id-QR0L.css,310HgKKWalL.css_.css?AUIClients/AmazonUI 
+2017/02/21 09:20:56 WARN  - jmeter.protocol.http.proxy.HttpRequestHdr: Url 'https://images-na.ssl-images-amazon.com:443/images/I/71gF74aeGuL._RC|01A7OPUhDKL.css,31+C8rQtOEL.css,21E1MhZOpTL.css,31d4ZsgKOkL.css,01EnpDxOA4L.css,31UlxNhlUML.css_.css?AUIClients/NavDesktopMetaAsset' contains unsafe characters, will escape it, message:Illegal character in path at index 68: https://images-na.ssl-images-amazon.com:443/images/I/71gF74aeGuL._RC|01A7OPUhDKL.css,31+C8rQtOEL.css,21E1MhZOpTL.css,31d4ZsgKOkL.css,01EnpDxOA4L.css,31UlxNhlUML.css_.css?AUIClients/NavDesktopMetaAsset 
+2017/02/21 09:20:57 INFO  - jmeter.protocol.http.proxy.ProxyControl: [46492] Creating entry fls-na.amazon.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:20:58 WARN  - jmeter.protocol.http.proxy.HttpRequestHdr: Url 'https://images-na.ssl-images-amazon.com:443/images/I/71gF74aeGuL._RC|01A7OPUhDKL.css,31+C8rQtOEL.css,21E1MhZOpTL.css,31d4ZsgKOkL.css,01EnpDxOA4L.css,31UlxNhlUML.css_.css?AUIClients/NavDesktopMetaAsset' contains unsafe characters, will escape it, message:Illegal character in path at index 68: https://images-na.ssl-images-amazon.com:443/images/I/71gF74aeGuL._RC|01A7OPUhDKL.css,31+C8rQtOEL.css,21E1MhZOpTL.css,31d4ZsgKOkL.css,01EnpDxOA4L.css,31UlxNhlUML.css_.css?AUIClients/NavDesktopMetaAsset 
+2017/02/21 09:20:59 INFO  - jmeter.protocol.http.proxy.Proxy: [46492] KeyStore for SSL loaded OK and put host 'fls-na.amazon.com' in map with key (fls-na.amazon.com) 
+2017/02/21 09:20:59 INFO  - jmeter.protocol.http.proxy.ProxyControl: [46656] Creating entry m.media-amazon.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:20:59 WARN  - jmeter.protocol.http.proxy.HttpRequestHdr: Url 'https://images-na.ssl-images-amazon.com:443/images/I/01fmyPmYavL._RC|71ZZulurWxL.js,61W7aoIkAyL.js,01A18a0oAWL.js,41Y3FLuA56L.js,010XVa0zfKL.js,01wBjiz9OvL.js,21QhSEq5BwL.js,3158lSGQWpL.js,51RgqN98m2L.js_.js?AUIClients/NavDesktopMetaAsset' contains unsafe characters, will escape it, message:Illegal character in path at index 68: https://images-na.ssl-images-amazon.com:443/images/I/01fmyPmYavL._RC|71ZZulurWxL.js,61W7aoIkAyL.js,01A18a0oAWL.js,41Y3FLuA56L.js,010XVa0zfKL.js,01wBjiz9OvL.js,21QhSEq5BwL.js,3158lSGQWpL.js,51RgqN98m2L.js_.js?AUIClients/NavDesktopMetaAsset 
+2017/02/21 09:20:59 WARN  - jmeter.protocol.http.proxy.HttpRequestHdr: Url 'https://images-na.ssl-images-amazon.com:443/images/I/01KRcg6-T5L._RC|118juELdZRL.js,61S7YbmVsoL.js,31pYyxAZJRL.js,31Qll8kfk9L.js,01N6xzIJxbL.js,516fQ5+zVmL.js,01rpauTep4L.js,31JzIBuTmgL.js,01yqNhFLqeL.js,61uDiYnK9wL.js,018X-PE063L.js,01BBu+b9t0L.js,01eO7OoSd6L.js_.js?AUIClients/AmazonUI' contains unsafe characters, will escape it, message:Illegal character in path at index 68: https://images-na.ssl-images-amazon.com:443/images/I/01KRcg6-T5L._RC|118juELdZRL.js,61S7YbmVsoL.js,31pYyxAZJRL.js,31Qll8kfk9L.js,01N6xzIJxbL.js,516fQ5+zVmL.js,01rpauTep4L.js,31JzIBuTmgL.js,01yqNhFLqeL.js,61uDiYnK9wL.js,018X-PE063L.js,01BBu+b9t0L.js,01eO7OoSd6L.js_.js?AUIClients/AmazonUI 
+2017/02/21 09:21:00 WARN  - jmeter.protocol.http.proxy.HttpRequestHdr: Url 'https://images-na.ssl-images-amazon.com:443/images/I/01KRcg6-T5L._RC|118juELdZRL.js,61S7YbmVsoL.js,31pYyxAZJRL.js,31Qll8kfk9L.js,01N6xzIJxbL.js,516fQ5+zVmL.js,01rpauTep4L.js,31JzIBuTmgL.js,01yqNhFLqeL.js,61uDiYnK9wL.js,018X-PE063L.js,01BBu+b9t0L.js,01eO7OoSd6L.js_.js?AUIClients/AmazonUI' contains unsafe characters, will escape it, message:Illegal character in path at index 68: https://images-na.ssl-images-amazon.com:443/images/I/01KRcg6-T5L._RC|118juELdZRL.js,61S7YbmVsoL.js,31pYyxAZJRL.js,31Qll8kfk9L.js,01N6xzIJxbL.js,516fQ5+zVmL.js,01rpauTep4L.js,31JzIBuTmgL.js,01yqNhFLqeL.js,61uDiYnK9wL.js,018X-PE063L.js,01BBu+b9t0L.js,01eO7OoSd6L.js_.js?AUIClients/AmazonUI 
+2017/02/21 09:21:01 INFO  - jmeter.protocol.http.proxy.ProxyControl: [46732] Creating entry aax-us-east.amazon-adsystem.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:21:01 INFO  - jmeter.protocol.http.proxy.Proxy: [46656] KeyStore for SSL loaded OK and put host 'm.media-amazon.com' in map with key (m.media-amazon.com) 
+2017/02/21 09:21:02 INFO  - jmeter.protocol.http.proxy.Proxy: [46732] KeyStore for SSL loaded OK and put host 'aax-us-east.amazon-adsystem.com' in map with key (aax-us-east.amazon-adsystem.com) 
+2017/02/21 09:21:03 INFO  - jmeter.protocol.http.proxy.ProxyControl: [46914] Creating entry dq4ijymydgrfx.cloudfront.net in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:21:04 INFO  - jmeter.protocol.http.proxy.Proxy: [46914] KeyStore for SSL loaded OK and put host 'dq4ijymydgrfx.cloudfront.net' in map with key (dq4ijymydgrfx.cloudfront.net) 
+2017/02/21 09:21:05 WARN  - jmeter.protocol.http.proxy.HttpRequestHdr: Url 'https://www.amazon.com:443/gp/uedata?ld&v=0.626.86&id=DVCCKDM92CAW7PY2B8PB&sw=1920&sh=1080&vw=1905&vh=960&m=1&sc=DVCCKDM92CAW7PY2B8PB&ue=3&bb=3703&ns=3712&x3=3720&af=3720&cf=3815&x1=3816&x2=3816&ne=3816&be=3824&pc=10002&tc=-12074&na_=-12074&ul_=-1487690455542&_ul=-1487690455542&rd_=-1487690455542&_rd=-1487690455542&fe_=-1900&lk_=-1900&_lk=-1900&co_=-1900&_co=-1900&rq_=-778&rs_=-1898&_rs=-21&dl_=-12074&di_=-12059&de_=-12054&_de=-12054&_dc=10001&ld_=10001&_ld=-1487690455542&ntd=0&ty=1&rc=0&hob=1&hoe=3&ld=10004&t=1487690465546&ctb=1&rt=cf:13-0-7-6-1-0-0_af:13-0-7-6-1-0-1_ld:60-13-7-29-5-0-1&ec=1&ecf=0&csmtags=aui|aui:aui_build_date:3.17.1.6-2017-02-10|restiming|noewc|navbar|gwCFImgCache|portal-br|fls-na|iss-on-time&viz=visible:3&pty=Gateway&spty=desktop-unrec&pti=desktop-unrec&tid=DVCCKDM92CAW7PY2B8PB&aftb=1&ui=4' contains unsafe characters, will escape it, message:Illegal character in query at index 617: https://www.amazon.com:443/gp/uedata?ld&v=0.626.86&id=DVCCKDM92CAW7PY2B8PB&sw=1920&sh=1080&vw=1905&vh=960&m=1&sc=DVCCKDM92CAW7PY2B8PB&ue=3&bb=3703&ns=3712&x3=3720&af=3720&cf=3815&x1=3816&x2=3816&ne=3816&be=3824&pc=10002&tc=-12074&na_=-12074&ul_=-1487690455542&_ul=-1487690455542&rd_=-1487690455542&_rd=-1487690455542&fe_=-1900&lk_=-1900&_lk=-1900&co_=-1900&_co=-1900&rq_=-778&rs_=-1898&_rs=-21&dl_=-12074&di_=-12059&de_=-12054&_de=-12054&_dc=10001&ld_=10001&_ld=-1487690455542&ntd=0&ty=1&rc=0&hob=1&hoe=3&ld=10004&t=1487690465546&ctb=1&rt=cf:13-0-7-6-1-0-0_af:13-0-7-6-1-0-1_ld:60-13-7-29-5-0-1&ec=1&ecf=0&csmtags=aui|aui:aui_build_date:3.17.1.6-2017-02-10|restiming|noewc|navbar|gwCFImgCache|portal-br|fls-na|iss-on-time&viz=visible:3&pty=Gateway&spty=desktop-unrec&pti=desktop-unrec&tid=DVCCKDM92CAW7PY2B8PB&aftb=1&ui=4 
+2017/02/21 09:21:05 INFO  - jmeter.protocol.http.proxy.ProxyControl: [46996] Creating entry s.amazon-adsystem.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:21:06 ERROR - jmeter.protocol.http.proxy.Proxy:  java.net.SocketException: Broken pipe (Write failed)
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:111)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:431)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:417)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:876)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:847)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:123)
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:122)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeToClient(Proxy.java:492)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:247)
+
+2017/02/21 09:21:06 ERROR - jmeter.protocol.http.proxy.Proxy: [46980] Exception when processing sample java.net.SocketException: Broken pipe (Write failed)
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:111)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:431)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:417)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:876)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:847)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:123)
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:122)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeToClient(Proxy.java:492)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:247)
+
+2017/02/21 09:21:06 WARN  - jmeter.protocol.http.proxy.Proxy: [46980] Exception while writing error java.net.SocketException: Socket is closed
+	at sun.security.ssl.SSLSocketImpl.getOutputStream(SSLSocketImpl.java:2240)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeErrorToClient(Proxy.java:570)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:263)
+
+2017/02/21 09:21:07 INFO  - jmeter.protocol.http.proxy.Proxy: [46996] KeyStore for SSL loaded OK and put host 's.amazon-adsystem.com' in map with key (s.amazon-adsystem.com) 
+2017/02/21 09:21:10 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47160] Creating entry bh.contextweb.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:21:10 INFO  - jmeter.protocol.http.proxy.Proxy: [47194] KeyStore for SSL loaded OK and put host 'www.facebook.com' in map with key (www.facebook.com) 
+2017/02/21 09:21:11 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47204] Creating entry sync.ipredictive.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:21:11 INFO  - jmeter.protocol.http.proxy.Proxy: [47160] KeyStore for SSL loaded OK and put host 'bh.contextweb.com' in map with key (bh.contextweb.com) 
+2017/02/21 09:21:13 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47202] Creating entry image5.pubmatic.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:21:13 INFO  - jmeter.protocol.http.proxy.Proxy: [47204] KeyStore for SSL loaded OK and put host 'sync.ipredictive.com' in map with key (sync.ipredictive.com) 
+2017/02/21 09:21:13 WARN  - jmeter.protocol.http.proxy.HttpRequestHdr: Url 'https://sync.ipredictive.com:443/d/sync/cookie/generic?https://s.amazon-adsystem.com/ecm3?id=${ADELPHIC_CUID}&ex=adelphic' contains unsafe characters, will escape it, message:Illegal character in query at index 94: https://sync.ipredictive.com:443/d/sync/cookie/generic?https://s.amazon-adsystem.com/ecm3?id=${ADELPHIC_CUID}&ex=adelphic 
+2017/02/21 09:21:13 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47200] Creating entry ads.yahoo.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:21:13 INFO  - jmeter.protocol.http.proxy.Proxy: [47202] KeyStore for SSL loaded OK and put host 'image5.pubmatic.com' in map with key (image5.pubmatic.com) 
+2017/02/21 09:21:15 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47198] Creating entry analytics.twitter.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:21:15 INFO  - jmeter.protocol.http.proxy.Proxy: [47200] KeyStore for SSL loaded OK and put host 'ads.yahoo.com' in map with key (ads.yahoo.com) 
+2017/02/21 09:21:16 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47196] Creating entry sync.adaptv.advertising.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:21:16 INFO  - jmeter.protocol.http.proxy.Proxy: [47198] KeyStore for SSL loaded OK and put host 'analytics.twitter.com' in map with key (analytics.twitter.com) 
+2017/02/21 09:21:17 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47192] Creating entry geo-um.btrll.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:21:17 INFO  - jmeter.protocol.http.proxy.Proxy: [47196] KeyStore for SSL loaded OK and put host 'sync.adaptv.advertising.com' in map with key (sync.adaptv.advertising.com) 
+2017/02/21 09:21:18 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47190] Creating entry token.rubiconproject.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:21:18 INFO  - jmeter.protocol.http.proxy.Proxy: [47192] KeyStore for SSL loaded OK and put host 'geo-um.btrll.com' in map with key (geo-um.btrll.com) 
+2017/02/21 09:21:19 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47184] Creating entry ib.adnxs.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:21:19 INFO  - jmeter.protocol.http.proxy.Proxy: [47190] KeyStore for SSL loaded OK and put host 'token.rubiconproject.com' in map with key (token.rubiconproject.com) 
+2017/02/21 09:21:20 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47182] Creating entry ums.adtechus.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:21:20 INFO  - jmeter.protocol.http.proxy.Proxy: [47184] KeyStore for SSL loaded OK and put host 'ib.adnxs.com' in map with key (ib.adnxs.com) 
+2017/02/21 09:21:21 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47176] Creating entry ssum-sec.casalemedia.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:21:21 INFO  - jmeter.protocol.http.proxy.Proxy: [47182] KeyStore for SSL loaded OK and put host 'ums.adtechus.com' in map with key (ums.adtechus.com) 
+2017/02/21 09:21:22 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47170] Creating entry us-u.openx.net in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:21:22 INFO  - jmeter.protocol.http.proxy.Proxy: [47176] KeyStore for SSL loaded OK and put host 'ssum-sec.casalemedia.com' in map with key (ssum-sec.casalemedia.com) 
+2017/02/21 09:21:23 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47168] Creating entry x.bidswitch.net in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:21:23 INFO  - jmeter.protocol.http.proxy.Proxy: [47170] KeyStore for SSL loaded OK and put host 'us-u.openx.net' in map with key (us-u.openx.net) 
+2017/02/21 09:21:25 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47166] Creating entry cm.g.doubleclick.net in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:21:25 INFO  - jmeter.protocol.http.proxy.Proxy: [47168] KeyStore for SSL loaded OK and put host 'x.bidswitch.net' in map with key (x.bidswitch.net) 
+2017/02/21 09:21:26 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47164] Creating entry usermatch.krxd.net in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:21:26 INFO  - jmeter.protocol.http.proxy.Proxy: [47166] KeyStore for SSL loaded OK and put host 'cm.g.doubleclick.net' in map with key (cm.g.doubleclick.net) 
+2017/02/21 09:21:28 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47162] Creating entry sync.search.spotxchange.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:21:28 INFO  - jmeter.protocol.http.proxy.Proxy: [47164] KeyStore for SSL loaded OK and put host 'usermatch.krxd.net' in map with key (usermatch.krxd.net) 
+2017/02/21 09:21:29 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47774] Creating entry beacon.krxd.net in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:21:29 INFO  - jmeter.protocol.http.proxy.Proxy: [47162] KeyStore for SSL loaded OK and put host 'sync.search.spotxchange.com' in map with key (sync.search.spotxchange.com) 
+2017/02/21 09:21:30 INFO  - jmeter.protocol.http.proxy.Proxy: [47774] KeyStore for SSL loaded OK and put host 'beacon.krxd.net' in map with key (beacon.krxd.net) 
+2017/02/21 09:28:08 WARN  - jmeter.protocol.http.proxy.Proxy: [57574] Problem with SSL certificate for 'fls-na.amazon.com'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/21 09:28:08 WARN  - jmeter.protocol.http.proxy.Proxy: [57572] Problem with SSL certificate for 'www.amazon.com'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/21 09:28:10 WARN  - jmeter.protocol.http.proxy.HttpRequestHdr: Url 'https://www.amazon.com:443/ap/uedata?ld&v=0.417.186&id=SAVJRXBGF90JZ27KPF4M&sw=1920&sh=1080&vw=1920&vh=960&m=1&sc=SAVJRXBGF90JZ27KPF4M&ue=3&bb=567&cf=570&be=571&pc=1232&tc=-1205&na_=-1205&ul_=-14&_ul=-12&rd_=-1201&_rd=-666&fe_=-665&lk_=-665&_lk=-665&co_=-665&_co=-665&rq_=-624&rs_=-664&_rs=-12&dl_=-14&di_=571&de_=583&_de=584&_dc=1230&ld_=1230&_ld=-1487690889561&ntd=-1&ty=0&rc=1&hob=1&hoe=4&ld=1233&t=1487690890794&ctb=1&rt=cf:1-0-1-0-1-0-1__ld:6-3-1-0-2-0-0&csmtags=aui|aui:aui_build_date:3.16.7.7-2016-07-27|fls-na&viz=visible:3&pty=AuthenticationPortal&spty=SignInApplication&pti=undefined&tid=DVCCKDM92CAW7PY2B8PB&aftb=1' contains unsafe characters, will escape it, message:Illegal character in query at index 471: https://www.amazon.com:443/ap/uedata?ld&v=0.417.186&id=SAVJRXBGF90JZ27KPF4M&sw=1920&sh=1080&vw=1920&vh=960&m=1&sc=SAVJRXBGF90JZ27KPF4M&ue=3&bb=567&cf=570&be=571&pc=1232&tc=-1205&na_=-1205&ul_=-14&_ul=-12&rd_=-1201&_rd=-666&fe_=-665&lk_=-665&_lk=-665&co_=-665&_co=-665&rq_=-624&rs_=-664&_rs=-12&dl_=-14&di_=571&de_=583&_de=584&_dc=1230&ld_=1230&_ld=-1487690889561&ntd=-1&ty=0&rc=1&hob=1&hoe=4&ld=1233&t=1487690890794&ctb=1&rt=cf:1-0-1-0-1-0-1__ld:6-3-1-0-2-0-0&csmtags=aui|aui:aui_build_date:3.16.7.7-2016-07-27|fls-na&viz=visible:3&pty=AuthenticationPortal&spty=SignInApplication&pti=undefined&tid=DVCCKDM92CAW7PY2B8PB&aftb=1 
+2017/02/21 09:28:36 ERROR - jmeter.protocol.http.proxy.Proxy: [58334] Not implemented (probably used https) java.lang.IllegalArgumentException: String must not be empty
+	at org.jsoup.helper.Validate.notEmpty(Validate.java:92)
+	at org.jsoup.nodes.Attribute.setKey(Attribute.java:51)
+	at org.jsoup.parser.ParseSettings.normalizeAttributes(ParseSettings.java:54)
+	at org.jsoup.parser.HtmlTreeBuilder.insert(HtmlTreeBuilder.java:185)
+	at org.jsoup.parser.HtmlTreeBuilderState$7.process(HtmlTreeBuilderState.java:553)
+	at org.jsoup.parser.HtmlTreeBuilder.process(HtmlTreeBuilder.java:113)
+	at org.jsoup.parser.TreeBuilder.runParser(TreeBuilder.java:50)
+	at org.jsoup.parser.TreeBuilder.parse(TreeBuilder.java:43)
+	at org.jsoup.parser.HtmlTreeBuilder.parse(HtmlTreeBuilder.java:56)
+	at org.jsoup.parser.Parser.parse(Parser.java:100)
+	at org.jsoup.Jsoup.parse(Jsoup.java:58)
+	at org.apache.jmeter.protocol.http.proxy.FormCharSetFinder.addFormActionsAndCharSet(FormCharSetFinder.java:58)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.addFormEncodings(Proxy.java:611)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:245)
+
+2017/02/21 09:30:21 WARN  - jmeter.protocol.http.proxy.HttpRequestHdr: Url 'https://www.amazon.com:443/ap/uedata?ld&v=0.417.186&id=6JAQK60P01VB6ZH8JH9Y&sw=1920&sh=1080&vw=1920&vh=960&m=1&sc=6JAQK60P01VB6ZH8JH9Y&ue=2&bb=48&cf=52&be=54&pc=197&tc=-826&na_=-826&ul_=-10&_ul=-10&rd_=-1487691021038&_rd=-1487691021038&fe_=-825&lk_=-825&_lk=-825&co_=-825&_co=-825&rq_=-784&rs_=-824&_rs=-11&dl_=-10&di_=54&de_=72&_de=73&_dc=196&ld_=196&_ld=-1487691021038&ntd=0&ty=2&rc=0&hob=1&hoe=3&ld=198&t=1487691021236&ctb=1&bfnt=1&nrbf=1&rt=cf:4-3-1-0-1-4-1__ld:5-3-1-0-1-5-0&csmtags=aui|aui:aui_build_date:3.16.7.7-2016-07-27|fls-na&viz=visible:2&pty=AuthenticationPortal&spty=SignInApplication&pti=undefined&tid=DVCCKDM92CAW7PY2B8PB&aftb=1&ui=2' contains unsafe characters, will escape it, message:Illegal character in query at index 491: https://www.amazon.com:443/ap/uedata?ld&v=0.417.186&id=6JAQK60P01VB6ZH8JH9Y&sw=1920&sh=1080&vw=1920&vh=960&m=1&sc=6JAQK60P01VB6ZH8JH9Y&ue=2&bb=48&cf=52&be=54&pc=197&tc=-826&na_=-826&ul_=-10&_ul=-10&rd_=-1487691021038&_rd=-1487691021038&fe_=-825&lk_=-825&_lk=-825&co_=-825&_co=-825&rq_=-784&rs_=-824&_rs=-11&dl_=-10&di_=54&de_=72&_de=73&_dc=196&ld_=196&_ld=-1487691021038&ntd=0&ty=2&rc=0&hob=1&hoe=3&ld=198&t=1487691021236&ctb=1&bfnt=1&nrbf=1&rt=cf:4-3-1-0-1-4-1__ld:5-3-1-0-1-5-0&csmtags=aui|aui:aui_build_date:3.16.7.7-2016-07-27|fls-na&viz=visible:2&pty=AuthenticationPortal&spty=SignInApplication&pti=undefined&tid=DVCCKDM92CAW7PY2B8PB&aftb=1&ui=2 
+2017/02/21 09:30:25 WARN  - jmeter.protocol.http.proxy.Proxy: [32786] Problem with SSL certificate for 'www.amazon.com'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/21 09:30:25 WARN  - jmeter.protocol.http.proxy.Proxy: [32788] Problem with SSL certificate for 'fls-na.amazon.com'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/21 09:30:27 ERROR - jmeter.protocol.http.proxy.Proxy: [32822] Not implemented (probably used https) java.lang.IllegalArgumentException: String must not be empty
+	at org.jsoup.helper.Validate.notEmpty(Validate.java:92)
+	at org.jsoup.nodes.Attribute.setKey(Attribute.java:51)
+	at org.jsoup.parser.ParseSettings.normalizeAttributes(ParseSettings.java:54)
+	at org.jsoup.parser.HtmlTreeBuilder.insert(HtmlTreeBuilder.java:185)
+	at org.jsoup.parser.HtmlTreeBuilderState$7.process(HtmlTreeBuilderState.java:553)
+	at org.jsoup.parser.HtmlTreeBuilder.process(HtmlTreeBuilder.java:113)
+	at org.jsoup.parser.TreeBuilder.runParser(TreeBuilder.java:50)
+	at org.jsoup.parser.TreeBuilder.parse(TreeBuilder.java:43)
+	at org.jsoup.parser.HtmlTreeBuilder.parse(HtmlTreeBuilder.java:56)
+	at org.jsoup.parser.Parser.parse(Parser.java:100)
+	at org.jsoup.Jsoup.parse(Jsoup.java:58)
+	at org.apache.jmeter.protocol.http.proxy.FormCharSetFinder.addFormActionsAndCharSet(FormCharSetFinder.java:58)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.addFormEncodings(Proxy.java:611)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:245)
+
+2017/02/21 09:30:52 INFO  - jmeter.protocol.http.proxy.Proxy: [33494] KeyStore for SSL loaded OK and put host 'cx.atdmt.com' in map with key (cx.atdmt.com) 
+2017/02/21 09:30:58 WARN  - jmeter.protocol.http.proxy.Proxy: [33664] Problem with SSL certificate for 'www.facebook.com'? Ensure browser is set to accept the JMeter proxy cert: Broken pipe (Write failed) 
+2017/02/21 09:30:59 INFO  - jmeter.protocol.http.proxy.Proxy: [33694] KeyStore for SSL loaded OK and put host 'static.xx.fbcdn.net' in map with key (static.xx.fbcdn.net) 
+2017/02/21 09:31:11 ERROR - jmeter.protocol.http.proxy.Proxy: [33982] Not implemented (probably used https) java.lang.IllegalArgumentException: String must not be empty
+	at org.jsoup.helper.Validate.notEmpty(Validate.java:92)
+	at org.jsoup.nodes.Attribute.setKey(Attribute.java:51)
+	at org.jsoup.parser.ParseSettings.normalizeAttributes(ParseSettings.java:54)
+	at org.jsoup.parser.HtmlTreeBuilder.insert(HtmlTreeBuilder.java:185)
+	at org.jsoup.parser.HtmlTreeBuilderState$7.process(HtmlTreeBuilderState.java:553)
+	at org.jsoup.parser.HtmlTreeBuilder.process(HtmlTreeBuilder.java:113)
+	at org.jsoup.parser.TreeBuilder.runParser(TreeBuilder.java:50)
+	at org.jsoup.parser.TreeBuilder.parse(TreeBuilder.java:43)
+	at org.jsoup.parser.HtmlTreeBuilder.parse(HtmlTreeBuilder.java:56)
+	at org.jsoup.parser.Parser.parse(Parser.java:100)
+	at org.jsoup.Jsoup.parse(Jsoup.java:58)
+	at org.apache.jmeter.protocol.http.proxy.FormCharSetFinder.addFormActionsAndCharSet(FormCharSetFinder.java:58)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.addFormEncodings(Proxy.java:611)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:245)
+
+2017/02/21 09:33:38 INFO  - jmeter.protocol.http.proxy.Proxy: [37590] KeyStore for SSL loaded OK and put host 'facebook.com' in map with key (facebook.com) 
+2017/02/21 09:33:40 INFO  - jmeter.protocol.http.proxy.ProxyControl: [37640] Creating entry github.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:33:41 INFO  - jmeter.protocol.http.proxy.Proxy: [37640] KeyStore for SSL loaded OK and put host 'github.com' in map with key (github.com) 
+2017/02/21 09:33:58 INFO  - jmeter.protocol.http.proxy.Proxy: [38076] KeyStore for SSL loaded OK and put host 'mitec.itesm.mx' in map with key (mitec.itesm.mx) 
+2017/02/21 09:33:59 INFO  - jmeter.protocol.http.proxy.Daemon: HTTP(S) Test Script Recorder stopped 
+2017/02/21 09:34:03 INFO  - jmeter.services.FileServer: Default base='/home/seung/ArielPruebas/apache-jmeter-3.1/bin' 
+2017/02/21 09:34:17 ERROR - jmeter.JMeter: Uncaught exception:  java.lang.NullPointerException
+	at org.apache.jmeter.protocol.http.proxy.ProxyControl.findApplicableElements(ProxyControl.java:1086)
+	at org.apache.jmeter.protocol.http.proxy.ProxyControl.deliverSampler(ProxyControl.java:605)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:291)
+
+2017/02/21 09:34:33 INFO  - jmeter.protocol.http.proxy.ProxyControl: Valid alias found for :root_ca: 
+2017/02/21 09:34:33 INFO  - jmeter.protocol.http.proxy.ProxyControl: Valid alias found for :intermediate_ca: 
+2017/02/21 09:34:33 INFO  - jmeter.protocol.http.proxy.Daemon: Creating Daemon Socket on port: 8080 
+2017/02/21 09:34:33 INFO  - jmeter.protocol.http.proxy.Daemon: Test Script Recorder up and running! 
+2017/02/21 09:34:42 INFO  - jmeter.protocol.http.proxy.Daemon: HTTP(S) Test Script Recorder stopped 
+2017/02/21 09:34:50 INFO  - jmeter.protocol.http.proxy.ProxyControl: Valid alias found for :root_ca: 
+2017/02/21 09:34:50 INFO  - jmeter.protocol.http.proxy.ProxyControl: Valid alias found for :intermediate_ca: 
+2017/02/21 09:34:50 INFO  - jmeter.protocol.http.proxy.Daemon: Creating Daemon Socket on port: 8080 
+2017/02/21 09:34:50 INFO  - jmeter.protocol.http.proxy.Daemon: Test Script Recorder up and running! 
+2017/02/21 09:34:56 INFO  - jmeter.protocol.http.proxy.ProxyControl: [39576] Creating entry assets-cdn.github.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:34:57 INFO  - jmeter.protocol.http.proxy.Proxy: [39576] KeyStore for SSL loaded OK and put host 'assets-cdn.github.com' in map with key (assets-cdn.github.com) 
+2017/02/21 09:35:00 INFO  - jmeter.protocol.http.proxy.ProxyControl: [39746] Creating entry collector.githubapp.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:35:00 INFO  - jmeter.protocol.http.proxy.Proxy: [39744] KeyStore for SSL loaded OK and put host 'www.google-analytics.com' in map with key (www.google-analytics.com) 
+2017/02/21 09:35:01 WARN  - jmeter.protocol.http.proxy.Proxy: [39786] Problem with SSL certificate for 'www.google-analytics.com'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/21 09:35:02 INFO  - jmeter.protocol.http.proxy.Proxy: [39746] KeyStore for SSL loaded OK and put host 'collector.githubapp.com' in map with key (collector.githubapp.com) 
+2017/02/21 09:35:02 WARN  - jmeter.protocol.http.proxy.Proxy: [39746] Problem with SSL certificate for 'collector.githubapp.com'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/21 09:35:02 WARN  - jmeter.protocol.http.proxy.Proxy: [39788] Problem with SSL certificate for 'collector.githubapp.com'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/21 09:35:02 ERROR - jmeter.protocol.http.proxy.Proxy:  java.net.SocketException: Broken pipe (Write failed)
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:111)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:431)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:417)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:876)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:847)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:123)
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:122)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeToClient(Proxy.java:492)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:247)
+
+2017/02/21 09:35:02 ERROR - jmeter.protocol.http.proxy.Proxy: [39752] Exception when processing sample java.net.SocketException: Broken pipe (Write failed)
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:111)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:431)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:417)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:876)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:847)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:123)
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:122)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeToClient(Proxy.java:492)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:247)
+
+2017/02/21 09:35:02 WARN  - jmeter.protocol.http.proxy.Proxy: [39752] Exception while writing error java.net.SocketException: Socket is closed
+	at sun.security.ssl.SSLSocketImpl.getOutputStream(SSLSocketImpl.java:2240)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeErrorToClient(Proxy.java:570)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:263)
+
+2017/02/21 09:35:03 ERROR - jmeter.protocol.http.proxy.Proxy:  java.net.SocketException: Broken pipe (Write failed)
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:111)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:431)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:417)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:876)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:847)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:123)
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:122)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeToClient(Proxy.java:492)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:247)
+
+2017/02/21 09:35:03 ERROR - jmeter.protocol.http.proxy.Proxy: [39758] Exception when processing sample java.net.SocketException: Broken pipe (Write failed)
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:111)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:431)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:417)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:876)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:847)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:123)
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:122)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeToClient(Proxy.java:492)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:247)
+
+2017/02/21 09:35:03 WARN  - jmeter.protocol.http.proxy.Proxy: [39758] Exception while writing error java.net.SocketException: Socket is closed
+	at sun.security.ssl.SSLSocketImpl.getOutputStream(SSLSocketImpl.java:2240)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeErrorToClient(Proxy.java:570)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:263)
+
+2017/02/21 09:35:04 INFO  - jmeter.protocol.http.proxy.ProxyControl: [39930] Creating entry api.github.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:35:04 ERROR - jmeter.protocol.http.proxy.Proxy:  java.net.SocketException: Broken pipe (Write failed)
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:111)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:431)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:417)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:876)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:847)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:123)
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:122)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeToClient(Proxy.java:492)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:247)
+
+2017/02/21 09:35:04 ERROR - jmeter.protocol.http.proxy.Proxy: [39750] Exception when processing sample java.net.SocketException: Broken pipe (Write failed)
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:111)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:431)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:417)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:876)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:847)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:123)
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:122)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeToClient(Proxy.java:492)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:247)
+
+2017/02/21 09:35:04 WARN  - jmeter.protocol.http.proxy.Proxy: [39750] Exception while writing error java.net.SocketException: Socket is closed
+	at sun.security.ssl.SSLSocketImpl.getOutputStream(SSLSocketImpl.java:2240)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeErrorToClient(Proxy.java:570)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:263)
+
+2017/02/21 09:35:06 INFO  - jmeter.protocol.http.proxy.Proxy: [39930] KeyStore for SSL loaded OK and put host 'api.github.com' in map with key (api.github.com) 
+2017/02/21 09:35:06 WARN  - jmeter.protocol.http.proxy.Proxy: [39932] Problem with SSL certificate for 'api.github.com'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/21 09:35:20 INFO  - jmeter.protocol.http.proxy.ProxyControl: [40314] Creating entry avatars3.githubusercontent.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:35:21 INFO  - jmeter.protocol.http.proxy.ProxyControl: [40324] Creating entry avatars2.githubusercontent.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:35:21 INFO  - jmeter.protocol.http.proxy.Proxy: [40314] KeyStore for SSL loaded OK and put host 'avatars3.githubusercontent.com' in map with key (avatars3.githubusercontent.com) 
+2017/02/21 09:35:22 INFO  - jmeter.protocol.http.proxy.ProxyControl: [40320] Creating entry avatars1.githubusercontent.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:35:22 INFO  - jmeter.protocol.http.proxy.Proxy: [40324] KeyStore for SSL loaded OK and put host 'avatars2.githubusercontent.com' in map with key (avatars2.githubusercontent.com) 
+2017/02/21 09:35:23 INFO  - jmeter.protocol.http.proxy.ProxyControl: [40318] Creating entry avatars0.githubusercontent.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:35:23 INFO  - jmeter.protocol.http.proxy.Proxy: [40320] KeyStore for SSL loaded OK and put host 'avatars1.githubusercontent.com' in map with key (avatars1.githubusercontent.com) 
+2017/02/21 09:35:24 INFO  - jmeter.protocol.http.proxy.Proxy: [40318] KeyStore for SSL loaded OK and put host 'avatars0.githubusercontent.com' in map with key (avatars0.githubusercontent.com) 
+2017/02/21 09:38:02 INFO  - jmeter.protocol.http.proxy.Proxy: [44250] KeyStore for SSL loaded OK and put host 'safebrowsing.google.com' in map with key (safebrowsing.google.com) 
+2017/02/21 09:38:02 INFO  - jmeter.protocol.http.proxy.Proxy: [44254] KeyStore for SSL loaded OK and put host 'safebrowsing-cache.google.com' in map with key (safebrowsing-cache.google.com) 
+2017/02/21 09:38:50 INFO  - jmeter.protocol.http.proxy.Daemon: HTTP(S) Test Script Recorder stopped 
+2017/02/21 09:38:50 INFO  - jmeter.protocol.http.proxy.ProxyControl: Valid alias found for :root_ca: 
+2017/02/21 09:38:50 INFO  - jmeter.protocol.http.proxy.ProxyControl: Valid alias found for :intermediate_ca: 
+2017/02/21 09:38:50 INFO  - jmeter.protocol.http.proxy.Daemon: Creating Daemon Socket on port: 8080 
+2017/02/21 09:38:50 INFO  - jmeter.protocol.http.proxy.Daemon: Test Script Recorder up and running! 
+2017/02/21 09:39:01 INFO  - jmeter.protocol.http.proxy.ProxyControl: [45716] Creating entry www.outlook.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:02 INFO  - jmeter.protocol.http.proxy.Proxy: [45716] KeyStore for SSL loaded OK and put host 'www.outlook.com' in map with key (www.outlook.com) 
+2017/02/21 09:39:02 INFO  - jmeter.protocol.http.proxy.ProxyControl: [45768] Creating entry outlook.live.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:03 INFO  - jmeter.protocol.http.proxy.Proxy: [45768] KeyStore for SSL loaded OK and put host 'outlook.live.com' in map with key (outlook.live.com) 
+2017/02/21 09:39:04 INFO  - jmeter.protocol.http.proxy.ProxyControl: [45796] Creating entry r1.res.office365.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:05 INFO  - jmeter.protocol.http.proxy.ProxyControl: [45800] Creating entry c.microsoft.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:05 INFO  - jmeter.protocol.http.proxy.Proxy: [45796] KeyStore for SSL loaded OK and put host 'r1.res.office365.com' in map with key (r1.res.office365.com) 
+2017/02/21 09:39:06 INFO  - jmeter.protocol.http.proxy.ProxyControl: [45798] Creating entry az725175.vo.msecnd.net in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:06 INFO  - jmeter.protocol.http.proxy.Proxy: [45800] KeyStore for SSL loaded OK and put host 'c.microsoft.com' in map with key (c.microsoft.com) 
+2017/02/21 09:39:08 INFO  - jmeter.protocol.http.proxy.ProxyControl: [45882] Creating entry c1.microsoft.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:08 INFO  - jmeter.protocol.http.proxy.Proxy: [45798] KeyStore for SSL loaded OK and put host 'az725175.vo.msecnd.net' in map with key (az725175.vo.msecnd.net) 
+2017/02/21 09:39:09 INFO  - jmeter.protocol.http.proxy.ProxyControl: [45878] Creating entry cs.microsoft.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:09 INFO  - jmeter.protocol.http.proxy.Proxy: [45882] KeyStore for SSL loaded OK and put host 'c1.microsoft.com' in map with key (c1.microsoft.com) 
+2017/02/21 09:39:09 WARN  - jmeter.protocol.http.proxy.Proxy: [45882] Problem with SSL certificate for 'c1.microsoft.com'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/21 09:39:09 ERROR - jmeter.protocol.http.proxy.Proxy:  java.net.SocketException: Broken pipe (Write failed)
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:111)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:431)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:417)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:876)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:847)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:123)
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:122)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeToClient(Proxy.java:492)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:247)
+
+2017/02/21 09:39:09 ERROR - jmeter.protocol.http.proxy.Proxy: [45930] Exception when processing sample java.net.SocketException: Broken pipe (Write failed)
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:111)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:431)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:417)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:876)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:847)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:123)
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:122)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeToClient(Proxy.java:492)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:247)
+
+2017/02/21 09:39:09 WARN  - jmeter.protocol.http.proxy.Proxy: [45930] Exception while writing error java.net.SocketException: Socket is closed
+	at sun.security.ssl.SSLSocketImpl.getOutputStream(SSLSocketImpl.java:2240)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeErrorToClient(Proxy.java:570)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:263)
+
+2017/02/21 09:39:09 ERROR - jmeter.protocol.http.proxy.Proxy:  java.net.SocketException: Broken pipe (Write failed)
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:111)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:431)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:417)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:876)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:847)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:123)
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:122)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeToClient(Proxy.java:492)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:247)
+
+2017/02/21 09:39:09 ERROR - jmeter.protocol.http.proxy.Proxy: [45928] Exception when processing sample java.net.SocketException: Broken pipe (Write failed)
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:111)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:431)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:417)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:876)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:847)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:123)
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:122)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeToClient(Proxy.java:492)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:247)
+
+2017/02/21 09:39:09 WARN  - jmeter.protocol.http.proxy.Proxy: [45928] Exception while writing error java.net.SocketException: Socket is closed
+	at sun.security.ssl.SSLSocketImpl.getOutputStream(SSLSocketImpl.java:2240)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeErrorToClient(Proxy.java:570)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:263)
+
+2017/02/21 09:39:09 ERROR - jmeter.protocol.http.proxy.Proxy:  java.net.SocketException: Broken pipe (Write failed)
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:111)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:431)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:417)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:876)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:847)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:123)
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:122)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeToClient(Proxy.java:492)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:247)
+
+2017/02/21 09:39:09 ERROR - jmeter.protocol.http.proxy.Proxy: [45798] Exception when processing sample java.net.SocketException: Broken pipe (Write failed)
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:111)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:431)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:417)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:876)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:847)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:123)
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:122)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeToClient(Proxy.java:492)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:247)
+
+2017/02/21 09:39:09 WARN  - jmeter.protocol.http.proxy.Proxy: [45798] Exception while writing error java.net.SocketException: Socket is closed
+	at sun.security.ssl.SSLSocketImpl.getOutputStream(SSLSocketImpl.java:2240)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeErrorToClient(Proxy.java:570)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:263)
+
+2017/02/21 09:39:09 ERROR - jmeter.protocol.http.proxy.Proxy:  java.net.SocketException: Broken pipe (Write failed)
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:111)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:431)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:417)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:876)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:847)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:123)
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:122)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeToClient(Proxy.java:492)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:247)
+
+2017/02/21 09:39:09 ERROR - jmeter.protocol.http.proxy.Proxy: [45972] Exception when processing sample java.net.SocketException: Broken pipe (Write failed)
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:111)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:431)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:417)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:876)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:847)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:123)
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:122)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeToClient(Proxy.java:492)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:247)
+
+2017/02/21 09:39:09 WARN  - jmeter.protocol.http.proxy.Proxy: [45972] Exception while writing error java.net.SocketException: Socket is closed
+	at sun.security.ssl.SSLSocketImpl.getOutputStream(SSLSocketImpl.java:2240)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeErrorToClient(Proxy.java:570)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:263)
+
+2017/02/21 09:39:09 ERROR - jmeter.protocol.http.proxy.Proxy:  java.net.SocketException: Broken pipe (Write failed)
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:111)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:431)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:417)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:876)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:847)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:123)
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:122)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeToClient(Proxy.java:492)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:247)
+
+2017/02/21 09:39:09 ERROR - jmeter.protocol.http.proxy.Proxy: [45890] Exception when processing sample java.net.SocketException: Broken pipe (Write failed)
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:111)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:431)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:417)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:876)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:847)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:123)
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:122)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeToClient(Proxy.java:492)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:247)
+
+2017/02/21 09:39:09 WARN  - jmeter.protocol.http.proxy.Proxy: [45890] Exception while writing error java.net.SocketException: Socket is closed
+	at sun.security.ssl.SSLSocketImpl.getOutputStream(SSLSocketImpl.java:2240)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeErrorToClient(Proxy.java:570)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:263)
+
+2017/02/21 09:39:10 INFO  - jmeter.protocol.http.proxy.ProxyControl: [46010] Creating entry login.live.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:10 INFO  - jmeter.protocol.http.proxy.Proxy: [45878] KeyStore for SSL loaded OK and put host 'cs.microsoft.com' in map with key (cs.microsoft.com) 
+2017/02/21 09:39:10 WARN  - jmeter.protocol.http.proxy.Proxy: [45878] Problem with SSL certificate for 'cs.microsoft.com'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/21 09:39:11 INFO  - jmeter.protocol.http.proxy.Proxy: [46010] KeyStore for SSL loaded OK and put host 'login.live.com' in map with key (login.live.com) 
+2017/02/21 09:39:11 INFO  - jmeter.protocol.http.proxy.ProxyControl: [46088] Creating entry auth.gfx.ms in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:12 INFO  - jmeter.protocol.http.proxy.Proxy: [46088] KeyStore for SSL loaded OK and put host 'auth.gfx.ms' in map with key (auth.gfx.ms) 
+2017/02/21 09:39:13 INFO  - jmeter.protocol.http.proxy.ProxyControl: [46136] Creating entry outlook.office365.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:14 INFO  - jmeter.protocol.http.proxy.Proxy: [46136] KeyStore for SSL loaded OK and put host 'outlook.office365.com' in map with key (outlook.office365.com) 
+2017/02/21 09:39:26 INFO  - jmeter.protocol.http.proxy.ProxyControl: [46576] Creating entry c.bing.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:27 INFO  - jmeter.protocol.http.proxy.ProxyControl: [46580] Creating entry c.live.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:27 INFO  - jmeter.protocol.http.proxy.Proxy: [46576] KeyStore for SSL loaded OK and put host 'c.bing.com' in map with key (c.bing.com) 
+2017/02/21 09:39:28 INFO  - jmeter.protocol.http.proxy.ProxyControl: [46578] Creating entry www.bizographics.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:28 INFO  - jmeter.protocol.http.proxy.Proxy: [46580] KeyStore for SSL loaded OK and put host 'c.live.com' in map with key (c.live.com) 
+2017/02/21 09:39:29 INFO  - jmeter.protocol.http.proxy.ProxyControl: [46708] Creating entry cid-56097519c1018a6e.users.storage.live.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:29 INFO  - jmeter.protocol.http.proxy.Proxy: [46578] KeyStore for SSL loaded OK and put host 'www.bizographics.com' in map with key (www.bizographics.com) 
+2017/02/21 09:39:30 INFO  - jmeter.protocol.http.proxy.ProxyControl: [46618] Creating entry xsi.outlook.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:30 INFO  - jmeter.protocol.http.proxy.Proxy: [46708] KeyStore for SSL loaded OK and put host 'cid-56097519c1018a6e.users.storage.live.com' in map with key (cid-56097519c1018a6e.users.storage.live.com) 
+2017/02/21 09:39:32 INFO  - jmeter.protocol.http.proxy.ProxyControl: [46842] Creating entry clientlog.portal.office.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:32 INFO  - jmeter.protocol.http.proxy.Proxy: [46618] KeyStore for SSL loaded OK and put host 'xsi.outlook.com' in map with key (xsi.outlook.com) 
+2017/02/21 09:39:33 INFO  - jmeter.protocol.http.proxy.ProxyControl: [46806] Creating entry us-east-1.dc.ads.linkedin.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:33 INFO  - jmeter.protocol.http.proxy.Proxy: [46842] KeyStore for SSL loaded OK and put host 'clientlog.portal.office.com' in map with key (clientlog.portal.office.com) 
+2017/02/21 09:39:33 WARN  - jmeter.protocol.http.proxy.HttpRequestHdr: Url 'https://clientlog.portal.office.com:443/l.l/?d={m:[{t:407712,l:1,ct:1487691566134,a:[%22outlook.live.com%22]},{t:175130,l:1,ct:1487691566134,a:[%22true%22,%22false%22,%22true%22,%22true%22,%22true%22,%22true%22,%22false%22,%22true%22,%22false%22,%22false%22,%221111%22]},{t:423162,l:1,ct:1487691566141,a:[%22false%22]},{t:300445,l:0,ct:1487691566148,a:[%222%22]},{t:300451,l:0,ct:1487691566149,a:[%222%22]},{t:175156,l:1,ct:1487691566294,a:[%22true%22]},{t:300448,l:0,ct:1487691568383,a:[%222%22]},{t:300445,l:0,ct:1487691568383,a:[%222%22]},{t:300451,l:0,ct:1487691568383,a:[%222%22]},{t:300446,l:0,ct:1487691571868,a:[%222%22]}],a:[%22s%22,%22Exchange%22,%22shpid%22,%221487691566132%22,%22shsid%22,%221487691566132_0.15277046616935275%22,%22u%22,%2256097519c1018a6e%22,%22c%22,%22true%22,%22sid%22,%221487691566133_0.5371557754677978%22]}&cb=1487691571868' contains unsafe characters, will escape it, message:Illegal character in query at index 47: https://clientlog.portal.office.com:443/l.l/?d={m:[{t:407712,l:1,ct:1487691566134,a:[%22outlook.live.com%22]},{t:175130,l:1,ct:1487691566134,a:[%22true%22,%22false%22,%22true%22,%22true%22,%22true%22,%22true%22,%22false%22,%22true%22,%22false%22,%22false%22,%221111%22]},{t:423162,l:1,ct:1487691566141,a:[%22false%22]},{t:300445,l:0,ct:1487691566148,a:[%222%22]},{t:300451,l:0,ct:1487691566149,a:[%222%22]},{t:175156,l:1,ct:1487691566294,a:[%22true%22]},{t:300448,l:0,ct:1487691568383,a:[%222%22]},{t:300445,l:0,ct:1487691568383,a:[%222%22]},{t:300451,l:0,ct:1487691568383,a:[%222%22]},{t:300446,l:0,ct:1487691571868,a:[%222%22]}],a:[%22s%22,%22Exchange%22,%22shpid%22,%221487691566132%22,%22shsid%22,%221487691566132_0.15277046616935275%22,%22u%22,%2256097519c1018a6e%22,%22c%22,%22true%22,%22sid%22,%221487691566133_0.5371557754677978%22]}&cb=1487691571868 
+2017/02/21 09:39:34 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47078] Creating entry onerm-staging.azurewebsites.net in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:34 INFO  - jmeter.protocol.http.proxy.Proxy: [46806] KeyStore for SSL loaded OK and put host 'us-east-1.dc.ads.linkedin.com' in map with key (us-east-1.dc.ads.linkedin.com) 
+2017/02/21 09:39:37 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47032] Creating entry s.aolcdn.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:37 INFO  - jmeter.protocol.http.proxy.Proxy: [47078] KeyStore for SSL loaded OK and put host 'onerm-staging.azurewebsites.net' in map with key (onerm-staging.azurewebsites.net) 
+2017/02/21 09:39:38 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47260] Creating entry secure.adnxs.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:38 INFO  - jmeter.protocol.http.proxy.Proxy: [47032] KeyStore for SSL loaded OK and put host 's.aolcdn.com' in map with key (s.aolcdn.com) 
+2017/02/21 09:39:40 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47600] Creating entry g.bing.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:40 INFO  - jmeter.protocol.http.proxy.Proxy: [47260] KeyStore for SSL loaded OK and put host 'secure.adnxs.com' in map with key (secure.adnxs.com) 
+2017/02/21 09:39:41 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47598] Creating entry ol.at.atwola.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:41 INFO  - jmeter.protocol.http.proxy.Proxy: [47600] KeyStore for SSL loaded OK and put host 'g.bing.com' in map with key (g.bing.com) 
+2017/02/21 09:39:42 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47710] Creating entry www.linkedin.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:42 INFO  - jmeter.protocol.http.proxy.Proxy: [47598] KeyStore for SSL loaded OK and put host 'ol.at.atwola.com' in map with key (ol.at.atwola.com) 
+2017/02/21 09:39:43 INFO  - jmeter.protocol.http.proxy.Proxy: [47710] KeyStore for SSL loaded OK and put host 'www.linkedin.com' in map with key (www.linkedin.com) 
+2017/02/21 09:39:44 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47874] Creating entry dc.ads.linkedin.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:44 WARN  - jmeter.protocol.http.proxy.HttpRequestHdr: Url 'https://secure.adnxs.com:443/ttj?member=280&inv_code=OVT2USEN&imp_id=1487691584|83889456096114039&cb=1487691584&size=160x600&providerid=&ext_inv_code=US&rid=&external_uid=228edd19a88864091cbfd729ac8867fa&traffic_source_code=pg%3AOVT2USEN%3Bp%3A%3Br%3A' contains unsafe characters, will escape it, message:Illegal character in query at index 79: https://secure.adnxs.com:443/ttj?member=280&inv_code=OVT2USEN&imp_id=1487691584|83889456096114039&cb=1487691584&size=160x600&providerid=&ext_inv_code=US&rid=&external_uid=228edd19a88864091cbfd729ac8867fa&traffic_source_code=pg%3AOVT2USEN%3Bp%3A%3Br%3A 
+2017/02/21 09:39:45 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47892] Creating entry gum.criteo.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:45 INFO  - jmeter.protocol.http.proxy.Proxy: [47874] KeyStore for SSL loaded OK and put host 'dc.ads.linkedin.com' in map with key (dc.ads.linkedin.com) 
+2017/02/21 09:39:46 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47880] Creating entry pixel.advertising.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:46 INFO  - jmeter.protocol.http.proxy.Proxy: [47892] KeyStore for SSL loaded OK and put host 'gum.criteo.com' in map with key (gum.criteo.com) 
+2017/02/21 09:39:47 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47930] Creating entry pixelus.alephd.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:47 INFO  - jmeter.protocol.http.proxy.Proxy: [47880] KeyStore for SSL loaded OK and put host 'pixel.advertising.com' in map with key (pixel.advertising.com) 
+2017/02/21 09:39:48 INFO  - jmeter.protocol.http.proxy.ProxyControl: [47928] Creating entry secure-nym.adnxs.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:48 INFO  - jmeter.protocol.http.proxy.Proxy: [47930] KeyStore for SSL loaded OK and put host 'pixelus.alephd.com' in map with key (pixelus.alephd.com) 
+2017/02/21 09:39:49 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48094] Creating entry acdn.adnxs.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:49 INFO  - jmeter.protocol.http.proxy.Proxy: [47928] KeyStore for SSL loaded OK and put host 'secure-nym.adnxs.com' in map with key (secure-nym.adnxs.com) 
+2017/02/21 09:39:51 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48038] Creating entry swx.cdn.skype.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:51 INFO  - jmeter.protocol.http.proxy.Proxy: [48094] KeyStore for SSL loaded OK and put host 'acdn.adnxs.com' in map with key (acdn.adnxs.com) 
+2017/02/21 09:39:52 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48000] Creating entry at.atwola.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:52 INFO  - jmeter.protocol.http.proxy.Proxy: [48038] KeyStore for SSL loaded OK and put host 'swx.cdn.skype.com' in map with key (swx.cdn.skype.com) 
+2017/02/21 09:39:53 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48214] Creating entry b.config.skype.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:53 INFO  - jmeter.protocol.http.proxy.Proxy: [48000] KeyStore for SSL loaded OK and put host 'at.atwola.com' in map with key (at.atwola.com) 
+2017/02/21 09:39:55 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48210] Creating entry m.adnxs.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:55 INFO  - jmeter.protocol.http.proxy.Proxy: [48214] KeyStore for SSL loaded OK and put host 'b.config.skype.com' in map with key (b.config.skype.com) 
+2017/02/21 09:39:56 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48176] Creating entry cms.quantserve.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:56 INFO  - jmeter.protocol.http.proxy.Proxy: [48210] KeyStore for SSL loaded OK and put host 'm.adnxs.com' in map with key (m.adnxs.com) 
+2017/02/21 09:39:58 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48174] Creating entry t.wayfair.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:58 INFO  - jmeter.protocol.http.proxy.Proxy: [48176] KeyStore for SSL loaded OK and put host 'cms.quantserve.com' in map with key (cms.quantserve.com) 
+2017/02/21 09:39:59 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48172] Creating entry p.rfihub.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:39:59 INFO  - jmeter.protocol.http.proxy.Proxy: [48174] KeyStore for SSL loaded OK and put host 't.wayfair.com' in map with key (t.wayfair.com) 
+2017/02/21 09:40:00 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48170] Creating entry dis.criteo.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:00 INFO  - jmeter.protocol.http.proxy.Proxy: [48172] KeyStore for SSL loaded OK and put host 'p.rfihub.com' in map with key (p.rfihub.com) 
+2017/02/21 09:40:01 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48168] Creating entry sync.mathtag.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:01 INFO  - jmeter.protocol.http.proxy.Proxy: [48170] KeyStore for SSL loaded OK and put host 'dis.criteo.com' in map with key (dis.criteo.com) 
+2017/02/21 09:40:02 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48166] Creating entry pixel.rubiconproject.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:02 INFO  - jmeter.protocol.http.proxy.Proxy: [48168] KeyStore for SSL loaded OK and put host 'sync.mathtag.com' in map with key (sync.mathtag.com) 
+2017/02/21 09:40:03 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48164] Creating entry match.adsrvr.org in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:03 INFO  - jmeter.protocol.http.proxy.Proxy: [48166] KeyStore for SSL loaded OK and put host 'pixel.rubiconproject.com' in map with key (pixel.rubiconproject.com) 
+2017/02/21 09:40:04 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48162] Creating entry odr.mookie1.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:04 INFO  - jmeter.protocol.http.proxy.Proxy: [48164] KeyStore for SSL loaded OK and put host 'match.adsrvr.org' in map with key (match.adsrvr.org) 
+2017/02/21 09:40:05 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48126] Creating entry contextual.media.net in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:05 INFO  - jmeter.protocol.http.proxy.Proxy: [48162] KeyStore for SSL loaded OK and put host 'odr.mookie1.com' in map with key (odr.mookie1.com) 
+2017/02/21 09:40:06 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48380] Creating entry browser.pipe.aria.microsoft.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:06 INFO  - jmeter.protocol.http.proxy.Proxy: [48126] KeyStore for SSL loaded OK and put host 'contextual.media.net' in map with key (contextual.media.net) 
+2017/02/21 09:40:07 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48378] Creating entry a.lw.skype.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:07 INFO  - jmeter.protocol.http.proxy.Proxy: [48380] KeyStore for SSL loaded OK and put host 'browser.pipe.aria.microsoft.com' in map with key (browser.pipe.aria.microsoft.com) 
+2017/02/21 09:40:09 ERROR - jmeter.protocol.http.proxy.Proxy: [48732] Not implemented (probably used https) java.lang.IllegalArgumentException: String must not be empty
+	at org.jsoup.helper.Validate.notEmpty(Validate.java:92)
+	at org.jsoup.nodes.Attribute.setKey(Attribute.java:51)
+	at org.jsoup.parser.ParseSettings.normalizeAttributes(ParseSettings.java:54)
+	at org.jsoup.parser.HtmlTreeBuilder.insert(HtmlTreeBuilder.java:185)
+	at org.jsoup.parser.HtmlTreeBuilderState$7.process(HtmlTreeBuilderState.java:553)
+	at org.jsoup.parser.HtmlTreeBuilder.process(HtmlTreeBuilder.java:113)
+	at org.jsoup.parser.TreeBuilder.runParser(TreeBuilder.java:50)
+	at org.jsoup.parser.TreeBuilder.parse(TreeBuilder.java:43)
+	at org.jsoup.parser.HtmlTreeBuilder.parse(HtmlTreeBuilder.java:56)
+	at org.jsoup.parser.Parser.parse(Parser.java:100)
+	at org.jsoup.Jsoup.parse(Jsoup.java:58)
+	at org.apache.jmeter.protocol.http.proxy.FormCharSetFinder.addFormActionsAndCharSet(FormCharSetFinder.java:58)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.addFormEncodings(Proxy.java:611)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:245)
+
+2017/02/21 09:40:09 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48742] Creating entry qsearch-a.akamaihd.net in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:09 INFO  - jmeter.protocol.http.proxy.Proxy: [48378] KeyStore for SSL loaded OK and put host 'a.lw.skype.com' in map with key (a.lw.skype.com) 
+2017/02/21 09:40:09 ERROR - jmeter.protocol.http.proxy.Proxy: [48746] Not implemented (probably used https) java.lang.IllegalArgumentException: String must not be empty
+	at org.jsoup.helper.Validate.notEmpty(Validate.java:92)
+	at org.jsoup.nodes.Attribute.setKey(Attribute.java:51)
+	at org.jsoup.parser.ParseSettings.normalizeAttributes(ParseSettings.java:54)
+	at org.jsoup.parser.HtmlTreeBuilder.insert(HtmlTreeBuilder.java:185)
+	at org.jsoup.parser.HtmlTreeBuilderState$7.process(HtmlTreeBuilderState.java:553)
+	at org.jsoup.parser.HtmlTreeBuilder.process(HtmlTreeBuilder.java:113)
+	at org.jsoup.parser.TreeBuilder.runParser(TreeBuilder.java:50)
+	at org.jsoup.parser.TreeBuilder.parse(TreeBuilder.java:43)
+	at org.jsoup.parser.HtmlTreeBuilder.parse(HtmlTreeBuilder.java:56)
+	at org.jsoup.parser.Parser.parse(Parser.java:100)
+	at org.jsoup.Jsoup.parse(Jsoup.java:58)
+	at org.apache.jmeter.protocol.http.proxy.FormCharSetFinder.addFormActionsAndCharSet(FormCharSetFinder.java:58)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.addFormEncodings(Proxy.java:611)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:245)
+
+2017/02/21 09:40:11 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48740] Creating entry i-a.akamaihd.net in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:11 INFO  - jmeter.protocol.http.proxy.Proxy: [48742] KeyStore for SSL loaded OK and put host 'qsearch-a.akamaihd.net' in map with key (qsearch-a.akamaihd.net) 
+2017/02/21 09:40:12 INFO  - jmeter.protocol.http.proxy.Proxy: [48740] KeyStore for SSL loaded OK and put host 'i-a.akamaihd.net' in map with key (i-a.akamaihd.net) 
+2017/02/21 09:40:12 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48678] Creating entry a248.e.akamai.net in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:12 WARN  - jmeter.protocol.http.proxy.HttpRequestHdr: Url 'https://qsearch-a.akamaihd.net:443/bql.php?v=1&&hvsid=00001487691607506024988504725591&geo=25.41|-99.91&lper=100&fp=7AT4_iufKup19GrVqsFdlt2ilod48UUHp0SOydMnwWW_th122kRbcvMj9CHOIuugZrDUUoe80qsgGEGJbQKVTzESr3S7tiw74gHmLqiesya6IjxtHx88_Q%3D%3D&lpid=&tsid=2&ksu=135&q=&prv=&type=&ps=&cme=sdeV8UH3dLN-hnRXFSiPefoWjuVBjeu5gzTA94fY8orFcSmhLu5YRcrD5uilPvSZSaDCxP_8ledne6rxKVyl5BAY5WVRz6RF1EncBgOqOGGDdYVCHBv-gkSwzI_dgUSaJKSidGS-DtpEZuV0FBhZSg1coGIVfbFSXzBSR4XQQyLopG10z9_KZ0DclMtuAklR4d48mnJHWQU%3D%7C%7CNDHRnZ9Gz3KXlI-i9OnZqQ%3D%3D%7C5gDUJdTGiJzedmq9hanWYg%3D%3D%7CN7fu2vKt8_s%3D%7CFcl4VLL-IaLmW79HU4ludff3oT5XHy_B%7CsRBSg3CPSiQ%3D%7C-VWhfQ2-Qs3f5iiR4Py4_7q1swe7SB_uWBP15EDpTVThv_BTQnhTS2pOkiZhCX5Gd4mvVfu836M%3D%7C&hint=&td=&cc=MX&wsip=2887305227&bca=0&ugd=4&&rc=0&fdkt=232&kwd[]=Best%20Foundation%20for%20Aging%20Skin&kwt[]=232&kbc[]=dcd48c6b23f33219a96958f2c7b729cf.d2s&kwp[]=1&kid[]=48860228&kbc2[]=%7C%7Cl%3D1107%7C%7C&ktd[]=2480499071255420&kwd[]=Mattress%20for%20Lower%20Back%20Pain&kwt[]=232&kbc[]=dcd48c6b23f33219a96958f2c7b729cf.d2s&kwp[]=2&kid[]=120557327&kbc2[]=0%7C%7Cl%3D1107%7C%7C&ktd[]=2480499054346876&kwd[]=Best%20Hair%20Growth%20Vitamins&kwt[]=232&kbc[]=dcd48c6b23f33219a96958f2c7b729cf.d2s&kwp[]=3&kid[]=48873530&kbc2[]=%7C%7Cl%3D1107%7C%7C&ktd[]=2480499071124092&kwd[]=Best%20Online%20Universities&kwt[]=232&kbc[]=dcd48c6b23f33219a96958f2c7b729cf.d2s&kwp[]=4&kid[]=3481257&kbc2[]=%7C%7Cl%3D1107%7C%7C&ktd[]=2480499071124092&rand=1487691609046&cid=8CU12VX8O&vwid=1487691606480873583&vi=1487691606480873583&l3ch=0&slnkp=no&tdAdd[]=rtbsd%3D11&tdAdd[]=ib=0&dytm=1487691608038&verid=111299&hvsid=00001487691607506024988504725591&upk=1487691607.20126&sttm=1487691607505&purld=1&rtbsd=11&=&tdAdd[]=%7C%40%7Cabp%3A0%3A2&tdAdd[]=%7C%40%7Cabp%3A0%3A2&tdAdd[]=%7C%40%7Cabp%3A0%3A2&tdAdd[]=%7C%40%7Cabp%3A0%3A2&matm=1487691609061&abpl=2&kbbq=%26asn%3D10436&tdAdd[]=nw%3DNone&tdAdd[]=nwType%3DNone&tdAdd[]=asnum%3D10436&tdAdd[]=proxy%3DNone&tdAdd[]=comp%3DNone&oRurl=http%3A%2F%2Fcdn3e.media.net%2Fmediamain.html%3F%26esi%3D1%26cid%3D8CU12VX8O%26cpcd%3Dwoss9wwEQiPLMlcavKjv4g%253D%253D%26crid%3D568562714%26pid%3D8PO9X5YJE%26size%3D160x600%26cpnet%3DyVb1sHm-0KIh29BOFTjjrBoGbVSRV2IA0_GarHeN_gQ%253D%26cme%3DtUvcUjHrdwP8sRfpwHeEmU9HaJIjLKNDpbXItqyErziRTlwawR9VuUji4dsoLdDgtFYdIjNeaLkQDBKkNfPWJDF58DquCztQ0IfgxzFa4jKYQVx-Hv3rnFUcV56-nH21OpOLM9wP3Gk%253D%257C%257CNDHRnZ9Gz3KXlI-i9OnZqQ%253D%253D%257C5gDUJdTGiJzedmq9hanWYg%253D%253D%257CN7fu2vKt8_s%253D%257CFcl4VLL-IaLmW79HU4ludff3oT5XHy_B%257CsRBSg3CPSiQ%253D%257C%26https%3D1%26cc%3DMX%26bf%3D0%26vif%3D2%26nse%3D1%26vi%3D1487691606480873583%26lw%3D1%26ugd%3D4%26ib%3D0%26nb%3D1%26chost%3Dcontextual.media.net%26fvips%3D0%26vpf%3D000%26ap%3D0%26pf%3D0%26isOffice%3D0&tdAdd[]=uiparams%3D%3Brend_w%3A160%3Brend_h%3A600%3Bscr_h%3A1080%3Bscr_w%3A1920%3Bkwd_scnt%3A4' contains unsafe characters, will escape it, message:Illegal character in query at index 96: https://qsearch-a.akamaihd.net:443/bql.php?v=1&&hvsid=00001487691607506024988504725591&geo=25.41|-99.91&lper=100&fp=7AT4_iufKup19GrVqsFdlt2ilod48UUHp0SOydMnwWW_th122kRbcvMj9CHOIuugZrDUUoe80qsgGEGJbQKVTzESr3S7tiw74gHmLqiesya6IjxtHx88_Q%3D%3D&lpid=&tsid=2&ksu=135&q=&prv=&type=&ps=&cme=sdeV8UH3dLN-hnRXFSiPefoWjuVBjeu5gzTA94fY8orFcSmhLu5YRcrD5uilPvSZSaDCxP_8ledne6rxKVyl5BAY5WVRz6RF1EncBgOqOGGDdYVCHBv-gkSwzI_dgUSaJKSidGS-DtpEZuV0FBhZSg1coGIVfbFSXzBSR4XQQyLopG10z9_KZ0DclMtuAklR4d48mnJHWQU%3D%7C%7CNDHRnZ9Gz3KXlI-i9OnZqQ%3D%3D%7C5gDUJdTGiJzedmq9hanWYg%3D%3D%7CN7fu2vKt8_s%3D%7CFcl4VLL-IaLmW79HU4ludff3oT5XHy_B%7CsRBSg3CPSiQ%3D%7C-VWhfQ2-Qs3f5iiR4Py4_7q1swe7SB_uWBP15EDpTVThv_BTQnhTS2pOkiZhCX5Gd4mvVfu836M%3D%7C&hint=&td=&cc=MX&wsip=2887305227&bca=0&ugd=4&&rc=0&fdkt=232&kwd[]=Best%20Foundation%20for%20Aging%20Skin&kwt[]=232&kbc[]=dcd48c6b23f33219a96958f2c7b729cf.d2s&kwp[]=1&kid[]=48860228&kbc2[]=%7C%7Cl%3D1107%7C%7C&ktd[]=2480499071255420&kwd[]=Mattress%20for%20Lower%20Back%20Pain&kwt[]=232&kbc[]=dcd48c6b23f33219a96958f2c7b729cf.d2s&kwp[]=2&kid[]=120557327&kbc2[]=0%7C%7Cl%3D1107%7C%7C&ktd[]=2480499054346876&kwd[]=Best%20Hair%20Growth%20Vitamins&kwt[]=232&kbc[]=dcd48c6b23f33219a96958f2c7b729cf.d2s&kwp[]=3&kid[]=48873530&kbc2[]=%7C%7Cl%3D1107%7C%7C&ktd[]=2480499071124092&kwd[]=Best%20Online%20Universities&kwt[]=232&kbc[]=dcd48c6b23f33219a96958f2c7b729cf.d2s&kwp[]=4&kid[]=3481257&kbc2[]=%7C%7Cl%3D1107%7C%7C&ktd[]=2480499071124092&rand=1487691609046&cid=8CU12VX8O&vwid=1487691606480873583&vi=1487691606480873583&l3ch=0&slnkp=no&tdAdd[]=rtbsd%3D11&tdAdd[]=ib=0&dytm=1487691608038&verid=111299&hvsid=00001487691607506024988504725591&upk=1487691607.20126&sttm=1487691607505&purld=1&rtbsd=11&=&tdAdd[]=%7C%40%7Cabp%3A0%3A2&tdAdd[]=%7C%40%7Cabp%3A0%3A2&tdAdd[]=%7C%40%7Cabp%3A0%3A2&tdAdd[]=%7C%40%7Cabp%3A0%3A2&matm=1487691609061&abpl=2&kbbq=%26asn%3D10436&tdAdd[]=nw%3DNone&tdAdd[]=nwType%3DNone&tdAdd[]=asnum%3D10436&tdAdd[]=proxy%3DNone&tdAdd[]=comp%3DNone&oRurl=http%3A%2F%2Fcdn3e.media.net%2Fmediamain.html%3F%26esi%3D1%26cid%3D8CU12VX8O%26cpcd%3Dwoss9wwEQiPLMlcavKjv4g%253D%253D%26crid%3D568562714%26pid%3D8PO9X5YJE%26size%3D160x600%26cpnet%3DyVb1sHm-0KIh29BOFTjjrBoGbVSRV2IA0_GarHeN_gQ%253D%26cme%3DtUvcUjHrdwP8sRfpwHeEmU9HaJIjLKNDpbXItqyErziRTlwawR9VuUji4dsoLdDgtFYdIjNeaLkQDBKkNfPWJDF58DquCztQ0IfgxzFa4jKYQVx-Hv3rnFUcV56-nH21OpOLM9wP3Gk%253D%257C%257CNDHRnZ9Gz3KXlI-i9OnZqQ%253D%253D%257C5gDUJdTGiJzedmq9hanWYg%253D%253D%257CN7fu2vKt8_s%253D%257CFcl4VLL-IaLmW79HU4ludff3oT5XHy_B%257CsRBSg3CPSiQ%253D%257C%26https%3D1%26cc%3DMX%26bf%3D0%26vif%3D2%26nse%3D1%26vi%3D1487691606480873583%26lw%3D1%26ugd%3D4%26ib%3D0%26nb%3D1%26chost%3Dcontextual.media.net%26fvips%3D0%26vpf%3D000%26ap%3D0%26pf%3D0%26isOffice%3D0&tdAdd[]=uiparams%3D%3Brend_w%3A160%3Brend_h%3A600%3Bscr_h%3A1080%3Bscr_w%3A1920%3Bkwd_scnt%3A4 
+2017/02/21 09:40:13 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48642] Creating entry s.mnet-ad.net in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:13 INFO  - jmeter.protocol.http.proxy.Proxy: [48678] KeyStore for SSL loaded OK and put host 'a248.e.akamai.net' in map with key (a248.e.akamai.net) 
+2017/02/21 09:40:14 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48882] Creating entry go.trouter.io in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:14 INFO  - jmeter.protocol.http.proxy.Proxy: [48642] KeyStore for SSL loaded OK and put host 's.mnet-ad.net' in map with key (s.mnet-ad.net) 
+2017/02/21 09:40:16 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48872] Creating entry kes.skype.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:16 INFO  - jmeter.protocol.http.proxy.Proxy: [48882] KeyStore for SSL loaded OK and put host 'go.trouter.io' in map with key (go.trouter.io) 
+2017/02/21 09:40:17 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48868] Creating entry api.skype.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:17 INFO  - jmeter.protocol.http.proxy.Proxy: [48872] KeyStore for SSL loaded OK and put host 'kes.skype.com' in map with key (kes.skype.com) 
+2017/02/21 09:40:18 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48866] Creating entry a.config.skype.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:18 INFO  - jmeter.protocol.http.proxy.Proxy: [48868] KeyStore for SSL loaded OK and put host 'api.skype.com' in map with key (api.skype.com) 
+2017/02/21 09:40:19 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48860] Creating entry flagsapi.skype.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:19 INFO  - jmeter.protocol.http.proxy.Proxy: [48866] KeyStore for SSL loaded OK and put host 'a.config.skype.com' in map with key (a.config.skype.com) 
+2017/02/21 09:40:21 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48858] Creating entry dev.microsofttranslator.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:21 INFO  - jmeter.protocol.http.proxy.Proxy: [48860] KeyStore for SSL loaded OK and put host 'flagsapi.skype.com' in map with key (flagsapi.skype.com) 
+2017/02/21 09:40:22 INFO  - jmeter.protocol.http.proxy.ProxyControl: [48840] Creating entry api.asm.skype.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:22 INFO  - jmeter.protocol.http.proxy.Proxy: [48858] KeyStore for SSL loaded OK and put host 'dev.microsofttranslator.com' in map with key (dev.microsofttranslator.com) 
+2017/02/21 09:40:24 INFO  - jmeter.protocol.http.proxy.ProxyControl: [49276] Creating entry tacoda.at.atwola.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:24 INFO  - jmeter.protocol.http.proxy.Proxy: [48840] KeyStore for SSL loaded OK and put host 'api.asm.skype.com' in map with key (api.asm.skype.com) 
+2017/02/21 09:40:25 INFO  - jmeter.protocol.http.proxy.ProxyControl: [49106] Creating entry static.asm.skype.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:25 INFO  - jmeter.protocol.http.proxy.Proxy: [49276] KeyStore for SSL loaded OK and put host 'tacoda.at.atwola.com' in map with key (tacoda.at.atwola.com) 
+2017/02/21 09:40:26 INFO  - jmeter.protocol.http.proxy.ProxyControl: [49072] Creating entry client-s.gateway.messenger.live.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:26 INFO  - jmeter.protocol.http.proxy.Proxy: [49106] KeyStore for SSL loaded OK and put host 'static.asm.skype.com' in map with key (static.asm.skype.com) 
+2017/02/21 09:40:27 INFO  - jmeter.protocol.http.proxy.ProxyControl: [49070] Creating entry contacts.skype.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:27 INFO  - jmeter.protocol.http.proxy.Proxy: [49072] KeyStore for SSL loaded OK and put host 'client-s.gateway.messenger.live.com' in map with key (client-s.gateway.messenger.live.com) 
+2017/02/21 09:40:28 INFO  - jmeter.protocol.http.proxy.ProxyControl: [49030] Creating entry prod.tpc.skype.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:28 INFO  - jmeter.protocol.http.proxy.Proxy: [49070] KeyStore for SSL loaded OK and put host 'contacts.skype.com' in map with key (contacts.skype.com) 
+2017/02/21 09:40:30 WARN  - jmeter.protocol.http.proxy.HttpRequestHdr: Url 'https://client-s.gateway.messenger.live.com:443/v1/users/ME/conversations?startTime=1486482018358&pageSize=100&view=msnp24Equivalent&targetType=Passport|Skype|Lync|Thread' contains unsafe characters, will escape it, message:Illegal character in query at index 152: https://client-s.gateway.messenger.live.com:443/v1/users/ME/conversations?startTime=1486482018358&pageSize=100&view=msnp24Equivalent&targetType=Passport|Skype|Lync|Thread 
+2017/02/21 09:40:30 INFO  - jmeter.protocol.http.proxy.ProxyControl: [49414] Creating entry static-asm.secure.skypeassets.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:30 INFO  - jmeter.protocol.http.proxy.Proxy: [49030] KeyStore for SSL loaded OK and put host 'prod.tpc.skype.com' in map with key (prod.tpc.skype.com) 
+2017/02/21 09:40:30 WARN  - jmeter.protocol.http.proxy.HttpRequestHdr: Url 'https://client-s.gateway.messenger.live.com:443/v1/users/ME/conversations?startTime=1486482018358&pageSize=100&view=msnp24Equivalent&targetType=Passport|Skype|Lync|Thread' contains unsafe characters, will escape it, message:Illegal character in query at index 152: https://client-s.gateway.messenger.live.com:443/v1/users/ME/conversations?startTime=1486482018358&pageSize=100&view=msnp24Equivalent&targetType=Passport|Skype|Lync|Thread 
+2017/02/21 09:40:31 INFO  - jmeter.protocol.http.proxy.ProxyControl: [49332] Creating entry cdn.at.atwola.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:31 INFO  - jmeter.protocol.http.proxy.Proxy: [49414] KeyStore for SSL loaded OK and put host 'static-asm.secure.skypeassets.com' in map with key (static-asm.secure.skypeassets.com) 
+2017/02/21 09:40:32 INFO  - jmeter.protocol.http.proxy.ProxyControl: [49538] Creating entry 429-trouter-weu-a.drip.trouter.io in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:32 INFO  - jmeter.protocol.http.proxy.Proxy: [49332] KeyStore for SSL loaded OK and put host 'cdn.at.atwola.com' in map with key (cdn.at.atwola.com) 
+2017/02/21 09:40:33 INFO  - jmeter.protocol.http.proxy.ProxyControl: [49658] Creating entry ads.scorecardresearch.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:33 INFO  - jmeter.protocol.http.proxy.Proxy: [49538] KeyStore for SSL loaded OK and put host '429-trouter-weu-a.drip.trouter.io' in map with key (429-trouter-weu-a.drip.trouter.io) 
+2017/02/21 09:40:34 INFO  - jmeter.protocol.http.proxy.Proxy: [49658] KeyStore for SSL loaded OK and put host 'ads.scorecardresearch.com' in map with key (ads.scorecardresearch.com) 
+2017/02/21 09:40:42 WARN  - jmeter.protocol.http.proxy.HttpRequestHdr: Url 'https://clientlog.portal.office.com:443/l.l/?d={m:[{t:171063,l:1,ct:1487691566149,a:[%22P1%22,%22272%22,%22M3%22,%222541%22,%22M1%22,%224777%22]},{t:419936,l:1,ct:1487691588928,a:[%22https%253A%252F%252Fswx.cdn.skype.com%252Fshared%252Fv%252F1.2.29%252FSkypeBootstrap.min.js%22]},{t:175179,l:1,ct:1487691588929,a:[%22https%253A%252F%252Foutlook.live.com%22,%22https%253A%252F%252Fclientlog.portal.office.com%252Fl.l%252F%22]},{t:171179,l:0,ct:1487691589051,a:[%22%255Bundefined%255D%22,%22148769158905100%22]},{t:171179,l:0,ct:1487691589070,a:[%22%255Bundefined%255D%22,%22148769158907001%22]},{t:419947,l:1,ct:1487691593109,a:[%220%22,%221%22,%22true%22]},{t:416957,l:1,ct:1487691612387,a:[%220%252C2%252C13%252C15%252C16%252C6%22]},{t:413864,l:1,ct:1487691612396,a:[]}],a:[%22s%22,%22Exchange%22,%22shpid%22,%221487691566132%22,%22shsid%22,%221487691566132_0.15277046616935275%22,%22u%22,%2256097519c1018a6e%22,%22c%22,%22true%22,%22sid%22,%221487691566133_0.5371557754677978%22]}&cb=1487691642400' contains unsafe characters, will escape it, message:Illegal character in query at index 47: https://clientlog.portal.office.com:443/l.l/?d={m:[{t:171063,l:1,ct:1487691566149,a:[%22P1%22,%22272%22,%22M3%22,%222541%22,%22M1%22,%224777%22]},{t:419936,l:1,ct:1487691588928,a:[%22https%253A%252F%252Fswx.cdn.skype.com%252Fshared%252Fv%252F1.2.29%252FSkypeBootstrap.min.js%22]},{t:175179,l:1,ct:1487691588929,a:[%22https%253A%252F%252Foutlook.live.com%22,%22https%253A%252F%252Fclientlog.portal.office.com%252Fl.l%252F%22]},{t:171179,l:0,ct:1487691589051,a:[%22%255Bundefined%255D%22,%22148769158905100%22]},{t:171179,l:0,ct:1487691589070,a:[%22%255Bundefined%255D%22,%22148769158907001%22]},{t:419947,l:1,ct:1487691593109,a:[%220%22,%221%22,%22true%22]},{t:416957,l:1,ct:1487691612387,a:[%220%252C2%252C13%252C15%252C16%252C6%22]},{t:413864,l:1,ct:1487691612396,a:[]}],a:[%22s%22,%22Exchange%22,%22shpid%22,%221487691566132%22,%22shsid%22,%221487691566132_0.15277046616935275%22,%22u%22,%2256097519c1018a6e%22,%22c%22,%22true%22,%22sid%22,%221487691566133_0.5371557754677978%22]}&cb=1487691642400 
+2017/02/21 09:40:45 INFO  - jmeter.protocol.http.proxy.ProxyControl: [50004] Creating entry prod.registrar.skype.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:40:46 INFO  - jmeter.protocol.http.proxy.Proxy: [50004] KeyStore for SSL loaded OK and put host 'prod.registrar.skype.com' in map with key (prod.registrar.skype.com) 
+2017/02/21 09:42:26 WARN  - jmeter.protocol.http.proxy.HttpRequestHdr: Url 'https://clientlog.portal.office.com:443/l.l/?d={m:[{t:405558,l:1,ct:1487691716860,a:[%22%255Bnull%255D%22]}],a:[%22s%22,%22Exchange%22,%22shpid%22,%221487691566132%22,%22shsid%22,%221487691566132_0.15277046616935275%22,%22u%22,%2256097519c1018a6e%22,%22c%22,%22true%22,%22sid%22,%221487691566133_0.5371557754677978%22]}&cb=1487691746861' contains unsafe characters, will escape it, message:Illegal character in query at index 47: https://clientlog.portal.office.com:443/l.l/?d={m:[{t:405558,l:1,ct:1487691716860,a:[%22%255Bnull%255D%22]}],a:[%22s%22,%22Exchange%22,%22shpid%22,%221487691566132%22,%22shsid%22,%221487691566132_0.15277046616935275%22,%22u%22,%2256097519c1018a6e%22,%22c%22,%22true%22,%22sid%22,%221487691566133_0.5371557754677978%22]}&cb=1487691746861 
+2017/02/21 09:43:15 INFO  - jmeter.protocol.http.proxy.ProxyControl: [53650] Creating entry gmail.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:43:17 INFO  - jmeter.protocol.http.proxy.Proxy: [53650] KeyStore for SSL loaded OK and put host 'gmail.com' in map with key (gmail.com) 
+2017/02/21 09:43:17 INFO  - jmeter.protocol.http.proxy.Proxy: [53722] KeyStore for SSL loaded OK and put host 'www.google.com' in map with key (www.google.com) 
+2017/02/21 09:43:18 INFO  - jmeter.protocol.http.proxy.ProxyControl: [53756] Creating entry mail.google.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:43:19 INFO  - jmeter.protocol.http.proxy.Proxy: [53756] KeyStore for SSL loaded OK and put host 'mail.google.com' in map with key (mail.google.com) 
+2017/02/21 09:43:21 INFO  - jmeter.protocol.http.proxy.ProxyControl: [53818] Creating entry accounts.google.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:43:22 INFO  - jmeter.protocol.http.proxy.Proxy: [53818] KeyStore for SSL loaded OK and put host 'accounts.google.com' in map with key (accounts.google.com) 
+2017/02/21 09:43:23 INFO  - jmeter.protocol.http.proxy.ProxyControl: [53880] Creating entry lh3.googleusercontent.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:43:24 INFO  - jmeter.protocol.http.proxy.ProxyControl: [53884] Creating entry accounts.youtube.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:43:24 INFO  - jmeter.protocol.http.proxy.Proxy: [53880] KeyStore for SSL loaded OK and put host 'lh3.googleusercontent.com' in map with key (lh3.googleusercontent.com) 
+2017/02/21 09:43:25 INFO  - jmeter.protocol.http.proxy.Proxy: [53884] KeyStore for SSL loaded OK and put host 'accounts.youtube.com' in map with key (accounts.youtube.com) 
+2017/02/21 09:43:30 INFO  - jmeter.protocol.http.proxy.ProxyControl: [54122] Creating entry accounts.google.com.mx in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:43:31 INFO  - jmeter.protocol.http.proxy.Proxy: [54122] KeyStore for SSL loaded OK and put host 'accounts.google.com.mx' in map with key (accounts.google.com.mx) 
+2017/02/21 09:43:41 INFO  - jmeter.protocol.http.proxy.ProxyControl: [54404] Creating entry www.gstatic.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:43:42 INFO  - jmeter.protocol.http.proxy.ProxyControl: [54450] Creating entry ssl.gstatic.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:43:42 INFO  - jmeter.protocol.http.proxy.Proxy: [54404] KeyStore for SSL loaded OK and put host 'www.gstatic.com' in map with key (www.gstatic.com) 
+2017/02/21 09:43:43 INFO  - jmeter.protocol.http.proxy.ProxyControl: [54446] Creating entry clients2.google.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:43:43 INFO  - jmeter.protocol.http.proxy.Proxy: [54450] KeyStore for SSL loaded OK and put host 'ssl.gstatic.com' in map with key (ssl.gstatic.com) 
+2017/02/21 09:43:45 INFO  - jmeter.protocol.http.proxy.ProxyControl: [54514] Creating entry ogs.google.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:43:45 INFO  - jmeter.protocol.http.proxy.Proxy: [54446] KeyStore for SSL loaded OK and put host 'clients2.google.com' in map with key (clients2.google.com) 
+2017/02/21 09:43:46 INFO  - jmeter.protocol.http.proxy.ProxyControl: [54512] Creating entry clients5.google.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:43:46 INFO  - jmeter.protocol.http.proxy.Proxy: [54514] KeyStore for SSL loaded OK and put host 'ogs.google.com' in map with key (ogs.google.com) 
+2017/02/21 09:43:46 WARN  - jmeter.protocol.http.proxy.Proxy: [54514] Problem with SSL certificate for 'ogs.google.com'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/21 09:43:47 INFO  - jmeter.protocol.http.proxy.ProxyControl: [54502] Creating entry apis.google.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:43:47 INFO  - jmeter.protocol.http.proxy.Proxy: [54512] KeyStore for SSL loaded OK and put host 'clients5.google.com' in map with key (clients5.google.com) 
+2017/02/21 09:43:49 INFO  - jmeter.protocol.http.proxy.ProxyControl: [54734] Creating entry hangouts.google.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:43:49 INFO  - jmeter.protocol.http.proxy.Proxy: [54502] KeyStore for SSL loaded OK and put host 'apis.google.com' in map with key (apis.google.com) 
+2017/02/21 09:43:49 INFO  - jmeter.protocol.http.proxy.Proxy: [54826] KeyStore for SSL loaded OK and put host 'googleads.g.doubleclick.net' in map with key (googleads.g.doubleclick.net) 
+2017/02/21 09:43:50 INFO  - jmeter.protocol.http.proxy.ProxyControl: [54832] Creating entry clients6.google.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:43:50 INFO  - jmeter.protocol.http.proxy.Proxy: [54734] KeyStore for SSL loaded OK and put host 'hangouts.google.com' in map with key (hangouts.google.com) 
+2017/02/21 09:43:50 WARN  - jmeter.protocol.http.proxy.Proxy: [54736] Problem with SSL certificate for 'hangouts.google.com'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/21 09:43:51 INFO  - jmeter.protocol.http.proxy.ProxyControl: [54792] Creating entry notifications.google.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:43:51 INFO  - jmeter.protocol.http.proxy.Proxy: [54832] KeyStore for SSL loaded OK and put host 'clients6.google.com' in map with key (clients6.google.com) 
+2017/02/21 09:43:53 INFO  - jmeter.protocol.http.proxy.ProxyControl: [54790] Creating entry plus.google.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:43:53 INFO  - jmeter.protocol.http.proxy.Proxy: [54792] KeyStore for SSL loaded OK and put host 'notifications.google.com' in map with key (notifications.google.com) 
+2017/02/21 09:43:54 INFO  - jmeter.protocol.http.proxy.Proxy: [54790] KeyStore for SSL loaded OK and put host 'plus.google.com' in map with key (plus.google.com) 
+2017/02/21 09:43:55 INFO  - jmeter.protocol.http.proxy.ProxyControl: [55038] Creating entry people-pa.clients6.google.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:43:57 INFO  - jmeter.protocol.http.proxy.ProxyControl: [55108] Creating entry clients4.google.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:43:57 INFO  - jmeter.protocol.http.proxy.Proxy: [55038] KeyStore for SSL loaded OK and put host 'people-pa.clients6.google.com' in map with key (people-pa.clients6.google.com) 
+2017/02/21 09:43:58 INFO  - jmeter.protocol.http.proxy.ProxyControl: [55106] Creating entry 0.client-channel.google.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:43:58 INFO  - jmeter.protocol.http.proxy.Proxy: [55108] KeyStore for SSL loaded OK and put host 'clients4.google.com' in map with key (clients4.google.com) 
+2017/02/21 09:43:59 INFO  - jmeter.protocol.http.proxy.ProxyControl: [55104] Creating entry lh4.googleusercontent.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:43:59 INFO  - jmeter.protocol.http.proxy.Proxy: [55106] KeyStore for SSL loaded OK and put host '0.client-channel.google.com' in map with key (0.client-channel.google.com) 
+2017/02/21 09:44:01 INFO  - jmeter.protocol.http.proxy.ProxyControl: [55102] Creating entry lh6.googleusercontent.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:44:01 INFO  - jmeter.protocol.http.proxy.Proxy: [55104] KeyStore for SSL loaded OK and put host 'lh4.googleusercontent.com' in map with key (lh4.googleusercontent.com) 
+2017/02/21 09:44:02 ERROR - jmeter.protocol.http.proxy.Proxy:  java.net.SocketException: Connection reset
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:115)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:431)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:417)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:876)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:847)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:123)
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:122)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeToClient(Proxy.java:492)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:247)
+
+2017/02/21 09:44:02 ERROR - jmeter.protocol.http.proxy.Proxy: [55098] Exception when processing sample java.net.SocketException: Connection reset
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:115)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:431)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:417)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:876)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:847)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:123)
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:122)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeToClient(Proxy.java:492)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:247)
+
+2017/02/21 09:44:02 WARN  - jmeter.protocol.http.proxy.Proxy: [55098] Exception while writing error java.net.SocketException: Socket is closed
+	at sun.security.ssl.SSLSocketImpl.getOutputStream(SSLSocketImpl.java:2240)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.writeErrorToClient(Proxy.java:570)
+	at org.apache.jmeter.protocol.http.proxy.Proxy.run(Proxy.java:263)
+
+2017/02/21 09:44:02 INFO  - jmeter.protocol.http.proxy.ProxyControl: [55096] Creating entry lh5.googleusercontent.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:44:02 INFO  - jmeter.protocol.http.proxy.Proxy: [55102] KeyStore for SSL loaded OK and put host 'lh6.googleusercontent.com' in map with key (lh6.googleusercontent.com) 
+2017/02/21 09:44:03 INFO  - jmeter.protocol.http.proxy.ProxyControl: [55164] Creating entry play.google.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:44:03 INFO  - jmeter.protocol.http.proxy.Proxy: [55096] KeyStore for SSL loaded OK and put host 'lh5.googleusercontent.com' in map with key (lh5.googleusercontent.com) 
+2017/02/21 09:44:04 INFO  - jmeter.protocol.http.proxy.Proxy: [55164] KeyStore for SSL loaded OK and put host 'play.google.com' in map with key (play.google.com) 
+2017/02/21 09:44:09 INFO  - jmeter.protocol.http.proxy.ProxyControl: [55628] Creating entry csi.gstatic.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:44:10 INFO  - jmeter.protocol.http.proxy.Proxy: [55628] KeyStore for SSL loaded OK and put host 'csi.gstatic.com' in map with key (csi.gstatic.com) 
+2017/02/21 09:44:24 INFO  - jmeter.protocol.http.proxy.ProxyControl: [55984] Creating entry www.googleadservices.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:44:25 INFO  - jmeter.protocol.http.proxy.Proxy: [55984] KeyStore for SSL loaded OK and put host 'www.googleadservices.com' in map with key (www.googleadservices.com) 
+2017/02/21 09:45:12 WARN  - jmeter.protocol.http.proxy.Proxy: [57134] Problem with SSL certificate for 'play.google.com'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/21 09:45:12 WARN  - jmeter.protocol.http.proxy.Proxy: [57136] Problem with SSL certificate for 'play.google.com'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/21 09:45:13 WARN  - jmeter.protocol.http.proxy.Proxy: [57176] Problem with SSL certificate for 'mitec.itesm.mx'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/21 09:45:13 WARN  - jmeter.protocol.http.proxy.Proxy: [57184] Problem with SSL certificate for 'mitec.itesm.mx'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/21 09:45:13 WARN  - jmeter.protocol.http.proxy.Proxy: [57182] Problem with SSL certificate for 'mitec.itesm.mx'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/21 09:45:13 WARN  - jmeter.protocol.http.proxy.Proxy: [57174] Problem with SSL certificate for 'mitec.itesm.mx'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/21 09:45:13 WARN  - jmeter.protocol.http.proxy.Proxy: [57178] Problem with SSL certificate for 'mitec.itesm.mx'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/21 09:45:13 WARN  - jmeter.protocol.http.proxy.Proxy: [57180] Problem with SSL certificate for 'mitec.itesm.mx'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/21 09:45:13 INFO  - jmeter.protocol.http.proxy.Proxy: [57230] KeyStore for SSL loaded OK and put host 'cdnapisec.kaltura.com' in map with key (cdnapisec.kaltura.com) 
+2017/02/21 09:45:15 INFO  - jmeter.protocol.http.proxy.Proxy: [57314] KeyStore for SSL loaded OK and put host 'cfvod.kaltura.com' in map with key (cfvod.kaltura.com) 
+2017/02/21 09:45:15 INFO  - jmeter.protocol.http.proxy.Proxy: [57316] KeyStore for SSL loaded OK and put host 'stats.kaltura.com' in map with key (stats.kaltura.com) 
+2017/02/21 09:45:15 INFO  - jmeter.protocol.http.proxy.Proxy: [57346] KeyStore for SSL loaded OK and put host 'analytics.kaltura.com' in map with key (analytics.kaltura.com) 
+2017/02/21 09:46:23 INFO  - jmeter.protocol.http.proxy.ProxyControl: [59032] Creating entry miscursos.tec.mx in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:46:25 INFO  - jmeter.protocol.http.proxy.Proxy: [59032] KeyStore for SSL loaded OK and put host 'miscursos.tec.mx' in map with key (miscursos.tec.mx) 
+2017/02/21 09:46:26 INFO  - jmeter.protocol.http.proxy.ProxyControl: [59120] Creating entry js-agent.newrelic.com in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:46:27 INFO  - jmeter.protocol.http.proxy.Proxy: [59120] KeyStore for SSL loaded OK and put host 'js-agent.newrelic.com' in map with key (js-agent.newrelic.com) 
+2017/02/21 09:46:28 INFO  - jmeter.protocol.http.proxy.ProxyControl: [59148] Creating entry bam.nr-data.net in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/21 09:46:29 INFO  - jmeter.protocol.http.proxy.Proxy: [59148] KeyStore for SSL loaded OK and put host 'bam.nr-data.net' in map with key (bam.nr-data.net) 
+2017/02/21 09:51:51 ERROR - jmeter.JMeter: Uncaught exception:  java.lang.ClassCastException: sun.awt.image.BufImgSurfaceData cannot be cast to sun.java2d.xr.XRSurfaceData
+	at sun.java2d.xr.XRPMBlitLoops.cacheToTmpSurface(XRPMBlitLoops.java:148)
+	at sun.java2d.xr.XrSwToPMBlit.Blit(XRPMBlitLoops.java:356)
+	at sun.java2d.pipe.DrawImage.blitSurfaceData(DrawImage.java:959)
+	at sun.java2d.pipe.DrawImage.renderImageCopy(DrawImage.java:577)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:67)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:1014)
+	at sun.java2d.SunGraphics2D.drawImage(SunGraphics2D.java:3318)
+	at sun.awt.image.ImageRepresentation.drawToBufImage(ImageRepresentation.java:813)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:1021)
+	at sun.java2d.SunGraphics2D.drawImage(SunGraphics2D.java:3318)
+	at sun.java2d.SunGraphics2D.drawImage(SunGraphics2D.java:3296)
+	at javax.swing.ImageIcon.paintIcon(ImageIcon.java:425)
+	at javax.swing.plaf.basic.BasicLabelUI.paint(BasicLabelUI.java:167)
+	at javax.swing.plaf.ComponentUI.update(ComponentUI.java:161)
+	at javax.swing.JComponent.paintComponent(JComponent.java:780)
+	at javax.swing.JComponent.paint(JComponent.java:1056)
+	at javax.swing.tree.DefaultTreeCellRenderer.paint(DefaultTreeCellRenderer.java:532)
+	at javax.swing.CellRendererPane.paintComponent(CellRendererPane.java:151)
+	at javax.swing.plaf.basic.BasicTreeUI.paintRow(BasicTreeUI.java:1540)
+	at javax.swing.plaf.basic.BasicTreeUI.paint(BasicTreeUI.java:1224)
+	at javax.swing.plaf.metal.MetalTreeUI.paint(MetalTreeUI.java:169)
+	at javax.swing.plaf.ComponentUI.update(ComponentUI.java:161)
+	at javax.swing.JComponent.paintComponent(JComponent.java:780)
+	at javax.swing.JComponent.paint(JComponent.java:1056)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JViewport.paint(JViewport.java:728)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JSplitPane.paintChildren(JSplitPane.java:1047)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JLayeredPane.paint(JLayeredPane.java:586)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paintToOffscreen(JComponent.java:5217)
+	at javax.swing.RepaintManager$PaintManager.paintDoubleBuffered(RepaintManager.java:1579)
+	at javax.swing.RepaintManager$PaintManager.paint(RepaintManager.java:1502)
+	at javax.swing.BufferStrategyPaintManager.paint(BufferStrategyPaintManager.java:306)
+	at javax.swing.RepaintManager.paint(RepaintManager.java:1272)
+	at javax.swing.JComponent.paint(JComponent.java:1042)
+	at java.awt.GraphicsCallback$PaintCallback.run(GraphicsCallback.java:39)
+	at sun.awt.SunGraphicsCallback.runOneComponent(SunGraphicsCallback.java:79)
+	at sun.awt.SunGraphicsCallback.runComponents(SunGraphicsCallback.java:116)
+	at java.awt.Container.paint(Container.java:1975)
+	at java.awt.Window.paint(Window.java:3904)
+	at javax.swing.RepaintManager$4.run(RepaintManager.java:842)
+	at javax.swing.RepaintManager$4.run(RepaintManager.java:814)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:814)
+	at javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:789)
+	at javax.swing.RepaintManager.prePaintDirtyRegions(RepaintManager.java:738)
+	at javax.swing.RepaintManager.access$1200(RepaintManager.java:64)
+	at javax.swing.RepaintManager$ProcessingRunnable.run(RepaintManager.java:1732)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:756)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:726)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2017/02/21 09:51:51 ERROR - jmeter.JMeter: Uncaught exception:  java.lang.ClassCastException: sun.awt.image.BufImgSurfaceData cannot be cast to sun.java2d.xr.XRSurfaceData
+	at sun.java2d.xr.XRPMBlitLoops.cacheToTmpSurface(XRPMBlitLoops.java:148)
+	at sun.java2d.xr.XrSwToPMBlit.Blit(XRPMBlitLoops.java:356)
+	at sun.java2d.pipe.DrawImage.blitSurfaceData(DrawImage.java:959)
+	at sun.java2d.pipe.DrawImage.renderImageCopy(DrawImage.java:577)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:67)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:1014)
+	at sun.java2d.SunGraphics2D.drawImage(SunGraphics2D.java:3318)
+	at sun.awt.image.ImageRepresentation.drawToBufImage(ImageRepresentation.java:813)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:1021)
+	at sun.java2d.SunGraphics2D.drawImage(SunGraphics2D.java:3318)
+	at sun.java2d.SunGraphics2D.drawImage(SunGraphics2D.java:3296)
+	at javax.swing.ImageIcon.paintIcon(ImageIcon.java:425)
+	at javax.swing.plaf.basic.BasicLabelUI.paint(BasicLabelUI.java:167)
+	at javax.swing.plaf.ComponentUI.update(ComponentUI.java:161)
+	at javax.swing.JComponent.paintComponent(JComponent.java:780)
+	at javax.swing.JComponent.paint(JComponent.java:1056)
+	at javax.swing.tree.DefaultTreeCellRenderer.paint(DefaultTreeCellRenderer.java:532)
+	at javax.swing.CellRendererPane.paintComponent(CellRendererPane.java:151)
+	at javax.swing.plaf.basic.BasicTreeUI.paintRow(BasicTreeUI.java:1540)
+	at javax.swing.plaf.basic.BasicTreeUI.paint(BasicTreeUI.java:1224)
+	at javax.swing.plaf.metal.MetalTreeUI.paint(MetalTreeUI.java:169)
+	at javax.swing.plaf.ComponentUI.update(ComponentUI.java:161)
+	at javax.swing.JComponent.paintComponent(JComponent.java:780)
+	at javax.swing.JComponent.paint(JComponent.java:1056)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JViewport.paint(JViewport.java:728)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JSplitPane.paintChildren(JSplitPane.java:1047)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JLayeredPane.paint(JLayeredPane.java:586)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paintToOffscreen(JComponent.java:5217)
+	at javax.swing.RepaintManager$PaintManager.paintDoubleBuffered(RepaintManager.java:1579)
+	at javax.swing.RepaintManager$PaintManager.paint(RepaintManager.java:1502)
+	at javax.swing.BufferStrategyPaintManager.paint(BufferStrategyPaintManager.java:306)
+	at javax.swing.RepaintManager.paint(RepaintManager.java:1272)
+	at javax.swing.JComponent.paint(JComponent.java:1042)
+	at java.awt.GraphicsCallback$PaintCallback.run(GraphicsCallback.java:39)
+	at sun.awt.SunGraphicsCallback.runOneComponent(SunGraphicsCallback.java:79)
+	at sun.awt.SunGraphicsCallback.runComponents(SunGraphicsCallback.java:116)
+	at java.awt.Container.paint(Container.java:1975)
+	at java.awt.Window.paint(Window.java:3904)
+	at javax.swing.RepaintManager$4.run(RepaintManager.java:842)
+	at javax.swing.RepaintManager$4.run(RepaintManager.java:814)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:814)
+	at javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:789)
+	at javax.swing.RepaintManager.prePaintDirtyRegions(RepaintManager.java:738)
+	at javax.swing.RepaintManager.access$1200(RepaintManager.java:64)
+	at javax.swing.RepaintManager$ProcessingRunnable.run(RepaintManager.java:1732)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:756)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:726)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2017/02/22 07:18:18 ERROR - jmeter.JMeter: Uncaught exception:  java.lang.ClassCastException: sun.awt.image.BufImgSurfaceData cannot be cast to sun.java2d.xr.XRSurfaceData
+	at sun.java2d.xr.XRPMBlitLoops.cacheToTmpSurface(XRPMBlitLoops.java:148)
+	at sun.java2d.xr.XrSwToPMBlit.Blit(XRPMBlitLoops.java:356)
+	at sun.java2d.pipe.DrawImage.blitSurfaceData(DrawImage.java:959)
+	at sun.java2d.pipe.DrawImage.renderImageCopy(DrawImage.java:577)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:67)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:1014)
+	at sun.java2d.SunGraphics2D.drawImage(SunGraphics2D.java:3318)
+	at sun.awt.image.ImageRepresentation.drawToBufImage(ImageRepresentation.java:813)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:1021)
+	at sun.java2d.SunGraphics2D.drawImage(SunGraphics2D.java:3318)
+	at sun.java2d.SunGraphics2D.drawImage(SunGraphics2D.java:3296)
+	at javax.swing.ImageIcon.paintIcon(ImageIcon.java:425)
+	at javax.swing.plaf.basic.BasicLabelUI.paint(BasicLabelUI.java:167)
+	at javax.swing.plaf.ComponentUI.update(ComponentUI.java:161)
+	at javax.swing.JComponent.paintComponent(JComponent.java:780)
+	at javax.swing.JComponent.paint(JComponent.java:1056)
+	at javax.swing.tree.DefaultTreeCellRenderer.paint(DefaultTreeCellRenderer.java:532)
+	at javax.swing.CellRendererPane.paintComponent(CellRendererPane.java:151)
+	at javax.swing.plaf.basic.BasicTreeUI.paintRow(BasicTreeUI.java:1540)
+	at javax.swing.plaf.basic.BasicTreeUI.paint(BasicTreeUI.java:1224)
+	at javax.swing.plaf.metal.MetalTreeUI.paint(MetalTreeUI.java:169)
+	at javax.swing.plaf.ComponentUI.update(ComponentUI.java:161)
+	at javax.swing.JComponent.paintComponent(JComponent.java:780)
+	at javax.swing.JComponent.paint(JComponent.java:1056)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JViewport.paint(JViewport.java:728)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JSplitPane.paintChildren(JSplitPane.java:1047)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JLayeredPane.paint(JLayeredPane.java:586)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paintToOffscreen(JComponent.java:5217)
+	at javax.swing.RepaintManager$PaintManager.paintDoubleBuffered(RepaintManager.java:1579)
+	at javax.swing.RepaintManager$PaintManager.paint(RepaintManager.java:1502)
+	at javax.swing.BufferStrategyPaintManager.paint(BufferStrategyPaintManager.java:306)
+	at javax.swing.RepaintManager.paint(RepaintManager.java:1272)
+	at javax.swing.JComponent.paint(JComponent.java:1042)
+	at java.awt.GraphicsCallback$PaintCallback.run(GraphicsCallback.java:39)
+	at sun.awt.SunGraphicsCallback.runOneComponent(SunGraphicsCallback.java:79)
+	at sun.awt.SunGraphicsCallback.runComponents(SunGraphicsCallback.java:116)
+	at java.awt.Container.paint(Container.java:1975)
+	at java.awt.Window.paint(Window.java:3904)
+	at javax.swing.RepaintManager$4.run(RepaintManager.java:842)
+	at javax.swing.RepaintManager$4.run(RepaintManager.java:814)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:814)
+	at javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:789)
+	at javax.swing.RepaintManager.prePaintDirtyRegions(RepaintManager.java:738)
+	at javax.swing.RepaintManager.access$1200(RepaintManager.java:64)
+	at javax.swing.RepaintManager$ProcessingRunnable.run(RepaintManager.java:1732)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:756)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:726)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2017/02/22 07:18:19 ERROR - jmeter.JMeter: Uncaught exception:  java.lang.ClassCastException: sun.awt.image.BufImgSurfaceData cannot be cast to sun.java2d.xr.XRSurfaceData
+	at sun.java2d.xr.XRPMBlitLoops.cacheToTmpSurface(XRPMBlitLoops.java:148)
+	at sun.java2d.xr.XrSwToPMBlit.Blit(XRPMBlitLoops.java:356)
+	at sun.java2d.pipe.DrawImage.blitSurfaceData(DrawImage.java:959)
+	at sun.java2d.pipe.DrawImage.renderImageCopy(DrawImage.java:577)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:67)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:1014)
+	at sun.java2d.pipe.ValidatePipe.copyImage(ValidatePipe.java:186)
+	at sun.java2d.SunGraphics2D.drawImage(SunGraphics2D.java:3318)
+	at sun.java2d.SunGraphics2D.drawImage(SunGraphics2D.java:3296)
+	at javax.swing.RepaintManager$PaintManager.paintDoubleBuffered(RepaintManager.java:1589)
+	at javax.swing.RepaintManager$PaintManager.paint(RepaintManager.java:1502)
+	at javax.swing.BufferStrategyPaintManager.paint(BufferStrategyPaintManager.java:306)
+	at javax.swing.RepaintManager.paint(RepaintManager.java:1272)
+	at javax.swing.JComponent.paint(JComponent.java:1042)
+	at java.awt.GraphicsCallback$PaintCallback.run(GraphicsCallback.java:39)
+	at sun.awt.SunGraphicsCallback.runOneComponent(SunGraphicsCallback.java:79)
+	at sun.awt.SunGraphicsCallback.runComponents(SunGraphicsCallback.java:116)
+	at java.awt.Container.paint(Container.java:1975)
+	at java.awt.Window.paint(Window.java:3904)
+	at javax.swing.RepaintManager$4.run(RepaintManager.java:842)
+	at javax.swing.RepaintManager$4.run(RepaintManager.java:814)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:814)
+	at javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:789)
+	at javax.swing.RepaintManager.prePaintDirtyRegions(RepaintManager.java:738)
+	at javax.swing.RepaintManager.access$1200(RepaintManager.java:64)
+	at javax.swing.RepaintManager$ProcessingRunnable.run(RepaintManager.java:1732)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:756)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:726)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2017/02/22 07:18:19 ERROR - jmeter.JMeter: Uncaught exception:  java.lang.ClassCastException: sun.awt.image.BufImgSurfaceData cannot be cast to sun.java2d.xr.XRSurfaceData
+	at sun.java2d.xr.XRPMBlitLoops.cacheToTmpSurface(XRPMBlitLoops.java:148)
+	at sun.java2d.xr.XrSwToPMBlit.Blit(XRPMBlitLoops.java:356)
+	at sun.java2d.pipe.DrawImage.blitSurfaceData(DrawImage.java:959)
+	at sun.java2d.pipe.DrawImage.renderImageCopy(DrawImage.java:577)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:67)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:1014)
+	at sun.java2d.SunGraphics2D.drawImage(SunGraphics2D.java:3318)
+	at sun.awt.image.ImageRepresentation.drawToBufImage(ImageRepresentation.java:813)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:1021)
+	at sun.java2d.SunGraphics2D.drawImage(SunGraphics2D.java:3318)
+	at sun.java2d.SunGraphics2D.drawImage(SunGraphics2D.java:3296)
+	at javax.swing.ImageIcon.paintIcon(ImageIcon.java:425)
+	at javax.swing.plaf.basic.BasicLabelUI.paint(BasicLabelUI.java:167)
+	at javax.swing.plaf.ComponentUI.update(ComponentUI.java:161)
+	at javax.swing.JComponent.paintComponent(JComponent.java:780)
+	at javax.swing.JComponent.paint(JComponent.java:1056)
+	at javax.swing.tree.DefaultTreeCellRenderer.paint(DefaultTreeCellRenderer.java:532)
+	at javax.swing.CellRendererPane.paintComponent(CellRendererPane.java:151)
+	at javax.swing.plaf.basic.BasicTreeUI.paintRow(BasicTreeUI.java:1540)
+	at javax.swing.plaf.basic.BasicTreeUI.paint(BasicTreeUI.java:1224)
+	at javax.swing.plaf.metal.MetalTreeUI.paint(MetalTreeUI.java:169)
+	at javax.swing.plaf.ComponentUI.update(ComponentUI.java:161)
+	at javax.swing.JComponent.paintComponent(JComponent.java:780)
+	at javax.swing.JComponent.paint(JComponent.java:1056)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JViewport.paint(JViewport.java:728)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JSplitPane.paintChildren(JSplitPane.java:1047)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JLayeredPane.paint(JLayeredPane.java:586)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paintToOffscreen(JComponent.java:5217)
+	at javax.swing.RepaintManager$PaintManager.paintDoubleBuffered(RepaintManager.java:1579)
+	at javax.swing.RepaintManager$PaintManager.paint(RepaintManager.java:1502)
+	at javax.swing.BufferStrategyPaintManager.paint(BufferStrategyPaintManager.java:306)
+	at javax.swing.RepaintManager.paint(RepaintManager.java:1272)
+	at javax.swing.JComponent.paint(JComponent.java:1042)
+	at java.awt.GraphicsCallback$PaintCallback.run(GraphicsCallback.java:39)
+	at sun.awt.SunGraphicsCallback.runOneComponent(SunGraphicsCallback.java:79)
+	at sun.awt.SunGraphicsCallback.runComponents(SunGraphicsCallback.java:116)
+	at java.awt.Container.paint(Container.java:1975)
+	at java.awt.Window.paint(Window.java:3904)
+	at javax.swing.RepaintManager$4.run(RepaintManager.java:842)
+	at javax.swing.RepaintManager$4.run(RepaintManager.java:814)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:814)
+	at javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:789)
+	at javax.swing.RepaintManager.prePaintDirtyRegions(RepaintManager.java:738)
+	at javax.swing.RepaintManager.access$1200(RepaintManager.java:64)
+	at javax.swing.RepaintManager$ProcessingRunnable.run(RepaintManager.java:1732)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:756)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:726)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2017/02/22 07:18:22 ERROR - jmeter.JMeter: Uncaught exception:  java.lang.ClassCastException: sun.awt.image.BufImgSurfaceData cannot be cast to sun.java2d.xr.XRSurfaceData
+	at sun.java2d.xr.XRPMBlitLoops.cacheToTmpSurface(XRPMBlitLoops.java:148)
+	at sun.java2d.xr.XrSwToPMBlit.Blit(XRPMBlitLoops.java:356)
+	at sun.java2d.pipe.DrawImage.blitSurfaceData(DrawImage.java:959)
+	at sun.java2d.pipe.DrawImage.renderImageCopy(DrawImage.java:577)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:67)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:1014)
+	at sun.java2d.SunGraphics2D.drawImage(SunGraphics2D.java:3318)
+	at sun.awt.image.ImageRepresentation.drawToBufImage(ImageRepresentation.java:813)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:1021)
+	at sun.java2d.SunGraphics2D.drawImage(SunGraphics2D.java:3318)
+	at sun.java2d.SunGraphics2D.drawImage(SunGraphics2D.java:3296)
+	at javax.swing.ImageIcon.paintIcon(ImageIcon.java:425)
+	at javax.swing.plaf.basic.BasicLabelUI.paint(BasicLabelUI.java:167)
+	at javax.swing.plaf.ComponentUI.update(ComponentUI.java:161)
+	at javax.swing.JComponent.paintComponent(JComponent.java:780)
+	at javax.swing.JComponent.paint(JComponent.java:1056)
+	at javax.swing.tree.DefaultTreeCellRenderer.paint(DefaultTreeCellRenderer.java:532)
+	at javax.swing.CellRendererPane.paintComponent(CellRendererPane.java:151)
+	at javax.swing.plaf.basic.BasicTreeUI.paintRow(BasicTreeUI.java:1540)
+	at javax.swing.plaf.basic.BasicTreeUI.paint(BasicTreeUI.java:1224)
+	at javax.swing.plaf.metal.MetalTreeUI.paint(MetalTreeUI.java:169)
+	at javax.swing.plaf.ComponentUI.update(ComponentUI.java:161)
+	at javax.swing.JComponent.paintComponent(JComponent.java:780)
+	at javax.swing.JComponent.paint(JComponent.java:1056)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JViewport.paint(JViewport.java:728)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JSplitPane.paintChildren(JSplitPane.java:1047)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JLayeredPane.paint(JLayeredPane.java:586)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paintToOffscreen(JComponent.java:5217)
+	at javax.swing.RepaintManager$PaintManager.paintDoubleBuffered(RepaintManager.java:1579)
+	at javax.swing.RepaintManager$PaintManager.paint(RepaintManager.java:1502)
+	at javax.swing.BufferStrategyPaintManager.paint(BufferStrategyPaintManager.java:306)
+	at javax.swing.RepaintManager.paint(RepaintManager.java:1272)
+	at javax.swing.JComponent.paint(JComponent.java:1042)
+	at java.awt.GraphicsCallback$PaintCallback.run(GraphicsCallback.java:39)
+	at sun.awt.SunGraphicsCallback.runOneComponent(SunGraphicsCallback.java:79)
+	at sun.awt.SunGraphicsCallback.runComponents(SunGraphicsCallback.java:116)
+	at java.awt.Container.paint(Container.java:1975)
+	at java.awt.Window.paint(Window.java:3904)
+	at javax.swing.RepaintManager$4.run(RepaintManager.java:842)
+	at javax.swing.RepaintManager$4.run(RepaintManager.java:814)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:814)
+	at javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:789)
+	at javax.swing.RepaintManager.prePaintDirtyRegions(RepaintManager.java:738)
+	at javax.swing.RepaintManager.access$1200(RepaintManager.java:64)
+	at javax.swing.RepaintManager$ProcessingRunnable.run(RepaintManager.java:1732)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:756)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:726)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2017/02/22 07:18:27 ERROR - jmeter.JMeter: Uncaught exception:  java.lang.ClassCastException: sun.awt.image.BufImgSurfaceData cannot be cast to sun.java2d.xr.XRSurfaceData
+	at sun.java2d.xr.XRPMBlitLoops.cacheToTmpSurface(XRPMBlitLoops.java:148)
+	at sun.java2d.xr.XrSwToPMBlit.Blit(XRPMBlitLoops.java:356)
+	at sun.java2d.pipe.DrawImage.blitSurfaceData(DrawImage.java:959)
+	at sun.java2d.pipe.DrawImage.renderImageCopy(DrawImage.java:577)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:67)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:1014)
+	at sun.java2d.SunGraphics2D.drawImage(SunGraphics2D.java:3318)
+	at sun.awt.image.ImageRepresentation.drawToBufImage(ImageRepresentation.java:813)
+	at sun.java2d.pipe.DrawImage.copyImage(DrawImage.java:1021)
+	at sun.java2d.SunGraphics2D.drawImage(SunGraphics2D.java:3318)
+	at sun.java2d.SunGraphics2D.drawImage(SunGraphics2D.java:3296)
+	at javax.swing.ImageIcon.paintIcon(ImageIcon.java:425)
+	at javax.swing.plaf.basic.BasicLabelUI.paint(BasicLabelUI.java:167)
+	at javax.swing.plaf.ComponentUI.update(ComponentUI.java:161)
+	at javax.swing.JComponent.paintComponent(JComponent.java:780)
+	at javax.swing.JComponent.paint(JComponent.java:1056)
+	at javax.swing.tree.DefaultTreeCellRenderer.paint(DefaultTreeCellRenderer.java:532)
+	at javax.swing.CellRendererPane.paintComponent(CellRendererPane.java:151)
+	at javax.swing.plaf.basic.BasicTreeUI.paintRow(BasicTreeUI.java:1540)
+	at javax.swing.plaf.basic.BasicTreeUI.paint(BasicTreeUI.java:1224)
+	at javax.swing.plaf.metal.MetalTreeUI.paint(MetalTreeUI.java:169)
+	at javax.swing.plaf.ComponentUI.update(ComponentUI.java:161)
+	at javax.swing.JComponent.paintComponent(JComponent.java:780)
+	at javax.swing.JComponent.paint(JComponent.java:1056)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JViewport.paint(JViewport.java:728)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JSplitPane.paintChildren(JSplitPane.java:1047)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paint(JComponent.java:1065)
+	at javax.swing.JLayeredPane.paint(JLayeredPane.java:586)
+	at javax.swing.JComponent.paintChildren(JComponent.java:889)
+	at javax.swing.JComponent.paintToOffscreen(JComponent.java:5217)
+	at javax.swing.RepaintManager$PaintManager.paintDoubleBuffered(RepaintManager.java:1579)
+	at javax.swing.RepaintManager$PaintManager.paint(RepaintManager.java:1502)
+	at javax.swing.BufferStrategyPaintManager.paint(BufferStrategyPaintManager.java:306)
+	at javax.swing.RepaintManager.paint(RepaintManager.java:1272)
+	at javax.swing.JComponent.paint(JComponent.java:1042)
+	at java.awt.GraphicsCallback$PaintCallback.run(GraphicsCallback.java:39)
+	at sun.awt.SunGraphicsCallback.runOneComponent(SunGraphicsCallback.java:79)
+	at sun.awt.SunGraphicsCallback.runComponents(SunGraphicsCallback.java:116)
+	at java.awt.Container.paint(Container.java:1975)
+	at java.awt.Window.paint(Window.java:3904)
+	at javax.swing.RepaintManager$4.run(RepaintManager.java:842)
+	at javax.swing.RepaintManager$4.run(RepaintManager.java:814)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:814)
+	at javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:789)
+	at javax.swing.RepaintManager.prePaintDirtyRegions(RepaintManager.java:738)
+	at javax.swing.RepaintManager.access$1200(RepaintManager.java:64)
+	at javax.swing.RepaintManager$ProcessingRunnable.run(RepaintManager.java:1732)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:756)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:726)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+2017/02/22 07:19:03 INFO  - jmeter.protocol.http.proxy.ProxyControl: [39776] Creating entry incoming.telemetry.mozilla.org in /home/seung/ArielPruebas/apache-jmeter-3.1/bin/proxyserver.jks 
+2017/02/22 07:19:05 INFO  - jmeter.protocol.http.proxy.Proxy: [39776] KeyStore for SSL loaded OK and put host 'incoming.telemetry.mozilla.org' in map with key (incoming.telemetry.mozilla.org) 
+2017/02/22 07:19:05 WARN  - jmeter.protocol.http.proxy.Proxy: [39776] Problem with SSL certificate for 'incoming.telemetry.mozilla.org'? Ensure browser is set to accept the JMeter proxy cert: Remote host closed connection during handshake 
+2017/02/22 07:19:13 INFO  - jmeter.services.FileServer: Set new base='/home/seung/ArielPruebas/apache-jmeter-3.1/bin' 
+2017/02/22 07:19:13 INFO  - jmeter.save.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2 
+2017/02/22 07:19:13 INFO  - jmeter.save.SaveService: Using SaveService properties file encoding UTF-8 
+2017/02/22 07:19:13 INFO  - jmeter.save.SaveService: Using SaveService properties version 3.1 
+2017/02/22 07:19:13 INFO  - jmeter.save.SaveService: All converter versions present and correct 
+2017/02/22 07:19:13 INFO  - jmeter.reporters.ResultCollector: Shutdown hook started 
+2017/02/22 07:19:13 INFO  - jmeter.reporters.ResultCollector: Shutdown hook ended 
